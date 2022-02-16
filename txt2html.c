@@ -142,9 +142,9 @@ int main(int argc, char **argv){
 
 void cleanLine(char *x){
   char tgr_o[] = {
-    '³', 'À', 'Ä', 'Ú', 'Å', 'Ù',  '´', 'Â', 'Á', '¿', 'Ã', 'ù', '\0'};
+    'ï¿½', 'ï¿½', 'ï¿½', 'ï¿½', 'ï¿½', 'ï¿½',  'ï¿½', 'ï¿½', 'ï¿½', 'ï¿½', 'ï¿½', 'ï¿½', '\0'};
   char tgr_r[] = {
-    '|', '`', '-', '´', '+', '\'', '|', '-', '-', '.', '|', '/', '\0'};
+    '|', '`', '-', 'ï¿½', '+', '\'', '|', '-', '-', '.', '|', '/', '\0'};
 
   int i = 0;
 
@@ -406,8 +406,7 @@ int buildConv(int argc, char **argv){
     fclose(fidx);
   } /* for */
 
-  fprintf(idx, "</UL>\n<HR>Converted to HTML by <A HREF=\"mailto:stanisls@gmail.com\">Stanislav"
-	  " Sokolov</A>.<BR>\n</BODY>\n</HTML>");
+  fprintf(idx, "</UL>\n<HR>Converted to HTML with a <a href='https://github.com/numberformat/helppc_reference_library_html' target='_blank'>tool written by Stanislav Sokolov</a>.<BR>\n</BODY>\n</HTML>");
 
   fclose(idx);
 
