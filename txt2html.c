@@ -19,7 +19,7 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 
-#define BASE_PATH "helppc"
+#define BASE_PATH "helppc"       
 
 struct conv{
   char *file;
@@ -31,7 +31,7 @@ struct conv *c_head;
 
 void cleanLine(char *);
 char *makeFile(char *);
-void rmFirst(char *);
+inline void rmFirst(char *);
 char *makeFName(char *);
 void convError(char *);
 void parseLine(char *);
@@ -59,7 +59,7 @@ int main(int argc, char **argv){
 	    "or\n  %s *.txt\n\n", argv[0], argv[0]);
     return 10;
   }
-
+  
   mkdir(BASE_PATH, 0777);
 
   /* Build conversion table */
@@ -94,7 +94,7 @@ int main(int argc, char **argv){
 	rmFirst(line);
 	tmp = strtok(line, ":");
 	fName = makeFName(tmp);
-
+      
 	sprintf(foutname, "%s/%s", BASE_PATH, fName);
 	if((fout = fopen(foutname, "w+")) == NULL){
 	  convError("Cannot open for writing!");
@@ -102,9 +102,9 @@ int main(int argc, char **argv){
 	  return 3;
 	}
 	free(fName);
-
+      
 	fprintf(fout,
-		"<HTML>\n<HEAD>\n<TITLE>%s</TITLE>\n</HEAD>\n\n<BODY><PRE>",
+		"<HTML>\n<HEAD>\n<TITLE>%s</TITLE>\n</HEAD>\n\n<BODY><PRE>", 
 		tmp);
 
       } else if(first == '^'){ /* Make H2 */
@@ -120,19 +120,19 @@ int main(int argc, char **argv){
 	}
 	fprintf(fout, "%s\n", line);
       }
-
+    
     }/* while */
     fclose(f);
   }/* for */
 
   fprintf(stderr, "\nAll done.\n");
-
-
+  
+  
   if(pending){
     fprintf(fout, "</PRE>\n\n</BODY>\n</HTML>");
     fclose(fout);
   }
-
+  
   fclose(f);
   freeTable(c_head);
 
@@ -142,9 +142,9 @@ int main(int argc, char **argv){
 
 void cleanLine(char *x){
   char tgr_o[] = {
-    'ï¿½', 'ï¿½', 'ï¿½', 'ï¿½', 'ï¿½', 'ï¿½',  'ï¿½', 'ï¿½', 'ï¿½', 'ï¿½', 'ï¿½', 'ï¿½', '\0'};
+    '³', 'À', 'Ä', 'Ú', 'Å', 'Ù',  '´', 'Â', 'Á', '¿', 'Ã', 'ù', '\0'};
   char tgr_r[] = {
-    '|', '`', '-', 'ï¿½', '+', '\'', '|', '-', '-', '.', '|', '/', '\0'};
+    '|', '`', '-', '´', '+', '\'', '|', '-', '-', '.', '|', '/', '\0'};
 
   int i = 0;
 
@@ -166,7 +166,7 @@ void cleanLine(char *x){
 }
 
 
-void rmFirst(char *x){
+inline void rmFirst(char *x){
   strcpy(x, x + 1);
 }
 
@@ -212,7 +212,7 @@ void parseLine(char *x){
   tmp[0] = '\0';
 
   while(*x != '\0'){
-
+    
     if(*x == '~' && *(x+1) != '~'){
       x++;
       i = 0;
@@ -221,7 +221,7 @@ void parseLine(char *x){
 	x++;
       }
       link[i] = '\0';
-
+      
 
       /* Do an exact matching first... */
       conv = c_head;
@@ -247,7 +247,7 @@ void parseLine(char *x){
 	  }
 	  conv = conv->next;
 	}
-
+      
 	if(!found){
 	  conv = c_head;
 	  while(conv != NULL){
@@ -284,7 +284,7 @@ void parseLine(char *x){
     x++;
   }
   *tmp = '\0';
-
+ 
   strcpy(x_o, t_o);
 }
 
@@ -306,7 +306,7 @@ int buildConv(int argc, char **argv){
     convError("Error writing main index!");
     exit(100);
   }
-
+     
   fprintf(idx, "<HTML>\n<HEAD>\n <TITLE>HelpPC Reference Library</TITLE>\n"
 	  "</HEAD>\n\n<BODY>\n<CENTER>\n<H1>HelpPC Reference Library</H1>\n"
 	  "David Jurgens<BR>\n</CENTER>\n<HR WIDTH=140>\n"
@@ -344,14 +344,14 @@ int buildConv(int argc, char **argv){
       convError(x2);
       free(x2);
       exit(100);
-    }
+    }	  
 
     free(x2);
-
+    
     fprintf(fidx, "<HTML>\n<HEAD>\n <TITLE>%s</TITLE>\n</HEAD>\n\n<BODY>\n", index);
     fprintf(fidx, "<H1 ALIGN=Center>%s</H1>\n\n", index);
     fprintf(fidx, "<TABLE BORDER=0>\n<TR>\n");
-
+    
     c_list_len = 0;
     while(fgets(line, 200, f) != NULL){
       cleanLine(line);
@@ -364,22 +364,22 @@ int buildConv(int argc, char **argv){
 	tmp = strtok(line, ":");
 	if(tmp != NULL){
 	  fName = makeFName(tmp);
-	  entry++;
+	  entry++;          
 	}
-
+	
 	while(tmp != NULL){
 	  count++;
-
+	  
 	  c_list[c_list_len].file = malloc(strlen(fName) + 1);
 	  c_list[c_list_len].orig = malloc(strlen(tmp) + 1);
 	  strcpy(c_list[c_list_len].file, fName);
 	  strcpy(c_list[c_list_len].orig, tmp);
 	  c_list_len++;
-
+	  
 	  conv = malloc(sizeof(struct conv));
 	  conv->file = malloc(strlen(fName) + 1);
 	  conv->orig = malloc(strlen(tmp) + 1);
-
+	
 	  conv->next = c_head;
 	  c_head = conv;
 
@@ -406,7 +406,8 @@ int buildConv(int argc, char **argv){
     fclose(fidx);
   } /* for */
 
-  fprintf(idx, "</UL>\n<HR>Converted to HTML with a <a href='https://github.com/numberformat/helppc_reference_library_html' target='_blank'>tool written by Stanislav Sokolov</a>.<BR>\n</BODY>\n</HTML>");
+  fprintf(idx, "</UL>\n<HR>Converted to HTML by <A HREF=\"mailto:stanisls@gmail.com\">Stanislav"
+	  " Sokolov</A>.<BR>\n</BODY>\n</HTML>");
 
   fclose(idx);
 
@@ -469,7 +470,7 @@ void _qsort(struct conv c_list[], int first, int last){
     }
 
     while(strcasecmp(med,
-		     *c_list[j].orig == '_' ?
+		     *c_list[j].orig == '_' ? 
 		     c_list[j].orig + 1 :
 		     c_list[j].orig) < 0){
       j--;
@@ -485,7 +486,7 @@ void _qsort(struct conv c_list[], int first, int last){
 
   if(first < j)
     _qsort(c_list, first, j);
-
+  
   if(i < last)
     _qsort(c_list, i, last);
 

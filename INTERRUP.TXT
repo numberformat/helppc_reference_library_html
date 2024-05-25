@@ -390,7 +390,7 @@
 	- the return data can be circumvented by direct port I/O to the 6845
 	  CRT Controller since this function returns the data found in the
 	  BIOS Data Area without actually checking the controller
-
+	
 :int 10,4
 ^INT 10,4 - Read Light Pen Position
 
@@ -3540,11 +3540,15 @@
 	~INT 21,15~  Sequential write using FCB
 	~INT 21,16~  Create a file using FCB
 	~INT 21,17~  Rename file using FCB
+	~INT 21,18~  DOS dummy function (CP/M) (not used/listed)
 	~INT 21,19~  Get current default drive
 	~INT 21,1A~  Set disk transfer address
 	~INT 21,1B~  Get allocation table information
 	~INT 21,1C~  Get allocation table info for specific device
+	~INT 21,1D~  DOS dummy function (CP/M) (not used/listed)
+	~INT 21,1E~  DOS dummy function (CP/M) (not used/listed)
 	~INT 21,1F~  Get pointer to default drive parameter table (undocumented)
+	~INT 21,20~  DOS dummy function (CP/M) (not used/listed)
 	~INT 21,21~  Random read using ~FCB~
 	~INT 21,22~  Random write using FCB
 	~INT 21,23~  Get file size using FCB
@@ -3617,6 +3621,8 @@
 	~INT 21,67~  Set handle count (3.3+)
 	~INT 21,68~  Flush buffer (3.3+)
 	~INT 21,69~  Get/set disk serial number (undocumented DOS 4.0+)
+	~INT 21,6A~  DOS reserved (DOS 4.0+)
+	~INT 21,6B~  DOS reserved
 	~INT 21,6C~  Extended open/create (4.x+)
 	~INT 21,F8~  Set OEM INT 21 handler (functions F9-FF) (undocumented)
 
@@ -5839,7 +5845,7 @@
 	AL = 00  get date and time
 	   = 01  set date and time
 	   = 02  ??? (DOS 4.0+ undocumented)
-	   = 03  ??? (DOS 4.0+ undocumented)
+	   = 03  ??? (DOS 4.0+ undocumented) 
 	   = 04  ??? (DOS 4.0+ undocumented)
 	BX = file handle
 	CX = time to set (if setting)
@@ -6112,6 +6118,7 @@
 	- see INT 21,5F subfunction 2 for information on obtaining the
 	  redirection list index
 	- fails if file sharing is not loaded
+	- issues ~INT 2F,11~  and  ~INT 2F,1F~
 
 
 ^INT 21,5E  AL=05  Get Printer Mode  (DOS 3.1+)
@@ -6132,6 +6139,7 @@
 	- see ~INT 21,5F~ subfunction 2 for information on obtaining the
 	  redirection list index
 	- fails if file sharing is not loaded
+	- issues  ~INT 2F,11~  and  ~INT 2F,1F~
 :int 21,5f
 ^INT 21,5F  AL=00  Get Redirection Mode  (DOS 3.1+)
 
@@ -6984,7 +6992,7 @@
 
 
 	AH = 00
-
+	
 
 	on return:
 	AH = zero if not installed
@@ -6998,7 +7006,7 @@
 
 	AH = 01
 	ES:BX = pointer to Network Control Block
-
+	
 
 	on return:
 	AL = NETBIOS error code
@@ -7013,8 +7021,8 @@
 
 	AH = 03
 	DS:SI = pointer to ASCIIZ disk device name or pathname (including ":")
-
-
+	
+	
 	on return:
 	CF = set if disk access is NOT allowed
 	   = clear if disk access is allowed
@@ -7022,6 +7030,7 @@
 
 	- do not use ~INT 13~, ~INT 25~ or ~INT 26~ if this function returns
 	  with the CF set
+	- see  ~INT 5F,2~
 :int 2a,4
 ^INT 2A,4 - Execute NETBIOS Request
 
@@ -7030,8 +7039,8 @@
 	AL = 00  allow retry
 	   = 01  no retry allowed
 	ES:BX = pointer to Network Control Block (NCB)
-
-
+	
+	
 	on return:
 	AX = 00 if successful
 	AH = 01 if error
@@ -7044,8 +7053,8 @@
 
 
 	AX = 0500
-
-
+	
+	
 	on return:
 	AX = destroyed
 	BX = number of available network names
@@ -7065,8 +7074,8 @@
 		close starts a new job
 	   = 03 flush printer output then start a new print job (similar to
 		pressing Ctrl-Alt-Kp-* )
-
-
+	
+	
 	on return:
 	AX = error code if CF set
 
@@ -7082,7 +7091,7 @@
 	   = 05  IFSFUNC (Installable File System, IFS, DOS 4.0+)
 	   = 06  IFSFUNC (Installable File System, IFS, DOS 4.0+)
 	   = 08  ASSIGN.COM
-
+	
 	returns nothing
 
 
@@ -7262,7 +7271,7 @@
 	DS:DX = pointer to a 5 byte packet containing an priority byte
 		and a DWORD pointer to an ASCIIZ filename
 	DS:DI
-
+	
 	on return:
 	ES = segment of ASSIGN work area and assignment table (AH=6 only)
 
@@ -7385,8 +7394,8 @@
 
 	AL = 80h
 	AH = 00
-
-
+	
+	
 	returns nothing
 
 
