@@ -55,12 +55,12 @@ class ListPageFactory:
   def __init__(self, template_path: str) -> None:
     with open(template_path) as file:
       self.template = "".join(file.readlines())
-      self.entries = []
+      self.entries = {}
       self.style_href = None
       self.title = None
 
   def add_entry(self, title: str, link: str) -> None:
-    self.entries.append((title, link))
+    self.entries[title] = link
 
   def set_style_href(self, style_href: str) -> None:
     self.style_href = style_href
@@ -71,7 +71,7 @@ class ListPageFactory:
   def build(self) -> str:
     html_entries = (
       f"<li><a href=\"{link}\">{title}</a></li>\n" 
-      for (title, link) in self.entries
+      for (title, link) in self.entries.items()
     )
     entries_replacement = "      ".join(html_entries)[:-1]
     return self.template \
