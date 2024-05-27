@@ -5,6 +5,8 @@ import glob
 import shutil
 from dataclasses import dataclass
 
+ASSETS_PATH="assets"
+DOCS_PATH="docs"
 BASE_PATH="dist"
 
 TOPIC_SLUG_MAP={
@@ -42,24 +44,40 @@ FILENAME_REPLACEMENTS={
 @dataclass
 class Topic:
   title: str
-  entries: dict[str, str]
+  file: str
 
-class IndexPageFactory:
+@dataclass
+class Section:
+  title: str
+  topics: dict[str, Topic]
+
+class ListPageFactory:
   def __init__(self, template_path: str) -> None:
     with open(template_path) as file:
       self.template = "".join(file.readlines())
-      self.topics=[]
+      self.entries = []
+      self.style_href = None
+      self.title = None
 
-  def add_topic(self, title: str, link: str) -> None:
-    self.topics.append((title, link))
-    
+  def add_entry(self, title: str, link: str) -> None:
+    self.entries.append((title, link))
+
+  def set_style_href(self, style_href: str) -> None:
+    self.style_href = style_href
+
+  def set_title(self, title: str) -> None:
+    self.title = title
+
   def build(self) -> str:
-    topic_list = (
+    html_entries = (
       f"<li><a href=\"{link}\">{title}</a></li>\n" 
-      for (title, link) in self.topics
+      for (title, link) in self.entries
     )
-    replacement = "      ".join(topic_list)[:-1]
-    return self.template.replace("%TOPICS%", replacement)
+    entries_replacement = "      ".join(html_entries)[:-1]
+    return self.template \
+      .replace("$STYLE_HREF", self.style_href) \
+      .replace("$TITLE", self.title) \
+      .replace("$ENTRIES", entries_replacement)
   
 def bytestostr(seq: bytes) -> str:
   return "".join(
@@ -77,9 +95,9 @@ def makefname(slug: bytes) -> str:
     for b in slug
   )
 
-def maketopic(file: str) -> Topic:
-  entries = {}
-  title = None
+def makesect(file: str) -> Section:
+  topics: dict[str, Topic] = {}
+  title: str = None
 
   with open(file, "rb") as reader:
     while line := reader.readline():
@@ -88,42 +106,58 @@ def maketopic(file: str) -> Topic:
         title = bytestostr(line)
       elif line.startswith(b':'):
         line = line[1:].strip()
-        refs = line.split(b':')
-        if refs:
-          refs_file = os.path.join(
-            TOPIC_SLUG_MAP[os.path.basename(file)], 
-            makefname(refs[0]) + '.html'
-          )
-          for ref in refs:
-            entries[ref.decode().lower()] = refs_file
+        byte_refs = line.split(b':')
+        if byte_refs:
+          topic_file = makefname(byte_refs[0]) + '.html'
+          line = reader.readline()
+          if line.startswith(b'^'):
+            topic_title = bytestostr(line[1:].strip())
 
-  return Topic(title, entries)
+            for byte_ref in byte_refs:
+              topic_ref = byte_ref.decode().lower()
+              topics[topic_ref] = Topic(topic_title, topic_file)
+
+  return Section(title, topics)
 
 def main() -> None:
-  index_factory = IndexPageFactory("assets/index.html")
-  
-  shutil.rmtree('dist', ignore_errors=True)
-  os.mkdir('dist')
-  shutil.copyfile("assets/style.css", "dist/style.css")
-  shutil.copyfile(
-    "assets/webplus-ibm-vga-8x14.woff", 
-    "dist/webplus-ibm-vga-8x14.woff"
-  )
+  main_index_factory = ListPageFactory(os.path.join(ASSETS_PATH, "list.html"))
 
-  for file in glob.glob('docs/*.TXT'):
-    slug = TOPIC_SLUG_MAP[os.path.basename(file)]
-    topic_dir = os.path.join(BASE_PATH, slug)
-    os.makedirs(topic_dir, 0o755, exist_ok=True)
+  main_index_factory.set_title("HelpPC reference Library")
+  main_index_factory.set_style_href("style.css")
 
-    topic = maketopic(file)
+  shutil.rmtree(BASE_PATH, ignore_errors=True)
+  os.mkdir(BASE_PATH)
 
-    index_factory.add_topic(
-      topic.title,
-      os.path.join(slug, "index.html")
+  for basename in ["style.css", "webplus-ibm-vga-8x14.woff"]:
+    shutil.copyfile(
+      os.path.join(ASSETS_PATH, basename),
+      os.path.join(BASE_PATH, basename)
     )
 
-  with open("dist/index.html", "w") as file:
-    file.write(index_factory.build())
+  for file in glob.glob('docs/*.TXT'):
+    section_slug = TOPIC_SLUG_MAP[os.path.basename(file)]
+    section_dir = os.path.join(BASE_PATH, section_slug)
+    os.makedirs(section_dir, 0o755, exist_ok=True)
+
+    section = makesect(file)
+
+    index_factory = ListPageFactory(os.path.join(ASSETS_PATH, "list.html"))
+    index_factory.set_title(section.title)
+    index_factory.set_style_href("../style.css")
+    
+    for topic in section.topics.values():
+      index_factory.add_entry(topic.title, topic.file)
+
+    with open(os.path.join(BASE_PATH, section_slug, "index.html"), "w") as file:
+      file.write(index_factory.build())
+
+    main_index_factory.add_entry(
+      section.title,
+      os.path.join(section_slug, "index.html")
+    )
+
+  with open(os.path.join(BASE_PATH, "index.html"), "w") as file:
+    file.write(main_index_factory.build())
 
 if __name__ == "__main__":
   main()
