@@ -1,0 +1,12 @@
+@font-face {
+  font-family: ibm-vga;
+  src: url('./webplus-ibm-vga-8x14.woff');
+}
+
+body {
+  font-family: ibm-vga, monospace;
+  font-size: 28px;
+  transform: scaleX(0.75);
+  background-color: rgb(0, 0, 0);
+  color: rgb(170, 170, 170);
+}
