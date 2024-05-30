@@ -42,14 +42,9 @@ FILENAME_REPLACEMENTS={
 }
 
 @dataclass
-class Topic:
-  title: str
-  file: str
-
-@dataclass
 class Section:
   title: str
-  topics: dict[str, Topic]
+  refs: dict[str, str]
 
 class ListPageFactory:
   def __init__(self, template_path: str) -> None:
@@ -60,7 +55,8 @@ class ListPageFactory:
       self.title = None
 
   def add_entry(self, title: str, link: str) -> None:
-    self.entries[title] = link
+    if link not in self.entries:
+      self.entries[link] = title
 
   def set_style_href(self, style_href: str) -> None:
     self.style_href = style_href
@@ -71,7 +67,7 @@ class ListPageFactory:
   def build(self) -> str:
     html_entries = (
       f"<li><a href=\"{link}\">{title}</a></li>\n" 
-      for (title, link) in self.entries.items()
+      for (link, title) in self.entries.items()
     )
     entries_replacement = "      ".join(html_entries)[:-1]
     return self.template \
@@ -96,7 +92,7 @@ def makefname(slug: bytes) -> str:
   )
 
 def makesect(file: str) -> Section:
-  topics: dict[str, Topic] = {}
+  refs: dict[str, str] = {}
   title: str = None
 
   with open(file, "rb") as stream:
@@ -109,15 +105,11 @@ def makesect(file: str) -> Section:
         byte_refs = line.split(b':')
         if byte_refs:
           topic_file = makefname(byte_refs[0]) + '.html'
-          line = stream.readline()
-          if line.startswith(b'^'):
-            topic_title = bytestostr(line[1:].strip())
+          for byte_ref in byte_refs:
+            topic_ref = byte_ref.decode().lower()
+            refs[topic_ref] = topic_file
 
-            for byte_ref in byte_refs:
-              topic_ref = byte_ref.decode().lower()
-              topics[topic_ref] = Topic(topic_title, topic_file)
-
-  return Section(title, topics)
+  return Section(title, refs)
 
 def main() -> None:
   main_index_factory = ListPageFactory(os.path.join(ASSETS_PATH, "list.html"))
@@ -145,8 +137,8 @@ def main() -> None:
     index_factory.set_title(section.title)
     index_factory.set_style_href("../style.css")
     
-    for topic in section.topics.values():
-      index_factory.add_entry(topic.title, topic.file)
+    for (ref, file) in section.refs.items():
+      index_factory.add_entry(ref.title(), file)
 
     with open(os.path.join(BASE_PATH, section_slug, "index.html"), "w") as stream:
       stream.write(index_factory.build())
