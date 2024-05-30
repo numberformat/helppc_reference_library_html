@@ -53,8 +53,8 @@ class Section:
 
 class ListPageFactory:
   def __init__(self, template_path: str) -> None:
-    with open(template_path) as file:
-      self.template = "".join(file.readlines())
+    with open(template_path) as stream:
+      self.template = "".join(stream.readlines())
       self.entries = {}
       self.style_href = None
       self.title = None
@@ -99,8 +99,8 @@ def makesect(file: str) -> Section:
   topics: dict[str, Topic] = {}
   title: str = None
 
-  with open(file, "rb") as reader:
-    while line := reader.readline():
+  with open(file, "rb") as stream:
+    while line := stream.readline():
       if line.startswith(b'@'):
         line = line[1:].strip()
         title = bytestostr(line)
@@ -109,7 +109,7 @@ def makesect(file: str) -> Section:
         byte_refs = line.split(b':')
         if byte_refs:
           topic_file = makefname(byte_refs[0]) + '.html'
-          line = reader.readline()
+          line = stream.readline()
           if line.startswith(b'^'):
             topic_title = bytestostr(line[1:].strip())
 
@@ -148,16 +148,16 @@ def main() -> None:
     for topic in section.topics.values():
       index_factory.add_entry(topic.title, topic.file)
 
-    with open(os.path.join(BASE_PATH, section_slug, "index.html"), "w") as file:
-      file.write(index_factory.build())
+    with open(os.path.join(BASE_PATH, section_slug, "index.html"), "w") as stream:
+      stream.write(index_factory.build())
 
     main_index_factory.add_entry(
       section.title,
       os.path.join(section_slug, "index.html")
     )
 
-  with open(os.path.join(BASE_PATH, "index.html"), "w") as file:
-    file.write(main_index_factory.build())
+  with open(os.path.join(BASE_PATH, "index.html"), "w") as stream:
+    stream.write(main_index_factory.build())
 
 if __name__ == "__main__":
   main()
