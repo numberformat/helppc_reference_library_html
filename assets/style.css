@@ -4,9 +4,45 @@
 }
 
 body {
-  font-family: ibm-vga, monospace;
-  font-size: 28px;
-  transform: scaleX(0.75);
   background-color: rgb(0, 0, 0);
   color: rgb(170, 170, 170);
+  font-family: ibm-vga, monospace;
+  font-size: 28px;
+  margin: 2em auto 4em;
+  max-width: 80ch;
+  padding: 0;
+  transform: scaleX(0.75);
+}
+
+pre {
+  font-family: inherit;
+  font-size: inherit;
+}
+
+b {
+  color: rgb(255, 255, 255);
+  font-weight: inherit;
+}
+
+a {
+  color: rgb(255, 255, 255);
+  text-decoration: underline 2px;
+}
+
+h1,
+h2 {
+  color: rgb(255, 255, 255);
+  font-weight: inherit;
+  padding: 0;
+  text-align: center;
+}
+
+h1 {
+  font-size: 250%;
+  margin: 1em 0;
+}
+
+h2 {
+  font-size: 150%;
+  margin: 0;
 }
