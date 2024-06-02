@@ -42,10 +42,38 @@ FILENAME_REPLACEMENTS={
 }
 
 @dataclass
+class TopicRef:
+  filename: str
+  section: str
+
+@dataclass
 class Section:
   title: str
-  refs: dict[str, str]
+  topics: dict[str, str]
 
+class TopicPageFactory:
+  def __init__(self, template_path: str) -> None:
+    with open(template_path) as stream:
+      self.template = "".join(stream.readlines())
+      self.body = {}
+      self.style_href = None
+      self.title = None
+
+  def set_style_href(self, style_href: str) -> None:
+    self.style_href = style_href
+
+  def set_title(self, title: str) -> None:
+    self.title = title
+
+  def set_body(self, body: str) -> None:
+    self.body = body
+
+  def build(self) -> str:
+    return self.template \
+      .replace("$STYLE_HREF", self.style_href) \
+      .replace("$TITLE", self.title) \
+      .replace("$BODY", self.body)
+  
 class ListPageFactory:
   def __init__(self, template_path: str) -> None:
     with open(template_path) as stream:
@@ -81,35 +109,84 @@ def bytestostr(seq: bytes) -> str:
     if b in BYTE_REPLACEMENTS
     else chr(b)
     for b in seq
-  ).strip()
+  )
 
-def makefname(slug: bytes) -> str:
+def fname(ref: bytes) -> str:
   return "".join(
     FILENAME_REPLACEMENTS[b]
     if b in FILENAME_REPLACEMENTS
     else chr(b).lower()
-    for b in slug
+    for b in ref
   )
 
-def makesect(file: str) -> Section:
+def readrefs(file: str) -> dict[str, TopicRef]:
   refs: dict[str, str] = {}
-  title: str = None
+  section_slug = TOPIC_SLUG_MAP[os.path.basename(file)]
 
   with open(file, "rb") as stream:
     while line := stream.readline():
-      if line.startswith(b'@'):
-        line = line[1:].strip()
-        title = bytestostr(line)
-      elif line.startswith(b':'):
-        line = line[1:].strip()
+      if line.startswith(b':'):
+        line = line[1:].rstrip()
         byte_refs = line.split(b':')
         if byte_refs:
-          topic_file = makefname(byte_refs[0]) + '.html'
+          topic_file = f"{fname(byte_refs[0])}.html"
           for byte_ref in byte_refs:
             topic_ref = byte_ref.decode().lower()
-            refs[topic_ref] = topic_file
+            refs[topic_ref] = TopicRef(topic_file, section_slug)
 
-  return Section(title, refs)
+  return refs
+
+def replace_links(line: str, refs: dict[str, TopicRef]) -> str:
+  replaced = []
+  pos = 0
+  while pos < len(line):
+    if line[pos] == '~':
+      # discard first tilde
+      pos += 1
+      if line[pos] == '~':
+        # if we get a second tilde, write the tilde
+        replaced.append('~')
+      else:
+        link = ""
+        while line[pos] != '~':
+          link += line[pos]
+          pos += 1
+        # insert the link only if it's present in the refs
+        if link.lower() in refs:
+          topic_ref = refs[link.lower()]
+          href = f"../{topic_ref.section}/{topic_ref.filename}"
+          replaced.append(f'<a href="{href}">{link}</a>')
+        else:
+          print(f"Link '{link}' not found in refs, treating as plain text")
+          replaced.append(link)
+    else:
+      replaced.append(line[pos])
+    pos += 1
+  return "".join(replaced)
+
+
+def readsection(file: str, refs: dict[str, TopicRef]) -> Section:
+  section_title = None
+  topics = {}
+  current_ref = None
+
+  with open(file, "rb") as stream:
+    while line := stream.readline():
+      line = replace_links(bytestostr(line.rstrip()), refs)
+      if line.startswith('@'):
+        section_title = line[1:]
+      elif line.startswith(':'):
+        # First tag in line
+        current_ref = line[1:].split(':')[0].lower()
+        topics[current_ref] = ""
+      elif line.startswith('^'):
+        topics[current_ref] += f"<h2>{line[1:]}</h2>\n"
+      elif line.startswith('%'):
+        topics[current_ref] += f"<b>{line[1:]}</b>\n"
+      else:
+        topics[current_ref] += f"{line}\n"
+
+  return Section(section_title, topics)
 
 def main() -> None:
   main_index_factory = ListPageFactory(os.path.join(ASSETS_PATH, "list.html"))
@@ -126,30 +203,64 @@ def main() -> None:
       os.path.join(BASE_PATH, basename)
     )
 
+  # First pass, create the references
+  refs: dict[str, TopicRef] = {}
   for file in glob.glob('docs/*.TXT'):
-    section_slug = TOPIC_SLUG_MAP[os.path.basename(file)]
+    refs |= readrefs(file)
+
+  # Second pass, read the content
+  sections: dict[str, Section] = {}
+  for file in glob.glob('docs/*.TXT'):
+    sections[file] = readsection(file, refs)
+
+  for section_file, section in sections.items():
+    # Create the section directory if it doesn't exist
+    section_slug = TOPIC_SLUG_MAP[os.path.basename(section_file)]
     section_dir = os.path.join(BASE_PATH, section_slug)
     os.makedirs(section_dir, 0o755, exist_ok=True)
 
-    section = makesect(file)
+    # Write the index file
+    factory = ListPageFactory(os.path.join(ASSETS_PATH, "list.html"))
+    factory.set_title(section.title)
+    factory.set_style_href("../style.css")
+    for topic_ref in section.topics.keys():
+      factory.add_entry(topic_ref.title(), refs[topic_ref].filename)
 
-    index_factory = ListPageFactory(os.path.join(ASSETS_PATH, "list.html"))
-    index_factory.set_title(section.title)
-    index_factory.set_style_href("../style.css")
-    
-    for (ref, file) in section.refs.items():
-      index_factory.add_entry(ref.title(), file)
+    index_file = os.path.join(BASE_PATH, section_slug, "index.html")
 
-    with open(os.path.join(BASE_PATH, section_slug, "index.html"), "w") as stream:
-      stream.write(index_factory.build())
+    with open(index_file, "w") as stream:
+      print(f"Writing index file of section '{section_slug}'")
+      stream.write(factory.build())
 
-    main_index_factory.add_entry(
-      section.title,
-      os.path.join(section_slug, "index.html")
-    )
+    # Write the topic files
+    for topic_ref, topic_body in section.topics.items():
+      factory = TopicPageFactory(os.path.join(ASSETS_PATH, "topic.html"))
+      factory.set_title(topic_ref.title())
+      factory.set_style_href("../style.css")
+      factory.set_body(topic_body)
 
-  with open(os.path.join(BASE_PATH, "index.html"), "w") as stream:
-    stream.write(main_index_factory.build())
+      topic_filename = refs[topic_ref].filename
+      topic_file = os.path.join(BASE_PATH, section_slug, topic_filename)
+
+      with open(topic_file, "w") as stream:
+        print(f"Writing file '{topic_file}'")
+        stream.write(factory.build())
+
+  # Write main index file
+  factory = ListPageFactory(os.path.join(ASSETS_PATH, "list.html"))
+  factory.set_title("HelpPC Reference Library")
+  factory.set_style_href("./style.css")
+
+  for section_file, section in sections.items():
+    section_slug = TOPIC_SLUG_MAP[os.path.basename(section_file)]
+    section_index_file = os.path.join(section_slug, "index.html")
+    factory.add_entry(section.title, section_index_file)
+
+  main_index_file = os.path.join(BASE_PATH, "index.html")
+
+  with open(main_index_file, "w") as stream:
+    print(f"Writing main index file")
+    stream.write(factory.build())
 
 if __name__ == "__main__":
   main()
