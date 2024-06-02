@@ -2,7 +2,7 @@
 
 This project contains Quick Reference Material used to program IBM PC and compatible computers back in the late 80's and early 90's. The information found here is distilled knowledge of many thousands of pages of Programmer reference material. 
 
-It also contains a utility program written in C to convert the information found in the TXT files to an HTML site. 
+It also contains a utility program written in Python to convert the information found in the TXT files to an HTML site. 
 
 The original program that used this data is available online on various retro software repositories. The TXT files availabe here can be updated and fed back into the program.
 
