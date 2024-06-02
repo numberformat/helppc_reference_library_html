@@ -33,7 +33,7 @@ BYTE_REPLACEMENTS = {
     0x1d: "↔",
     0x1e: "▲",
     0x1f: "▼",
-    
+
     # Extended latin characters
     0x7f: "⌂",
     0x80: "Ç",
@@ -219,7 +219,10 @@ def readsection(file: str, refs: dict[str, TopicRef]) -> Section:
             if line.startswith("@"):
                 section_title = line[1:]
             elif line.startswith(":"):
-                # First tag in line
+                if current_ref:
+                    # Trim current body from extra newlines
+                    topics[current_ref] = topics[current_ref].strip()
+                # Use first tag in line as ref
                 current_ref = line[1:].split(":")[0].lower()
                 topics[current_ref] = ""
             elif line.startswith("^"):
