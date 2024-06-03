@@ -8,7 +8,6 @@ body {
   color: rgb(170, 170, 170);
   font-family: ibm-vga, monospace;
   font-size: 28px;
-  line-height: 1em;
   margin: 2em auto 4em;
   max-width: 80ch;
   padding: 0;
@@ -18,6 +17,7 @@ body {
 pre {
   font-family: inherit;
   font-size: inherit;
+  line-height: 1em;
 }
 
 b {
