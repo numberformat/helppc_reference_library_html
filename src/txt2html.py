@@ -7,8 +7,10 @@ from readrefs import readrefs
 from readsection import readsection
 from pagefactory import IndexPageFactory, TopicPageFactory
 from common import TopicRef, Section
+from argparse import ArgumentParser
 
 ASSETS_PATH = "assets"
+TEMPLATES_PATH = "templates"
 DOCS_PATH = "docs"
 BASE_PATH = "dist"
 
@@ -22,22 +24,14 @@ TOPIC_SLUG_MAP = {
 }
 
 
-def main() -> None:
-    main_index_factory = IndexPageFactory(
-        os.path.join(ASSETS_PATH, "list.html")
-    )
+class MainArguments:
+    generate_index: bool
 
-    main_index_factory.set_title("HelpPC reference Library")
-    main_index_factory.set_style_href("style.css")
 
+def main(args: MainArguments) -> None:
+    # Copy assets over
     shutil.rmtree(BASE_PATH, ignore_errors=True)
-    os.mkdir(BASE_PATH)
-
-    for basename in ["style.css", "webplus-ibm-vga-8x14.woff"]:
-        shutil.copyfile(
-            os.path.join(ASSETS_PATH, basename),
-            os.path.join(BASE_PATH, basename)
-        )
+    shutil.copytree(ASSETS_PATH, BASE_PATH)
 
     # First pass, create the references
     refs: dict[str, TopicRef] = {}
@@ -58,7 +52,9 @@ def main() -> None:
 
         # Write the topic files
         for topic_ref, topic_body in section.topics.items():
-            factory = TopicPageFactory(os.path.join(ASSETS_PATH, "topic.html"))
+            factory = TopicPageFactory(
+                os.path.join(TEMPLATES_PATH, "topic.html")
+            )
             factory.set_title(topic_ref.title())
             factory.set_style_href("../style.css")
             factory.set_body(topic_body)
@@ -70,35 +66,40 @@ def main() -> None:
                 print(f"Writing file '{topic_file}'")
                 stream.write(factory.build())
 
-        # Write the index file
-        factory = IndexPageFactory(os.path.join(ASSETS_PATH, "list.html"))
-        factory.set_title(section.title)
-        factory.set_style_href("../style.css")
-        for topic_ref in section.topics.keys():
-            factory.add_entry(topic_ref.title(), refs[topic_ref].filename)
+        if args.generate_index:
+            # Write the index file
+            factory = IndexPageFactory(
+                os.path.join(TEMPLATES_PATH, "list.html"))
+            factory.set_title(section.title)
+            factory.set_style_href("../style.css")
+            for topic_ref in section.topics.keys():
+                factory.add_entry(topic_ref.title(), refs[topic_ref].filename)
 
-        index_file = os.path.join(BASE_PATH, section_slug, "index.html")
+            index_file = os.path.join(BASE_PATH, section_slug, "index.html")
 
-        with open(index_file, "w") as stream:
-            print(f"Writing index file of section '{section_slug}'")
+            with open(index_file, "w") as stream:
+                print(f"Writing index file of section '{section_slug}'")
+                stream.write(factory.build())
+
+    if args.generate_index:
+        # Write main index file
+        factory = IndexPageFactory(os.path.join(TEMPLATES_PATH, "list.html"))
+        factory.set_title("HelpPC Reference Library")
+        factory.set_style_href("./style.css")
+
+        for section_file, section in sections.items():
+            section_slug = TOPIC_SLUG_MAP[os.path.basename(section_file)]
+            section_index_file = os.path.join(section_slug, "index.html")
+            factory.add_entry(section.title, section_index_file)
+
+        main_index_file = os.path.join(BASE_PATH, "index.html")
+
+        with open(main_index_file, "w") as stream:
+            print(f"Writing main index file")
             stream.write(factory.build())
-
-    # Write main index file
-    factory = IndexPageFactory(os.path.join(ASSETS_PATH, "list.html"))
-    factory.set_title("HelpPC Reference Library")
-    factory.set_style_href("./style.css")
-
-    for section_file, section in sections.items():
-        section_slug = TOPIC_SLUG_MAP[os.path.basename(section_file)]
-        section_index_file = os.path.join(section_slug, "index.html")
-        factory.add_entry(section.title, section_index_file)
-
-    main_index_file = os.path.join(BASE_PATH, "index.html")
-
-    with open(main_index_file, "w") as stream:
-        print(f"Writing main index file")
-        stream.write(factory.build())
 
 
 if __name__ == "__main__":
-    main()
+    argparser = ArgumentParser(prog="txt2html")
+    argparser.add_argument("-i", "--generate-index", action="store_true")
+    main(argparser.parse_args(namespace=MainArguments))
