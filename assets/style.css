@@ -14,10 +14,9 @@ body {
   transform: scaleX(0.83333333333);
 }
 
-pre {
-  font-family: inherit;
-  font-size: inherit;
-  line-height: 1em;
+a {
+  color: rgb(255, 255, 255);
+  text-decoration: underline 2px;
 }
 
 b {
@@ -25,17 +24,14 @@ b {
   font-weight: inherit;
 }
 
-a {
-  color: rgb(255, 255, 255);
-  text-decoration: underline 2px;
-}
-
 h1,
 h2 {
   color: rgb(255, 255, 255);
   font-weight: inherit;
+  line-height: 125%;
   padding: 0;
   text-align: center;
+  text-wrap: wrap;
 }
 
 h1 {
@@ -46,4 +42,27 @@ h1 {
 h2 {
   font-size: 150%;
   margin: 0;
+}
+
+footer {
+  font-size: 50%;
+  text-align: center;
+  margin-top: 5em;
+}
+
+p {
+  margin: 0.5em;
+  padding: 0;
+}
+
+pre {
+  font-family: inherit;
+  font-size: inherit;
+  line-height: 1em;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
 }
