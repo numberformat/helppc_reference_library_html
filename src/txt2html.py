@@ -51,13 +51,13 @@ def main(args: MainArguments) -> None:
         os.makedirs(section_dir, 0o755, exist_ok=True)
 
         # Write the topic files
-        for topic_ref, topic_body in section.topics.items():
+        for topic_ref, topic in section.topics.items():
             factory = TopicPageFactory(
                 os.path.join(TEMPLATES_PATH, "topic.html")
             )
-            factory.set_title(topic_ref.title())
+            factory.set_title(topic.title)
             factory.set_style_href("../style.css")
-            factory.set_body(topic_body)
+            factory.set_body(topic.body)
 
             topic_filename = refs[topic_ref].filename
             topic_file = os.path.join(BASE_PATH, section_slug, topic_filename)
@@ -72,10 +72,10 @@ def main(args: MainArguments) -> None:
                 os.path.join(TEMPLATES_PATH, "list.html"))
             factory.set_title(section.title)
             factory.set_style_href("../style.css")
-            for topic_ref in section.topics.keys():
-                factory.add_entry(topic_ref.title(), refs[topic_ref].filename)
+            for topic_ref, topic in section.topics.items():
+                factory.add_entry(topic.title, refs[topic_ref].filename)
 
-            index_file = os.path.join(BASE_PATH, section_slug, "index.html")
+            index_file = os.path.join(ASSETS_PATH, section_slug, "index.html")
 
             with open(index_file, "w") as stream:
                 print(f"Writing index file of section '{section_slug}'")
@@ -92,7 +92,7 @@ def main(args: MainArguments) -> None:
             section_index_file = os.path.join(section_slug, "index.html")
             factory.add_entry(section.title, section_index_file)
 
-        main_index_file = os.path.join(BASE_PATH, "index.html")
+        main_index_file = os.path.join(ASSETS_PATH, "index.html")
 
         with open(main_index_file, "w") as stream:
             print(f"Writing main index file")
@@ -101,5 +101,6 @@ def main(args: MainArguments) -> None:
 
 if __name__ == "__main__":
     argparser = ArgumentParser(prog="txt2html")
-    argparser.add_argument("-i", "--generate-index", action="store_true")
+    # Specify -i to generate indices in the assets folder, to be used locally
+    argparser.add_argument("-i", "--generate-indices", action="store_true")
     main(argparser.parse_args(namespace=MainArguments))

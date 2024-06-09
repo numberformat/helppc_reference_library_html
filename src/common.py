@@ -8,6 +8,12 @@ class TopicRef:
 
 
 @dataclass
+class Topic:
+    title: str
+    body: str
+
+
+@dataclass
 class Section:
     title: str
-    topics: dict[str, str]
+    topics: dict[str, Topic]

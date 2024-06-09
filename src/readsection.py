@@ -1,4 +1,9 @@
-from common import TopicRef, Section
+from common import Topic, TopicRef, Section
+
+TITLE_MAP = {
+    "int table": "Interrupt Tables",
+}
+
 
 BYTE_REPLACEMENTS = {
     # Control characters
@@ -210,7 +215,7 @@ def replace_links(line: str, refs: dict[str, TopicRef]) -> str:
 
 def readsection(file: str, refs: dict[str, TopicRef]) -> Section:
     section_title = None
-    topics = {}
+    topics: dict[str, Topic] = {}
     current_ref = None
 
     with open(file, "rb") as stream:
@@ -221,15 +226,21 @@ def readsection(file: str, refs: dict[str, TopicRef]) -> Section:
             elif line.startswith(":"):
                 if current_ref:
                     # Trim current body from extra newlines
-                    topics[current_ref] = topics[current_ref].strip()
+                    stripped = topics[current_ref].body.strip('\r\n')
+                    topics[current_ref].body = stripped
                 # Use first tag in line as ref
                 current_ref = line[1:].split(":")[0].lower()
-                topics[current_ref] = ""
+                topics[current_ref] = Topic("", "")
             elif line.startswith("^"):
-                topics[current_ref] += f"<h2>{line[1:]}</h2>\n"
+                if current_ref in TITLE_MAP:
+                    topics[current_ref].title = TITLE_MAP[current_ref]
+                    topics[current_ref].body += f"<h2>{line[1:]}</h2>\n"
+                else:
+                    # Take title from the ^ line if we don't override it
+                    topics[current_ref].title = line[1:]
             elif line.startswith("%"):
-                topics[current_ref] += f"<b>{line[1:]}</b>\n"
+                topics[current_ref].body += f"<b>{line[1:]}</b>\n"
             else:
-                topics[current_ref] += f"{line}\n"
+                topics[current_ref].body += f"{line}\n"
 
     return Section(section_title, topics)
