@@ -1,7 +1,7 @@
 from common import Topic, TopicRef, Section
 
 TITLE_MAP = {
-    "int table": "Interrupt Tables",
+    "int table": "Interrupt Tables"
 }
 
 
@@ -217,6 +217,8 @@ def readsection(file: str, refs: dict[str, TopicRef]) -> Section:
     section_title = None
     topics: dict[str, Topic] = {}
     current_ref = None
+    prev_line_title = False
+    prev_line_bold = False
 
     with open(file, "rb") as stream:
         while line := stream.readline():
@@ -232,14 +234,19 @@ def readsection(file: str, refs: dict[str, TopicRef]) -> Section:
                 current_ref = line[1:].split(":")[0].lower()
                 topics[current_ref] = Topic("", "")
             elif line.startswith("^"):
+                # Replace the title only if it's not set
                 if current_ref in TITLE_MAP:
                     topics[current_ref].title = TITLE_MAP[current_ref]
                     topics[current_ref].body += f"<h2>{line[1:]}</h2>\n"
                 else:
-                    # Take title from the ^ line if we don't override it
-                    topics[current_ref].title = line[1:]
+                    # Only consider the first ^ line as the title
+                    if not topics[current_ref].title:
+                        # Take title from the ^ line if we don't override it
+                        topics[current_ref].title = line[1:]
+                    else:
+                        topics[current_ref].body += f"<h2>{line[1:]}</h2>\n"
             elif line.startswith("%"):
-                topics[current_ref].body += f"<b>{line[1:]}</b>\n"
+                topics[current_ref].body += f"<b> {line[1:]}</b>\n"
             else:
                 topics[current_ref].body += f"{line}\n"
 

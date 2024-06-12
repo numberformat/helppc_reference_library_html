@@ -25,7 +25,7 @@ TOPIC_SLUG_MAP = {
 
 
 class MainArguments:
-    generate_index: bool
+    generate_indices: bool
 
 
 def main(args: MainArguments) -> None:
@@ -66,7 +66,7 @@ def main(args: MainArguments) -> None:
                 print(f"Writing file '{topic_file}'")
                 stream.write(factory.build())
 
-        if args.generate_index:
+        if args.generate_indices:
             # Write the index file
             factory = IndexPageFactory(
                 os.path.join(TEMPLATES_PATH, "list.html"))
@@ -81,7 +81,7 @@ def main(args: MainArguments) -> None:
                 print(f"Writing index file of section '{section_slug}'")
                 stream.write(factory.build())
 
-    if args.generate_index:
+    if args.generate_indices:
         # Write main index file
         factory = IndexPageFactory(os.path.join(TEMPLATES_PATH, "list.html"))
         factory.set_title("HelpPC Reference Library")

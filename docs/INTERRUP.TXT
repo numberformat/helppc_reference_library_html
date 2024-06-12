@@ -1027,8 +1027,7 @@
 	- used to detect video display capabilities
 
 :int 10,1b
-^INT 10,1B - Video BIOS Functionality and
-^State Information (MCGA/VGA)
+^INT 10,1B - Video BIOS Functionality and State Information (MCGA/VGA)
 
 	AH = 1B
 	BX = implementation type (must be zero)
@@ -1678,7 +1677,7 @@
 	- INT 46h vector is pointer to table for drive 1
 
 
-^Table	definitions located by interrupt vectors  41H & 46H
+^Table definitions located by interrupt vectors 41H & 46H
 
 %	Offset Size	    Description
 
