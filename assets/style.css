@@ -15,10 +15,14 @@ body {
   transform: scaleX(0.83333333333);
 }
 
+body > :not(h1) {
+  margin-left: 8ch;
+}
+
 a {
   color: rgb(255, 255, 255);
-  text-decoration: underline 7%;
-  text-underline-offset: 5%;
+  text-decoration: underline 2px;
+  text-underline-offset: 3px;
 }
 
 b {
@@ -71,6 +75,10 @@ td {
   margin: 0;
 }
 
+td:first-child {
+  text-align: right;
+}
+
 td:not(:last-child) {
   padding-right: 2ch;
 }
@@ -81,11 +89,7 @@ ul {
   padding: 0;
 }
 
-.left-tabbed {
-  margin-left: 8ch;
-}
-
-.v-spaced {
+ul.v-spaced > li {
   margin-top: 1em;
   margin-bottom: 1em;
 }
