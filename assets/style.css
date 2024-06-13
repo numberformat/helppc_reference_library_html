@@ -32,7 +32,8 @@ b {
 }
 
 h1,
-h2 {
+h2,
+h3 {
   color: rgb(255, 255, 255);
   font-weight: inherit;
   line-height: 125%;
@@ -46,7 +47,8 @@ h1 {
   margin: 2em 0;
 }
 
-h2 {
+h2,
+h3 {
   font-size: 100%;
   margin: 0;
 }
@@ -69,6 +71,8 @@ pre {
 table {
   border-collapse: collapse;
   border: none;
+  margin: 1em 0;
+  padding: 0;
 }
 
 td {
@@ -93,4 +97,18 @@ ul {
 ul.v-spaced > li {
   margin-top: 1em;
   margin-bottom: 1em;
+}
+
+.asm .isa {
+  margin-top: 2em;
+}
+
+.asm .letters {
+  text-align: center;
+  margin-bottom: 1em;
+}
+
+.asm td:first-child {
+  width: 13ch;
+  vertical-align: top;
 }
