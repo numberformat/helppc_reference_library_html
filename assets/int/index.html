@@ -7,365 +7,150 @@
   </head>
   <body>
     <h1>Interrupt Services DOS∙BIOS∙EMS∙Mouse</h1>
-    <ul>
-      <li><a href="int_table.html">Interrupt Tables</a></li>
-      <li><a href="int_5.html">INT 5 - Print Screen</a></li>
-      <li><a href="int_8.html">INT 8 - System timer</a></li>
-      <li><a href="int_9.html">INT 9 - Keyboard Interrupt (Hardware Handler)</a></li>
-      <li><a href="int_10.html">INT 10 - Video BIOS Services</a></li>
-      <li><a href="int_10-0.html">INT 10,0 - Set Video Mode</a></li>
-      <li><a href="int_10-1.html">INT 10,1 - Set Cursor Type</a></li>
-      <li><a href="int_10-2.html">INT 10,2 - Set Cursor Position</a></li>
-      <li><a href="int_10-3.html">INT 10,3 - Read Cursor Position and Size</a></li>
-      <li><a href="int_10-4.html">INT 10,4 - Read Light Pen Position</a></li>
-      <li><a href="int_10-5.html">INT 10,5 - Select Active Display Page</a></li>
-      <li><a href="int_10-6.html">INT 10,6 - Scroll Window Up</a></li>
-      <li><a href="int_10-7.html">INT 10,7 - Scroll Window Down</a></li>
-      <li><a href="int_10-8.html">INT 10,8 - Read Character and Attribute at Cursor Position</a></li>
-      <li><a href="int_10-9.html">INT 10,9 - Write Character and Attribute at Cursor Position</a></li>
-      <li><a href="int_10-a.html">INT 10,A - Write Character Only at Current Cursor Position</a></li>
-      <li><a href="int_10-b.html">INT 10,B - Set Color Palette</a></li>
-      <li><a href="int_10-c.html">INT 10,C - Write Graphics Pixel at Coordinate</a></li>
-      <li><a href="int_10-d.html">INT 10,D - Read Graphics Pixel at Coordinate</a></li>
-      <li><a href="int_10-e.html">INT 10,E - Write Text in Teletype Mode</a></li>
-      <li><a href="int_10-f.html">INT 10,F - Get Video State</a></li>
-      <li><a href="int_10-10.html">INT 10,10 - Set/Get Palette Registers (EGA/VGA)</a></li>
-      <li><a href="int_10-11.html">INT 10,11 - Character Generator Routine (EGA/VGA)</a></li>
-      <li><a href="int_10-12.html">INT 10,12 - Video Subsystem Configuration (EGA/VGA)</a></li>
-      <li><a href="int_10-13.html">INT 10,13 - Write String (BIOS versions from 1/10/86)</a></li>
-      <li><a href="int_10-14.html">INT 10,14 - Load LCD Character Font (convertible only)</a></li>
-      <li><a href="int_10-15.html">INT 10,15 - Return Physical Display Parms (convertible)</a></li>
-      <li><a href="int_10-1a.html">INT 10,1A - Video Display Combination (VGA)</a></li>
-      <li><a href="int_10-1b.html">INT 10,1B - Video BIOS Functionality and State Information (MCGA/VGA)</a></li>
-      <li><a href="int_10-1c.html">INT 10,1C - Save/Restore Video State  (VGA only)</a></li>
-      <li><a href="int_10-fe.html">INT 10,FE - Get DESQView/TopView Virtual Screen Regen Buffer</a></li>
-      <li><a href="int_10-ff.html">INT 10,FF - Update DESQView/TopView Virtual Screen Regen Buffer</a></li>
-      <li><a href="int_11.html">INT 11 - BIOS Equipment Determination / BIOS Equipment Flags</a></li>
-      <li><a href="int_12.html">INT 12 - Memory Size Determination</a></li>
-      <li><a href="int_13.html">INT 13 - Diskette BIOS Services</a></li>
-      <li><a href="int_13-0.html">INT 13,0 - Reset Disk System</a></li>
-      <li><a href="int_13-1.html">INT 13,1 - Disk Status</a></li>
-      <li><a href="int_13-2.html">INT 13,2 - Read Disk Sectors</a></li>
-      <li><a href="int_13-3.html">INT 13,3 - Write Disk Sectors</a></li>
-      <li><a href="int_13-4.html">INT 13,4 - Verify Disk Sectors</a></li>
-      <li><a href="int_13-5.html">INT 13,5 - Format Disk Track</a></li>
-      <li><a href="int_13-6.html">INT 13,6 - Format Track and Set Bad Sector Flags (XT & portable)</a></li>
-      <li><a href="int_13-7.html">INT 13,7 - Format Drive Starting at Specified Track (XT & portable)</a></li>
-      <li><a href="int_13-8.html">INT 13,8 - Get Current Drive Parameters (XT & newer)</a></li>
-      <li><a href="int_13-9.html">INT 13,9 - Initialize Fixed Disk Table (XT & newer)</a></li>
-      <li><a href="int_13-a.html">INT 13,A - Read Long Sector (XT & newer)</a></li>
-      <li><a href="int_13-b.html">INT 13,B - Write Long Sectors (XT & newer)</a></li>
-      <li><a href="int_13-c.html">INT 13,C - Seek to Cylinder (XT & newer)</a></li>
-      <li><a href="int_13-d.html">INT 13,D - Alternate Disk Reset  (XT & newer)</a></li>
-      <li><a href="int_13-e.html">INT 13,E - Read Sector Buffer (XT & portable only)</a></li>
-      <li><a href="int_13-f.html">INT 13,F - Write Sector Buffer (XT & portable only)</a></li>
-      <li><a href="int_13-10.html">INT 13,10 - Test for Drive Ready (XT  & newer)</a></li>
-      <li><a href="int_13-11.html">INT 13,11 - Recalibrate Drive (XT & newer)</a></li>
-      <li><a href="int_13-12.html">INT 13,12 - Controller RAM Diagnostic (XT & portable only)</a></li>
-      <li><a href="int_13-13.html">INT 13,13 - Drive Diagnostic (XT & portable only)</a></li>
-      <li><a href="int_13-14.html">INT 13,14 - Controller Internal Diagnostic (XT & newer)</a></li>
-      <li><a href="int_13-15.html">INT 13,15 - Read DASD Type (XT BIOS from 1/10/86 & newer)</a></li>
-      <li><a href="int_13-16.html">INT 13,16 - Change of Disk Status (XT BIOS from 1/10/86 & newer)</a></li>
-      <li><a href="int_13-17.html">INT 13,17 - Set DASD Type for Format (XT BIOS from 1/10/86 & newer)</a></li>
-      <li><a href="int_13-18.html">INT 13,18 - Set Media Type for Format (BIOS date specific)</a></li>
-      <li><a href="int_13-19.html">INT 13,19 - Park Fixed Disk Heads (AT & newer)</a></li>
-      <li><a href="int_13-1a.html">INT 13,1A - Format Unit (PS/2 model 50+)</a></li>
-      <li><a href="int_14.html">INT 14 - BIOS Asynchronous Communications Services</a></li>
-      <li><a href="int_14-0.html">INT 14,0 - Initialize Communications Port Parameters</a></li>
-      <li><a href="int_14-1.html">INT 14,1 - Send Character to Communications Port</a></li>
-      <li><a href="int_14-2.html">INT 14,2 - Receive Character from Communications Port</a></li>
-      <li><a href="int_14-3.html">INT 14,3 - Get Serial Port Status</a></li>
-      <li><a href="int_14-4.html">INT 14,4 - Serial Port Extended Initialization (PS/2 & later systems)</a></li>
-      <li><a href="int_14-5.html">INT 14,5 - Extended Communication Port Control (PS/2 & later systems)</a></li>
-      <li><a href="int_15.html">INT 15 - System BIOS Services</a></li>
-      <li><a href="int_15-0.html">INT 15,0 - Turn Cassette Motor On (PC,PCjr only)</a></li>
-      <li><a href="int_15-1.html">INT 15,1 - Turn Cassette Motor Off (PC,PCjr only)</a></li>
-      <li><a href="int_15-2.html">INT 15,2 - Read Blocks from Cassette (PC,PCjr only)</a></li>
-      <li><a href="int_15-3.html">INT 15,3 - Write Blocks to Cassette (PC,PCjr only)</a></li>
-      <li><a href="int_15-f.html">INT 15,F - Format Periodic Interrupt (PS/2 only)</a></li>
-      <li><a href="int_15-20.html">INT 15,20 - PRINT.COM Critical Region Flag (undocumented DOS 3.x+)</a></li>
-      <li><a href="int_15-21.html">INT 15,21 - Power On Self Test (POST) Error Log  (PS/2 except 30)</a></li>
-      <li><a href="int_15-40.html">INT 15,40 - Read / Modify Profiles (convertible only)</a></li>
-      <li><a href="int_15-41.html">INT 15,41 - Wait on External Event (convertible only)</a></li>
-      <li><a href="int_15-42.html">INT 15,42 - Request System Power Off (convertible only)</a></li>
-      <li><a href="int_15-43.html">INT 15,43 - Read System Status (convertible only)</a></li>
-      <li><a href="int_15-44.html">INT 15,44 - (De)activate Internal Modem Power (convertible)</a></li>
-      <li><a href="int_15-4f.html">INT 15,4F - Keyboard Intercept  (BIOS date specific)</a></li>
-      <li><a href="int_15-80.html">INT 15,80 - Device Open</a></li>
-      <li><a href="int_15-81.html">INT 15,81 - Device Close</a></li>
-      <li><a href="int_15-82.html">INT 15,82 - Program Termination</a></li>
-      <li><a href="int_15-83.html">INT 15,83 - Event Wait</a></li>
-      <li><a href="int_15-84.html">INT 15,84 - Joy-Stick Support</a></li>
-      <li><a href="int_15-85.html">INT 15,85 - System Request Key Pressed</a></li>
-      <li><a href="int_15-86.html">INT 15,86 - Elapsed Time Wait (AT and PS/2)</a></li>
-      <li><a href="int_15-87.html">INT 15,87 - Move Block to/from Extended Memory</a></li>
-      <li><a href="int_15-88.html">INT 15,88 - Extended Memory Size Determination</a></li>
-      <li><a href="int_15-89.html">INT 15,89 - Switch Processor to Protected Mode</a></li>
-      <li><a href="int_15-90.html">INT 15,90 - Device Busy</a></li>
-      <li><a href="int_15-91.html">INT 15,91 - Interrupt Complete</a></li>
-      <li><a href="int_15-c0.html">INT 15,C0 - Return System Configuration Parameters (PS/2 only)</a></li>
-      <li><a href="int_15-c1.html">INT 15,C1 - Return Extended BIOS Data Area Segment (PS/2 only)</a></li>
-      <li><a href="int_15-c2.html">INT 15,C2 - Pointing Device BIOS Interface  (PS/2 only)</a></li>
-      <li><a href="int_15-c3.html">INT 15,C3 - Enable/Disable Watchdog Timer  (PS/2)</a></li>
-      <li><a href="int_15-c4.html">INT 15,C4 - Programmable Option Select  (PS/2)</a></li>
-      <li><a href="int_16.html">INT 16 - Keyboard BIOS Services</a></li>
-      <li><a href="int_16-0.html">INT 16,0 - Wait for Keypress and Read Character</a></li>
-      <li><a href="int_16-1.html">INT 16,1 - Get Keyboard Status</a></li>
-      <li><a href="int_16-2.html">INT 16,2 - Read Keyboard Flags</a></li>
-      <li><a href="int_16-3.html">INT 16,3 - Set Keyboard Typematic Rate  (AT+)</a></li>
-      <li><a href="int_16-4.html">INT 16,4 - Keyboard Click Adjustment (AT+)</a></li>
-      <li><a href="int_16-5.html">INT 16,5 - Keyboard Buffer Write  (AT+)</a></li>
-      <li><a href="int_16-10.html">INT 16,10 - Extended Wait for Keypress and Read Character  (AT+)</a></li>
-      <li><a href="int_16-11.html">INT 16,11 - Extended Get Keyboard Status  (AT+)</a></li>
-      <li><a href="int_16-12.html">INT 16,12 - Extended Get Keyboard Status  (AT+)</a></li>
-      <li><a href="int_17.html">INT 17 - Printer BIOS Services</a></li>
-      <li><a href="int_17-0.html">INT 17,0 - Print Character</a></li>
-      <li><a href="int_17-1.html">INT 17,1 - Initialize Printer Port</a></li>
-      <li><a href="int_17-2.html">INT 17,2 - Read Printer Port Status</a></li>
-      <li><a href="int_19.html">INT 19 - Bootstrap Loader</a></li>
-      <li><a href="int_1a.html">INT 1A - System and Real Time Clock BIOS Services</a></li>
-      <li><a href="int_1a-0.html">INT 1A,0 - Read System Clock Counter</a></li>
-      <li><a href="int_1a-1.html">INT 1A,1 - Set System Clock Counter</a></li>
-      <li><a href="int_1a-2.html">INT 1A,2 - Read Time From Real Time Clock  (XT 286,AT,PS/2)</a></li>
-      <li><a href="int_1a-3.html">INT 1A,3 - Set Time on Real Time Clock  (XT 286,AT,PS/2)</a></li>
-      <li><a href="int_1a-4.html">INT 1A,4 - Read Real Time Clock Date  (XT 286,AT,PS/2)</a></li>
-      <li><a href="int_1a-5.html">INT 1A,5 - Set Real Time Clock Date  (XT 286,AT,PS/2)</a></li>
-      <li><a href="int_1a-6.html">INT 1A,6 - Set Real Time Clock Alarm  (XT 286,AT,PS/2)</a></li>
-      <li><a href="int_1a-7.html">INT 1A,7 - Disable Real Time Clock Alarm  (XT,AT,PS/2)</a></li>
-      <li><a href="int_1a-8.html">INT 1A,8 - Set RTC Activated Power On Mode (convertible)</a></li>
-      <li><a href="int_1a-9.html">INT 1A,9 - Read RTC Alarm Time and Status (convertible,PS/2)</a></li>
-      <li><a href="int_1a-a.html">INT 1A,A - Read System Day Counter (PS/2)</a></li>
-      <li><a href="int_1a-b.html">INT 1A,B - Set System Day Counter (PS/2)</a></li>
-      <li><a href="int_1a-80.html">INT 1A,80 - Setup Sound Multiplexer  (PCjr only)</a></li>
-      <li><a href="int_1b.html">INT 1B - BIOS Ctrl-Break Handler Address</a></li>
-      <li><a href="int_1c.html">INT 1C - System Timer Tick (User Routine)</a></li>
-      <li><a href="int_1d.html">INT 1D - Video Initialization Parameter Table Vector</a></li>
-      <li><a href="int_1e.html">INT 1E - Disk Initialization Parameter Table Vector</a></li>
-      <li><a href="int_1f.html">INT 1F - Graphics Display Character Bit Map Table</a></li>
-      <li><a href="dos_interrupts.html">DOS Interrupt Summary</a></li>
-      <li><a href="int_20.html">INT 20 - Program Terminate</a></li>
-      <li><a href="int_21.html">INT 21 - DOS Function Dispatcher</a></li>
-      <li><a href="int_21-0.html">INT 21,0 - Program Terminate</a></li>
-      <li><a href="int_21-1.html">INT 21,1 - Keyboard Input with Echo</a></li>
-      <li><a href="int_21-2.html">INT 21,2 - Display Output</a></li>
-      <li><a href="int_21-3.html">INT 21,3 - Wait for Auxiliary Device Input</a></li>
-      <li><a href="int_21-4.html">INT 21,4 - Auxiliary Output</a></li>
-      <li><a href="int_21-5.html">INT 21,5 - Printer Output</a></li>
-      <li><a href="int_21-6.html">INT 21,6 - Direct Console I/O</a></li>
-      <li><a href="int_21-7.html">INT 21,7 - Direct Console Input Without Echo</a></li>
-      <li><a href="int_21-8.html">INT 21,8 - Console Input Without Echo</a></li>
-      <li><a href="int_21-9.html">INT 21,9 - Print String</a></li>
-      <li><a href="int_21-a.html">INT 21,A - Buffered Keyboard Input</a></li>
-      <li><a href="int_21-b.html">INT 21,B - Check Standard Input Status</a></li>
-      <li><a href="int_21-c.html">INT 21,C - Clear Keyboard Buffer and Invoke Keyboard Function</a></li>
-      <li><a href="int_21-d.html">INT 21,D - Disk Reset</a></li>
-      <li><a href="int_21-e.html">INT 21,E - Select Disk</a></li>
-      <li><a href="int_21-f.html">INT 21,F - Open a File Using FCB</a></li>
-      <li><a href="int_21-10.html">INT 21,10 - Close a File Using FCB</a></li>
-      <li><a href="int_21-11.html">INT 21,11 - Search for First Entry Using FCB</a></li>
-      <li><a href="int_21-12.html">INT 21,12 - Search for Next Entry Using FCB</a></li>
-      <li><a href="int_21-13.html">INT 21,13 - Delete File Using FCB</a></li>
-      <li><a href="int_21-14.html">INT 21,14 - Sequential Read Using FCB</a></li>
-      <li><a href="int_21-15.html">INT 21,15 - Sequential Write Using FCB</a></li>
-      <li><a href="int_21-16.html">INT 21,16 - Create a File Using FCB</a></li>
-      <li><a href="int_21-17.html">INT 21,17 - Rename a File Using FCB</a></li>
-      <li><a href="int_21-19.html">INT 21,19 - Get Current Default Drive</a></li>
-      <li><a href="int_21-1a.html">INT 21,1A - Set Disk Transfer Address (DTA)</a></li>
-      <li><a href="int_21-1b.html">INT 21,1B - Get Allocation Table Information</a></li>
-      <li><a href="int_21-1c.html">INT 21,1C - Get Allocation Table Info for Specified Drive</a></li>
-      <li><a href="int_21-1f.html">INT 21,1F - Get Pointer to Current Drive Parameter Table</a></li>
-      <li><a href="int_21-21.html">INT 21,21 - Random Read Using FCB</a></li>
-      <li><a href="int_21-22.html">INT 21,22 - Random Write Using FCB</a></li>
-      <li><a href="int_21-23.html">INT 21,23 - Get File Size Using FCB</a></li>
-      <li><a href="int_21-24.html">INT 21,24 - Set Relative Record Field in FCB</a></li>
-      <li><a href="int_21-25.html">INT 21,25 - Set Interrupt Vector</a></li>
-      <li><a href="int_21-26.html">INT 21,26 - Create New Program Segment Prefix</a></li>
-      <li><a href="int_21-27.html">INT 21,27 - Random Block Read Using FCB</a></li>
-      <li><a href="int_21-28.html">INT 21,28 - Random Block Write Using FCB</a></li>
-      <li><a href="int_21-29.html">INT 21,29 - Parse a Filename for FCB</a></li>
-      <li><a href="int_21-2a.html">INT 21,2A - Get Date</a></li>
-      <li><a href="int_21-2b.html">INT 21,2B - Set Date</a></li>
-      <li><a href="int_21-2c.html">INT 21,2C - Get Time</a></li>
-      <li><a href="int_21-2d.html">INT 21,2D - Set Time</a></li>
-      <li><a href="int_21-2e.html">INT 21,2E - Set/Reset Verify Switch</a></li>
-      <li><a href="int_21-2f.html">INT 21,2F - Get Disk Transfer Address (DTA)</a></li>
-      <li><a href="int_21-30.html">INT 21,30 - Get DOS Version Number</a></li>
-      <li><a href="int_21-31.html">INT 21,31 - Terminate Process and Remain Resident</a></li>
-      <li><a href="int_21-32.html">INT 21,32 - Get Pointer to Drive Parameter Table (Undocumented)</a></li>
-      <li><a href="int_21-33.html">INT 21,33 - Get/Set System Values (Ctl-Break/Boot Drive)</a></li>
-      <li><a href="int_21-34.html">INT 21,34 - Get Address to DOS Critical Flag</a></li>
-      <li><a href="int_21-35.html">INT 21,35 - Get Interrupt Vector</a></li>
-      <li><a href="int_21-36.html">INT 21,36 - Get Disk Free Space</a></li>
-      <li><a href="int_21-37.html">INT 21,37 - Get/Set Switch Character (Undocumented, DOS 2.0+)</a></li>
-      <li><a href="int_21-38.html">INT 21,38 - Get/Set Country Dependent Information</a></li>
-      <li><a href="int_21-39.html">INT 21,39 - Create Subdirectory (mkdir)</a></li>
-      <li><a href="int_21-3a.html">INT 21,3A - Remove Subdirectory (rmdir)</a></li>
-      <li><a href="int_21-3b.html">INT 21,3B - Change Current Directory (chdir)</a></li>
-      <li><a href="int_21-3c.html">INT 21,3C - Create File Using Handle</a></li>
-      <li><a href="int_21-3d.html">INT 21,3D - Open File Using Handle</a></li>
-      <li><a href="int_21-3e.html">INT 21,3E - Close File Using Handle</a></li>
-      <li><a href="int_21-3f.html">INT 21,3F - Read From File or Device Using Handle</a></li>
-      <li><a href="int_21-40.html">INT 21,40 - Write To File or Device Using Handle</a></li>
-      <li><a href="int_21-41.html">INT 21,41 - Delete File</a></li>
-      <li><a href="int_21-42.html">INT 21,42 - Move File Pointer Using Handle</a></li>
-      <li><a href="int_21-43.html">INT 21,43 - Get/Set File Attributes</a></li>
-      <li><a href="int_21-44.html">INT 21,44 - I/O Control for Devices  (IOCTL)</a></li>
-      <li><a href="int_21-44-0.html">INT 21,44,0 / IOCTL,0 - Get Device Information</a></li>
-      <li><a href="int_21-44-1.html">INT 21,44,1 / IOCTL,1 - Set Device Information</a></li>
-      <li><a href="int_21-44-2.html">INT 21,44,2 / IOCTL,2 - Read From Character Device</a></li>
-      <li><a href="int_21-44-3.html">INT 21,44,3 / IOCTL,3 - Write to Character Device</a></li>
-      <li><a href="int_21-44-4.html">INT 21,44,4 / IOCTL,4 - Read from Block Device</a></li>
-      <li><a href="int_21-44-5.html">INT 21,44,5 / IOCTL,5 - Write to Block Device</a></li>
-      <li><a href="int_21-44-6.html">INT 21,44,6 / IOCTL,6 - Get Input Status</a></li>
-      <li><a href="int_21-44-7.html">INT 21,44,7 / IOCTL,7 - Get Output Status</a></li>
-      <li><a href="int_21-44-8.html">INT 21,44,8 / IOCTL,8 - Device Removable Query</a></li>
-      <li><a href="int_21-44-9.html">INT 21,44,9 / IOCTL,9 - Device Local or Remote Query</a></li>
-      <li><a href="int_21-44-a.html">INT 21,44,A / IOCTL,A - Handle Local or Remote Query</a></li>
-      <li><a href="int_21-44-b.html">INT 21,44,B / IOCTL,B - Set Sharing Retry Count</a></li>
-      <li><a href="int_21-44-c.html">INT 21,44,C / IOCTL,C - Generic I/O for Handles</a></li>
-      <li><a href="int_21-44-d.html">INT 21,44,D / IOCTL,D - Generic I/O for Block Devices</a></li>
-      <li><a href="int_21-44-e.html">INT 21,44,E / IOCTL,E - Get Logical Drive</a></li>
-      <li><a href="int_21-44-f.html">INT 21,44,F / IOCTL,F - Set Logical Drive</a></li>
-      <li><a href="int_21-45.html">INT 21,45 - Duplicate File Handle</a></li>
-      <li><a href="int_21-46.html">INT 21,46 - Force Duplicate File Handle</a></li>
-      <li><a href="int_21-47.html">INT 21,47 - Get Current Directory</a></li>
-      <li><a href="int_21-48.html">INT 21,48 - Allocate Memory</a></li>
-      <li><a href="int_21-49.html">INT 21,49 - Free Allocated Memory</a></li>
-      <li><a href="int_21-4a.html">INT 21,4A - Modify Allocated Memory Block  (SETBLOCK)</a></li>
-      <li><a href="int_21-4b.html">INT 21,4B - EXEC/Load and Execute Program</a></li>
-      <li><a href="int_21-4c.html">INT 21,4C - Terminate Process With Return Code</a></li>
-      <li><a href="int_21-4d.html">INT 21,4D - Get Return Code of Sub-process</a></li>
-      <li><a href="int_21-4e.html">INT 21,4E - Find First Matching File</a></li>
-      <li><a href="int_21-4f.html">INT 21,4F - Find Next Matching File</a></li>
-      <li><a href="int_21-50.html">INT 21,50 - Set Current Process ID  (Undocumented DOS 2.x)</a></li>
-      <li><a href="int_21-51.html">INT 21,51 - Get Current Process ID  (Undocumented DOS 2.x)</a></li>
-      <li><a href="int_21-52.html">INT 21,52 - Get Pointer to DOS "INVARS"  (Undocumented)</a></li>
-      <li><a href="int_21-53.html">INT 21,53 - Generate Drive Parameter Table  (Undocumented)</a></li>
-      <li><a href="int_21-54.html">INT 21,54 - Get Verify Setting</a></li>
-      <li><a href="int_21-55.html">INT 21,55 - Create New PSP  (Undocumented)</a></li>
-      <li><a href="int_21-56.html">INT 21,56 - Rename File</a></li>
-      <li><a href="int_21-57.html">INT 21,57 - Get/Set File Date and Time Using Handle</a></li>
-      <li><a href="int_21-58.html">INT 21,58 - Get/Set Memory Allocation Strategy</a></li>
-      <li><a href="int_21-59.html">INT 21,59 - Get Extended Error Information (DOS 3.0+)</a></li>
-      <li><a href="int_21-5a.html">INT 21,5A - Create Temporary File  (DOS 3.0+)</a></li>
-      <li><a href="int_21-5b.html">INT 21,5B - Create File  (DOS 3.0+)</a></li>
-      <li><a href="int_21-5c.html">INT 21,5C - Lock/Unlock File Access  (DOS 3.0+)</a></li>
-      <li><a href="int_21-5d.html">INT 21,5D - Critical Error Information  (Undocumented, DOS 3.x+)</a></li>
-      <li><a href="int_21-5e.html">INT 21,5E  AL=0  Get Machine Name  (DOS 3.1+)</a></li>
-      <li><a href="int_21-5f.html">INT 21,5F  AL=00  Get Redirection Mode  (DOS 3.1+)</a></li>
-      <li><a href="int_21-60.html">INT 21,60 - Get Fully Qualified File Name (Undocumented 3.x+)</a></li>
-      <li><a href="int_21-62.html">INT 21,62 - Get PSP address  (DOS 3.x)</a></li>
-      <li><a href="int_21-63.html">INT 21,63 - Get Lead Byte Table  (MSDOS 2.25 only)</a></li>
-      <li><a href="int_21-64.html">INT 21,64 - Set Device Driver Look Ahead  (Undocumented)</a></li>
-      <li><a href="int_21-65.html">INT 21,65 - Get Extended Country Information (DOS 3.3+)</a></li>
-      <li><a href="int_21-66.html">INT 21,66 - Get/Set Global Code Page  (DOS 3.3+)</a></li>
-      <li><a href="int_21-67.html">INT 21,67 - Set Handle Count  (DOS 3.3+)</a></li>
-      <li><a href="int_21-68.html">INT 21,68 - Flush Buffer Using Handle	(DOS 3.3+)</a></li>
-      <li><a href="int_21-69.html">INT 21,69 - Get/Set Disk Serial Number  (Undocumented DOS 4+)</a></li>
-      <li><a href="int_21-6c.html">INT 21,6C - Extended Open/Create  (DOS 4.x+)</a></li>
-      <li><a href="int_21-f8.html">INT 21,F8 - Set OEM Int 21 Handler (functions F9-FF, Undocumented)</a></li>
-      <li><a href="int_22.html">INT 22 - Program Terminate</a></li>
-      <li><a href="int_23.html">INT 23 - Control-Break Exit Address</a></li>
-      <li><a href="int_24.html">INT 24 - Critical Error Handler</a></li>
-      <li><a href="int_25.html">INT 25 - Absolute Disk Read</a></li>
-      <li><a href="int_26.html">INT 26 - Absolute Disk Write</a></li>
-      <li><a href="int_27.html">INT 27 - Terminate and Stay Resident</a></li>
-      <li><a href="int_28.html">INT 28 - DOS Idle Loop / Scheduler  (Undocumented)</a></li>
-      <li><a href="int_29.html">INT 29 - DOS Fast Character I/O  (Undocumented 2.x+)</a></li>
-      <li><a href="int_2a.html">INT 2A - DOS Network Critical Section and NETBIOS</a></li>
-      <li><a href="int_2a-0.html">INT 2A,0 - Network Installation Query</a></li>
-      <li><a href="int_2a-1.html">INT 2A,1 - Execute NETBIOS Request With No Error Retry</a></li>
-      <li><a href="int_2a-3.html">INT 2A,3 - Check if Direct I/O Allowed</a></li>
-      <li><a href="int_2a-4.html">INT 2A,4 - Execute NETBIOS Request</a></li>
-      <li><a href="int_2a-5.html">INT 2A,5 - Get Network Resource Information</a></li>
-      <li><a href="int_2a-6.html">INT 2A,6 - Network Print Stream Control</a></li>
-      <li><a href="int_2a-80.html">INT 2A,80 - Begin DOS Critical Section</a></li>
-      <li><a href="int_2a-81.html">INT 2A,81 - End DOS Critical Section</a></li>
-      <li><a href="int_2a-82.html">INT 2A,82 - End DOS Critical Sections 0 thru 7</a></li>
-      <li><a href="int_2a-84.html">INT 2A,84 - Keyboard Busy Loop</a></li>
-      <li><a href="int_2a-87.html">INT 2A,87 - Critical Section</a></li>
-      <li><a href="int_2e.html">INT 2E - Execute Command Using Base Level Command Interpreter</a></li>
-      <li><a href="int_2f.html">INT 2F - DOS Multiplex Interrupt</a></li>
-      <li><a href="int_2f-0.html">INT 2F,0 - DOS Multiplex Interrupt - Get Installed State</a></li>
-      <li><a href="int_2f-1.html">INT 2F,1 - Multiplex Interrupt - Submit file</a></li>
-      <li><a href="int_2f-2.html">INT 2F,2 - Multiplex Interrupt - Cancel file</a></li>
-      <li><a href="int_2f-3.html">INT 2F,3 - Multiplex Interrupt - Cancel all files</a></li>
-      <li><a href="int_2f-4.html">INT 2F,4 - Multiplex Interrupt - Pause / return status</a></li>
-      <li><a href="int_2f-5.html">INT 2F,5 - Multiplex Interrupt - End of Status</a></li>
-      <li><a href="int_2f-6.html">INT 2F,6 - PRINT.COM Check for Error on Output Device (Undocumented)</a></li>
-      <li><a href="int_2f-8.html">INT 2F,8 - DRIVER.SYS Support	(Undocumented DOS 3.2+)</a></li>
-      <li><a href="int_2f-2e.html">INT 2F,2E - Setup Error Code Translation Tables  (undoc. DOS 4.x+)</a></li>
-      <li><a href="int_2f-80.html">INT 2F,80 - PRINT.COM Time Slice Allotment  (Undocumented DOS 3.1+)</a></li>
-      <li><a href="int_33.html">INT 33 - Mouse Function Calls</a></li>
-      <li><a href="int_33-0.html">INT 33,0 - Mouse Reset/Get Mouse Installed Flag</a></li>
-      <li><a href="int_33-1.html">INT 33,1 - Show Mouse Cursor</a></li>
-      <li><a href="int_33-2.html">INT 33,2 - Hide Mouse Cursor</a></li>
-      <li><a href="int_33-3.html">INT 33,3 - Get Mouse Position and Button Status</a></li>
-      <li><a href="int_33-4.html">INT 33,4 - Set Mouse Cursor Position</a></li>
-      <li><a href="int_33-5.html">INT 33,5 - Get Mouse Button Press Information</a></li>
-      <li><a href="int_33-6.html">INT 33,6 - Get Mouse Button Release Information</a></li>
-      <li><a href="int_33-7.html">INT 33,7 - Set Mouse Horizontal Min/Max Position</a></li>
-      <li><a href="int_33-8.html">INT 33,8 - Set Mouse Vertical Min/Max Position</a></li>
-      <li><a href="int_33-9.html">INT 33,9 - Set Mouse Graphics Cursor</a></li>
-      <li><a href="int_33-a.html">INT 33,A - Set Mouse Text Cursor</a></li>
-      <li><a href="int_33-b.html">INT 33,B - Read Mouse Motion Counters</a></li>
-      <li><a href="int_33-c.html">INT 33,C - Set Mouse User Defined Subroutine and Input Mask</a></li>
-      <li><a href="int_33-d.html">INT 33,D - Mouse Light Pen Emulation On</a></li>
-      <li><a href="int_33-e.html">INT 33,E - Mouse Light Pen Emulation Off</a></li>
-      <li><a href="int_33-f.html">INT 33,F - Set Mouse Mickey Pixel Ratio</a></li>
-      <li><a href="int_33-10.html">INT 33,10 - Mouse Conditional OFF</a></li>
-      <li><a href="int_33-13.html">INT 33,13 - Set Mouse Double Speed Threshold</a></li>
-      <li><a href="int_33-14.html">INT 33,14 - Swap Interrupt Subroutines</a></li>
-      <li><a href="int_33-15.html">INT 33,15 - Get Mouse Driver State and Memory Requirements</a></li>
-      <li><a href="int_33-16.html">INT 33,16 - Save Mouse Driver State</a></li>
-      <li><a href="int_33-17.html">INT 33,17 - Restore Mouse Driver State</a></li>
-      <li><a href="int_33-18.html">INT 33,18 - Set alternate subroutine call mask and address</a></li>
-      <li><a href="int_33-19.html">INT 33,19 - Get User Alternate Interrupt Address</a></li>
-      <li><a href="int_33-1a.html">INT 33,1A - Set Mouse Sensitivity</a></li>
-      <li><a href="int_33-1b.html">INT 33,1B - Get Mouse Sensitivity</a></li>
-      <li><a href="int_33-1c.html">INT 33,1C - Set Mouse Interrupt Rate  (InPort only)</a></li>
-      <li><a href="int_33-1d.html">INT 33,1D - Set Mouse CRT Page</a></li>
-      <li><a href="int_33-1e.html">INT 33,1E - Get Mouse CRT Page</a></li>
-      <li><a href="int_33-1f.html">INT 33,1F - Disable Mouse Driver</a></li>
-      <li><a href="int_33-20.html">INT 33,20 - Enable Mouse Driver</a></li>
-      <li><a href="int_33-21.html">INT 33,21 - Reset Mouse Software</a></li>
-      <li><a href="int_33-22.html">INT 33,22 - Set Language for Messages</a></li>
-      <li><a href="int_33-23.html">INT 33,23 - Get Language Number</a></li>
-      <li><a href="int_33-24.html">INT 33,24 - Get Driver Version, Mouse Type & IRQ Number</a></li>
-      <li><a href="int_4a.html">INT 4A - RTC Alarm Handler Vector</a></li>
-      <li><a href="int_67.html">INT 67 - Expanded Memory Specification</a></li>
-      <li><a href="int_67-40.html">INT 67,40 - Get EMM Status  (LIM EMS 3.0+)</a></li>
-      <li><a href="int_67-41.html">INT 67,41 - Get Page Frame Base Address  (LIM EMS 3.0+)</a></li>
-      <li><a href="int_67-42.html">INT 67,42 - Get Page Counts  (LIM EMS 3.2+)</a></li>
-      <li><a href="int_67-43.html">INT 67,43 - Get Handle and Allocate Pages  (LIM EMS 3.2+)</a></li>
-      <li><a href="int_67-44.html">INT 67,44 - Map Logical Page Into Physical Page Window (LIM EMS)</a></li>
-      <li><a href="int_67-45.html">INT 67,45 - Release Handle and Memory Pages  (LIM EMS)</a></li>
-      <li><a href="int_67-46.html">INT 67,46 - Get EMM Version  (LIM EMS)</a></li>
-      <li><a href="int_67-47.html">INT 67,47 - Save Page Map Context  (LIM EMS 3.0+)</a></li>
-      <li><a href="int_67-48.html">INT 67,48 - Restore Page Map Context  (LIM EMS 3.0+)</a></li>
-      <li><a href="int_67-49.html">INT 67,49 - Get I/O Port Addresses  (LIM EMS ≤ 3.0)</a></li>
-      <li><a href="int_67-4a.html">INT 67,4A - Get Logical to Physical Page Mapping  (LIM EMS ≤ 3.0)</a></li>
-      <li><a href="int_67-4b.html">INT 67,4B - Get Handle Count  (LIM EMS)</a></li>
-      <li><a href="int_67-4c.html">INT 67,4C - Get Page Count for Handle	(LIM EMS)</a></li>
-      <li><a href="int_67-4d.html">INT 67,4D - Get Page Count for All Handles  (LIM EMS)</a></li>
-      <li><a href="int_67-4e.html">INT 67,4E - Get/Set Page Map Context  (LIM EMS 3.2+)</a></li>
-      <li><a href="int_67-4f.html">INT 67,4F - Get/Set Partial Page Map  (LIM EMS 4.0+)</a></li>
-      <li><a href="int_67-50.html">INT 67,50 - Map/Unmap Multiple Handle Pages  (LIM EMS 4.0+)</a></li>
-      <li><a href="int_67-51.html">INT 67,51 - Reallocate Pages  (LIM EMS 4.0+)</a></li>
-      <li><a href="int_67-52.html">INT 67,52 - Get/Set Handle Attributes	(LIM EMS 4.0+)</a></li>
-      <li><a href="int_67-53.html">INT 67,53 Get/Set Handle Name	(LIM EMS 4.0+)</a></li>
-      <li><a href="int_67-54.html">INT 67,54 - Get Handle Directory  (LIM EMS 4.0+)</a></li>
-      <li><a href="int_67-55.html">INT 67,55 - Alter Page Map and Jump  (LIM EMS 4.0+)</a></li>
-      <li><a href="int_67-56.html">INT 67,56 - Alter Page Map and Call  (LIM EMS 4.0+)</a></li>
-      <li><a href="int_67-57.html">INT 67,57 - Move/Exchange Memory Region  (LIM EMS 4.0+)</a></li>
-      <li><a href="int_67-58.html">INT 67,58 - Get Mappable Physical Address Array  (LIM EMS 4.0+)</a></li>
-      <li><a href="int_67-59.html">INT 67,59 - Get Expanded Memory Hardware Information (LIM EMS 4.0+)</a></li>
-      <li><a href="int_67-5a.html">INT 67,5A - Allocate Standard/Raw Pages  (LIM EMS 4.0+)</a></li>
-      <li><a href="int_67-5b.html">INT 67,5B - Alternate Map Register Set  (LIM EMS 4.0+)</a></li>
-      <li><a href="int_67-5c.html">INT 67,5C - Prepare Expanded Memory for Warm Boot  (LIM EMS 4.0+)</a></li>
-      <li><a href="int_67-5d.html">INT 67,5D - Enable/Disable OS Functions  (LIM EMS 4.0+)</a></li>
-      <li><a href="int_67-60.html">INT 67,60 - LIM EMS Get Physical Window Array</a></li>
-      <li><a href="int_70.html">INT 70 - Real Time Clock Interrupt  (XT 286,AT,PS/2)</a></li>
-    </ul>
+    <p class="left-tabbed">
+      <a href="int_table.html">Interrupt Tables</a>
+    </p>
+    <table class="left-tabbed">
+      <tr>
+        <td><a href="int_5.html">INT 5</a></td>
+        <td>Print Screen</td>
+      </tr>
+      <tr>
+        <td><a href="int_5.html">INT 8</a></td>
+        <td>System timer</td>
+      </tr>
+      <tr>
+        <td><a href="int_9.html">INT 9</a></td>
+        <td>Keyboard Interrupt (Hardware Handler)</td>
+      </tr>
+      <tr>
+        <td><a href="int_10.html">INT 10</a></td>
+        <td>Video BIOS Services</td>
+      </tr>
+      <tr>
+        <td><a href="int_11.html">INT 11</a></td>
+        <td>BIOS Equipment Determination / BIOS Equipment Flags</td>
+      </tr>
+      <tr>
+        <td><a href="int_12.html">INT 12</a></td>
+        <td>Memory Size Determination</td>
+      </tr>
+      <tr>
+        <td><a href="int_13.html">INT 13</a></td>
+        <td>Diskette BIOS Services</td>
+      </tr>
+      <tr>
+        <td><a href="int_14.html">INT 14</a></td>
+        <td>BIOS Asynchronous Communications Services</td>
+      </tr>
+      <tr>
+        <td><a href="int_15.html">INT 15</a></td>
+        <td>System BIOS Services</td>
+      </tr>
+      <tr>
+        <td><a href="int_16.html">INT 16</a></td>
+        <td>Keyboard BIOS Services</td>
+      </tr>
+      <tr>
+        <td><a href="int_17.html">INT 17</a></td>
+        <td>Printer BIOS Services</td>
+      </tr>
+      <tr>
+        <td><a href="int_19.html">INT 19</a></td>
+        <td>Bootstrap Loader</td>
+      </tr>
+      <tr>
+        <td><a href="int_1a.html">INT 1A</a></td>
+        <td>System and Real Time Clock BIOS Services</td>
+      </tr>
+      <tr>
+        <td><a href="int_1b.html">INT 1B</a></td>
+        <td>BIOS Ctrl-Break Handler Address</td>
+      </tr>
+      <tr>
+        <td><a href="int_1c.html">INT 1C</a></td>
+        <td>System Timer Tick (User Routine)</td>
+      </tr>
+      <tr>
+        <td><a href="int_1d.html">INT 1D</a></td>
+        <td>Video Initialization Parameter Table Vector</td>
+      </tr>
+      <tr>
+        <td><a href="int_1e.html">INT 1E</a></td>
+        <td>Disk Initialization Parameter Table Vector</td>
+      </tr>
+      <tr>
+        <td><a href="int_1f.html">INT 1F</a></td>
+        <td>Graphics Display Character Bit Map Table</td>
+      </tr>
+      <tr>
+        <td><a href="int_20.html">INT 20</a></td>
+        <td>Program Terminate</td>
+      </tr>
+      <tr>
+        <td><a href="int_21.html">INT 21</a></td>
+        <td>DOS Function Dispatcher</td>
+      </tr>
+      <tr>
+        <td><a href="int_22.html">INT 22</a></td>
+        <td>Program Terminate</td>
+      </tr>
+      <tr>
+        <td><a href="int_23.html">INT 23</a></td>
+        <td>Control-Break Exit Address</td>
+      </tr>
+      <tr>
+        <td><a href="int_24.html">INT 24</a></td>
+        <td>Critical Error Handler</td>
+      </tr>
+      <tr>
+        <td><a href="int_25.html">INT 25</a></td>
+        <td>Absolute Disk Read</td>
+      </tr>
+      <tr>
+        <td><a href="int_26.html">INT 26</a></td>
+        <td>Absolute Disk Write</td>
+      </tr>
+      <tr>
+        <td><a href="int_27.html">INT 27</a></td>
+        <td>Terminate and Stay Resident</td>
+      </tr>
+      <tr>
+        <td><a href="int_28.html">INT 28</a></td>
+        <td>DOS Idle Loop / Scheduler (Undocumented)</td>
+      </tr>
+      <tr>
+        <td><a href="int_29.html">INT 29</a></td>
+        <td>DOS Fast Character I/O (Undocumented 2.x+)</td>
+      </tr>
+      <tr>
+        <td><a href="int_2a.html">INT 2A</a></td>
+        <td>DOS Network Critical Section and NETBIOS</td>
+      </tr>
+      <tr>
+        <td><a href="int_2e.html">INT 2E</a></td>
+        <td>Execute Command Using Base Level Command Interpreter</td>
+      </tr>
+      <tr>
+        <td><a href="int_2f.html">INT 2F</a></td>
+        <td>DOS Multiplex Interrupt</td>
+      </tr>
+      <tr>
+        <td><a href="int_33.html">INT 33</a></td>
+        <td>Mouse Function Calls</td>
+      </tr>
+      <tr>
+        <td><a href="int_4a.html">INT 4A</a></td>
+        <td>RTC Alarm Handler Vector</td>
+      </tr>
+      <tr>
+        <td><a href="int_67.html">INT 67</a></td>
+        <td>Expanded Memory Specification</td>
+      </tr>
+      <tr>
+        <td><a href="int_70.html">INT 70</a></td>
+        <td>Real Time Clock Interrupt (XT 286,AT,PS/2)</td>
+      </tr>
+    </table>
   </body>
 </html>
