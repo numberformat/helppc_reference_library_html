@@ -23,7 +23,6 @@ body > :not(pre):not(h1) {
 a {
   color: rgb(255, 255, 255);
   text-decoration: underline 2px;
-  text-underline-offset: 3px;
 }
 
 b {
@@ -103,7 +102,7 @@ ul.v-spaced > li {
   margin-top: 2em;
 }
 
-.asm .letters {
+.letters {
   text-align: center;
   margin-bottom: 1em;
 }
