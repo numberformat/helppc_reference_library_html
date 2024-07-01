@@ -7,62 +7,65 @@
   </head>
   <body>
     <h1>C Programming Topics</h1>
-    <h2>BIOS functions (bios.h)</h2>
+    <h2>Assembly Language Interface</h2>
     <ul>
-      <li>int <a href="bdos.html">bdos</a>( int dosfun, unsigned dosdx, unsigned dosal )</li>
-      <li>int <a href="bioscom.html">bioscom</a>( int cmd, char byte, int port )</li>
+      <li>void <a href="_chain_intr.html">_chain_intr</a>( void (interrupt far *target)() )</li>
+      <li>void <a href="disable.html">_disable</a>( void )</li>
+      <li>void <a href="disable.html">disable</a>( void )</li>
+      <li>void <a href="enable.html">_enable</a>( void )</li>
+      <li>void <a href="enable.html">enable</a>( void )</li>
+      <li>unsigned <a href="fp_off.html">FP_OFF</a>( void far *fptr )</li>
+      <li>unsigned <a href="fp_seg.html">FP_SEG</a>( void far *fptr )</li>
+      <li>void <a href="geninterrupt.html">geninterrupt</a>( int interrupt_num )</li>
+      <li>void <a href="_harderr.html">_harderr</a>( void (far *handler)() )</li>
+      <li>void <a href="_harderr.html">_hardresume</a>( int result )</li>
+      <li>void <a href="_harderr.html">_hardretn</a>( int error )</li>
+      <li>void <a href="harderr.html">harderr</a>( int (*fptr)())</li>
+      <li>void <a href="hardresume.html">hardresume</a>( int rescode )</li>
+      <li>void <a href="hardretn.html">hardretn</a>( int errcode )</li>
+      <li>int <a href="inp.html">inp</a>( unsigned port )</li>
+      <li>int <a href="inport.html">inport</a>( int port )</li>
+      <li>unsigned char <a href="inportb.html">inportb</a>( int port )</li>
+      <li>unsigned <a href="inp.html">inpw</a>( unsigned port )</li>
       <li>
-        int
-        <a href="biosdisk.html">biosdisk</a>( int cmd, int drive, int head, int track, int sector,
-        int nsects, void *buffer )
+        int <a href="int86.html">int86</a>( int intr_num, union REGS *inregs, union REGS *outregs )
       </li>
       <li>
-        unsigned <a href="_bios_disk.html">_bios_disk</a>(unsigned cmd,struct diskinfo_t *dskinfo)
+        int <a href="int86x.html">int86x</a>( int intr_num, union REGS *inregs, union REGS *outregs,
+        struct SREGS *segregs )
       </li>
-      <li>int <a href="biosequip.html">biosequip</a>( void )</li>
-      <li>unsigned <a href="_bios_equiplist.html">_bios_equiplist</a>( void )</li>
-      <li>int <a href="bioskey.html">bioskey</a>( int cmd )</li>
-      <li>int <a href="biosmemory.html">biosmemory</a>( void )</li>
-      <li>int <a href="biosprint.html">biosprint</a>( int cmd, int byte, int port )</li>
-      <li>int <a href="biostime.html">biostime</a>( int cmd, long newtime )</li>
-      <li>int <a href="_bios_keybrd.html">_bios_keybrd</a>( int cmd )</li>
-      <li>unsigned <a href="_bios_memsize.html">_bios_memsize</a>( void )</li>
-      <li>
-        unsigned
-        <a href="_bios_printer.html">_bios_printer</a>(unsigned cmd,unsigned port,unsigned data)
-      </li>
-      <li>
-        unsigned
-        <a href="_bios_serialcom.html">_bios_serialcom</a>(unsigned cmd,unsigned port,unsigned fmt)
-      </li>
-      <li>
-        unsigned <a href="_bios_timeofday.html">_bios_timeofday</a>( unsigned cmd, long *timeval )
-      </li>
+      <li>void <a href="intr.html">intr</a>( int intr_num, struct REGPACK *preg )</li>
+      <li>void <a href="longjmp.html">longjmp</a>( jmp_buf env, int id )</li>
+      <li>void far <a href="mk_fp.html">*MK_FP</a>( unsigned segment, unsigned offset )</li>
+      <li>int <a href="outp.html">outp</a>( unsigned port, int datab )</li>
+      <li>void <a href="outport.html">outport</a>( int port, int word )</li>
+      <li>void <a href="outportb.html">outportb</a>( int port, unsigned char byte )</li>
+      <li>void <a href="outp.html">outpw</a>( unsigned port, unsigned dataw )</li>
+      <li>int <a href="peek.html">peek</a>( unsigned seg, unsigned off )</li>
+      <li>char <a href="peekb.html">peekb</a>( unsigned seg, unsigned off )</li>
+      <li>void <a href="poke.html">poke</a>( unsigned seg, unsigned off, int value )</li>
+      <li>void <a href="pokeb.html">pokeb</a>( unsigned seg, unsigned off, char value )</li>
+      <li>void <a href="segread.html">segread</a>( struct SREGS *segregs )</li>
+      <li>int <a href="setjmp.html">setjmp</a>( jmp_buf env )</li>
     </ul>
 
-    <h2>MS-DOS specific functions (dos.h)</h2>
+    <h2>MS-DOS Dispatcher Handlers</h2>
     <ul>
-      <li>
-        int <a href="absread.html">absread</a>( int drive, int count, int start, void *buffer )
-      </li>
-      <li>
-        int <a href="abswrite.html">abswrite</a>( int drive, int sectors, int start, void *buffer )
-      </li>
       <li>int <a href="allocmem.html">allocmem</a>( unsigned size, unsigned *seg )</li>
       <li>int <a href="bdosptr.html">bdosptr</a>( int dosfun, void *argument, unsigned dosal )</li>
-      <li>void <a href="_chain_intr.html">_chain_intr</a>( void (interrupt far *target)() )</li>
       <li>
         struct country <a href="country.html">*country</a>(int cntrycode,struct country *cntryp)
       </li>
       <li>void <a href="ctrlbrk.html">ctrlbrk</a>( int (*fptr )(void) )</li>
-      <li>void <a href="disable.html">disable</a>( void )</li>
-      <li>void <a href="disable.html">_disable</a>( void )</li>
       <li>
         unsigned <a href="_dos_allocmem.html">_dos_allocmem</a>( unsigned size, unsigned *seg )
       </li>
       <li>unsigned <a href="_dos_close.html">_dos_close</a>( int handle )</li>
       <li>
         unsigned <a href="_dos_creat.html">_dos_creat</a>(char *fname,unsigned attr,int *handle)
+      </li>
+      <li>
+        unsigned <a href="_dos_creat.html">_dos_creatnew</a>(char *fname,unsigned attr,int *handle)
       </li>
       <li>
         unsigned
@@ -74,10 +77,9 @@
       <li>void <a href="_dos_getdate.html">_dos_getdate</a>( struct dosdate_t *date )</li>
       <li>
         unsigned
-        <a href="_dos_getdiskfree.html">_dos_getdiskfree(unsigned drv,struct diskfree_t *spc) </a>
+        <a href="_dos_getdiskfree.html">_dos_getdiskfree</a>(unsigned drv,struct diskfree_t *spc)
       </li>
       <li>void <a href="_dos_getdrive.html">_dos_getdrive</a>( unsigned *drive )</li>
-
       <li>
         unsigned <a href="_dos_getfileattr.html">_dos_getfileattr</a>( char *path, unsigned *attr )
       </li>
@@ -92,7 +94,6 @@
       <li>
         unsigned <a href="_dos_open.html">_dos_open</a>( char *fname, unsigned mode, int *handle )
       </li>
-
       <li>
         unsigned <a href="_dos_read.html">_dos_read</a>( int handle, void far *buffer, unsigned
         count, unsigned *nread )
@@ -129,13 +130,13 @@
       <li>
         long <a href="dostounix.html">dostounix</a>( struct date *dateptr, struct time *timeptr )
       </li>
-      <li>void <a href="enable.html">enable</a>( void )</li>
-      <li>void <a href="enable.html">_enable</a>( void )</li>
       <li>FILE <a href="fdopen.html">*fdopen</a>( int handle, char *type )</li>
-      <li>unsigned <a href="fp_off.html">FP_OFF</a>( void far *fptr )</li>
-      <li>unsigned <a href="fp_seg.html">FP_SEG</a>( void far *fptr )</li>
+      <li>
+        int
+        <a href="findfirst.html">findfirst</a>( const char *path, struct ffblk *ffblk, int attr)
+      </li>
+      <li>int <a href="findnext.html">findnext</a>( struct ffblk *ffblk )</li>
       <li>int <a href="freemem.html">freemem</a>( unsigned seg )</li>
-      <li>void <a href="geninterrupt.html">geninterrupt</a>( int interrupt_num )</li>
       <li>int <a href="getcbrk.html">getcbrk</a>( void )</li>
       <li>void <a href="getdate.html">getdate</a>( struct date *dateblk )</li>
       <li>
@@ -149,41 +150,19 @@
       <li>void <a href="gettime.html">gettime</a>( struct time *timep )</li>
       <li>void interrupt (<a href="getvect.html">*getvect</a>( int intr_num ))()</li>
       <li>int <a href="getverify.html">getverify</a>( void )</li>
-      <li>void <a href="_harderr.html">_harderr</a>( void (far *handler)() )</li>
-      <li>void <a href="harderr.html">harderr</a>( int (*fptr)())</li>
-      <li>void <a href="hardresume.html">hardresume</a>( int rescode )</li>
-      <li>void <a href="hardretn.html">hardretn</a>( int errcode )</li>
-      <li>int <a href="inport.html">inport</a>( int port )</li>
-      <li>unsigned <a href="inportb.html">char inportb</a>( int port )</li>
-      <li>
-        int <a href="int86.html">int86</a>( int intr_num, union REGS *inregs, union REGS *outregs )
-      </li>
-      <li>
-        int <a href="int86x.html">int86x</a>( int intr_num, union REGS *inregs, union REGS *outregs,
-        struct SREGS *segregs )
-      </li>
       <li>int <a href="intdos.html">intdos</a>(union REGS *inregs, union REGS *outregs )</li>
       <li>
         int
         <a href="intdosx.html">intdosx</a>( union REGS *inregs, union REGS *outregs, struct SREGS
         *segregs )
       </li>
-      <li>void <a href="intr.html">intr</a>( int intr_num, struct REGPACK *preg )</li>
       <li>void <a href="keep.html">keep</a>( unsigned char status, int size )</li>
-      <li>void far <a href="mk_fp.html">*MK_FP</a>( unsigned segment, unsigned offset )</li>
-      <li>void <a href="outport.html">outport</a>( int port, int word )</li>
-      <li>void <a href="outportb.html">outportb</a>( int port, unsigned char byte )</li>
       <li>
         char
         <a href="parsfnm.html">*parsfnm</a>( const char *cmdline, struct fcb *fcbptr, int option)
       </li>
-      <li>int <a href="peek.html">peek</a>( unsigned seg, unsigned off )</li>
-      <li>char <a href="peekb.html">peekb</a>( unsigned seg, unsigned off )</li>
-      <li>void <a href="poke.html">poke</a>( unsigned seg, unsigned off, int value )</li>
-      <li>void <a href="pokeb.html">pokeb</a>( unsigned seg, unsigned off, char value )</li>
       <li>int <a href="randbrd.html">randbrd</a>( struct fcb *fcbptr, int reccnt )</li>
       <li>int <a href="randbrw.html">randbrw</a>( struct fcb *fcbptr, int reccnt )</li>
-      <li>void <a href="segread.html">segread</a>( struct SREGS *segregs )</li>
       <li>int <a href="setblock.html">setblock</a>( unsigned seg, unsigned newsize )</li>
       <li>int <a href="setcbrk.html">setcbrk</a>( int value )</li>
       <li>void <a href="setdate.html">setdate</a>( struct date *dateblk )</li>
@@ -199,6 +178,39 @@
         *timeptr)
       </li>
       <li>int <a href="unlink.html">unlink</a>( const char *filename )</li>
+    </ul>
+
+    <h2>BIOS Handlers</h2>
+    <ul>
+      <li>int <a href="bdos.html">bdos</a>( int dosfun, unsigned dosdx, unsigned dosal )</li>
+      <li>int <a href="bioscom.html">bioscom</a>( int cmd, char byte, int port )</li>
+      <li>
+        int
+        <a href="biosdisk.html">biosdisk</a>( int cmd, int drive, int head, int track, int sector,
+        int nsects, void *buffer )
+      </li>
+      <li>
+        unsigned <a href="_bios_disk.html">_bios_disk</a>(unsigned cmd,struct diskinfo_t *dskinfo)
+      </li>
+      <li>int <a href="biosequip.html">biosequip</a>( void )</li>
+      <li>unsigned <a href="_bios_equiplist.html">_bios_equiplist</a>( void )</li>
+      <li>int <a href="bioskey.html">bioskey</a>( int cmd )</li>
+      <li>int <a href="biosmemory.html">biosmemory</a>( void )</li>
+      <li>int <a href="biosprint.html">biosprint</a>( int cmd, int byte, int port )</li>
+      <li>int <a href="biostime.html">biostime</a>( int cmd, long newtime )</li>
+      <li>int <a href="_bios_keybrd.html">_bios_keybrd</a>( int cmd )</li>
+      <li>unsigned <a href="_bios_memsize.html">_bios_memsize</a>( void )</li>
+      <li>
+        unsigned
+        <a href="_bios_printer.html">_bios_printer</a>(unsigned cmd,unsigned port,unsigned data)
+      </li>
+      <li>
+        unsigned
+        <a href="_bios_serialcom.html">_bios_serialcom</a>(unsigned cmd,unsigned port,unsigned fmt)
+      </li>
+      <li>
+        unsigned <a href="_bios_timeofday.html">_bios_timeofday</a>( unsigned cmd, long *timeval )
+      </li>
     </ul>
 
     <h2>Standard Input/Output (stdio.h)</h2>
@@ -280,8 +292,14 @@
       </li>
     </ul>
 
-    <h2>Other Input/Output (io.h)</h2>
+    <h2>Other Input/Output</h2>
     <ul>
+      <li>
+        int <a href="absread.html">absread</a>( int drive, int count, int start, void *buffer )
+      </li>
+      <li>
+        int <a href="abswrite.html">abswrite</a>( int drive, int sectors, int start, void *buffer )
+      </li>
       <li>int <a href="access.html">access</a>( const char *filename, int amode )</li>
       <li>int <a href="_creat.html">_creat</a>( const char *fname, int attr )</li>
       <li>int <a href="creattemp.html">creattemp</a>( char *filename, int attr )</li>
@@ -328,8 +346,6 @@
       <li>int <a href="getche.html">getche</a>( void )</li>
       <li>char <a href="getpass.html">*getpass</a>( const char *prompt )</li>
       <li>int <a href="kbhit.html">kbhit</a>( void )</li>
-      <li>int <a href="inp.html">inp</a>( unsigned port )</li>
-      <li>int <a href="outp.html">outp</a>( unsigned port, int datab )</li>
       <li>int <a href="putch.html">putch</a>( int ch )</li>
       <li>void <a href="ungetch.html">ungetch</a>( int c )</li>
     </ul>
@@ -390,7 +406,7 @@
       <li>int <a href="setdisk.html">setdisk</a>( int drive )</li>
     </ul>
 
-    <h2>Graphics mode functions (graph.h / graphics.h)</h2>
+    <h2>Graphics mode functions</h2>
     <ul>
       <li>void far<a href="_clearscreen.html">_clearscreen</a>( short target )</li>
       <li>short far<a href="_displaycursor.html">_displaycursor</a>( short flag )</li>
@@ -400,6 +416,9 @@
       </li>
       <li>short far <a href="_floodfill.html">_floodfill</a>( short x, short y, short bcolor )</li>
       <li>short far <a href="_getcolor.html">_getcolor</a>( void )</li>
+      <li>
+        flagType <a href="getcolor.html">GetColor</a>( LINE line, la *colorlist, PFILE pFile )
+      </li>
       <li>struct xycoord far <a href="_getcurrentposition.html">_getcurrentposition</a>( void )</li>
       <li>
         unsigned char far <a href="_getfillmask.html">*_getfillmask</a>( unsigned char far *mask )
@@ -436,6 +455,7 @@
         <a href="_pie.html">_pie</a>( short control, short x1, short y1, short x2, short y2, short
         x3, short y3, short x4, short y4 )
       </li>
+      <li>void <a href="getcolor.html">PutColor</a>( LINE line, la *colorlist, PFILE pFile )</li>
       <li>
         void
         <a href="_putimage.html">_putimage</a>( short x, short y, char huge *image, short action )
@@ -680,18 +700,10 @@
     <h2>File status (stat.h)</h2>
     <ul>
       <li>int <a href="fstat.html">fstat</a>( int handle, struct stat *buff )</li>
-      <li>int <a href="stat.html">stat( char *pathname, struct stat *buff ) </a></li>
+      <li>int <a href="stat.html">stat</a>( char *pathname, struct stat *buff )</li>
     </ul>
 
-    <h2>ext.h</h2>
-    <ul>
-      <li>
-        flagType <a href="getcolor.html">GetColor</a>( LINE line, la *colorlist, PFILE pFile ) void
-        <a href="getcolor.html">PutColor</a>( LINE line, la *colorlist, PFILE pFile )
-      </li>
-    </ul>
-
-    <h2>ctype.h</h2>
+    <h2>Type utilities</h2>
     <ul>
       <li>int <a href="is___.html">isalnum</a>( int c )</li>
       <li>int <a href="is___.html">isalpha</a>( int c )</li>
@@ -710,12 +722,6 @@
       <li>int <a href="tolower.html">tolower</a>( int c )</li>
       <li>int <a href="_toupper.html">_toupper</a>( int c )</li>
       <li>int <a href="toupper.html">toupper</a>( int c )</li>
-    </ul>
-
-    <h2>setjmp.h</h2>
-    <ul>
-      <li>void <a href="longjmp.html">longjmp</a>( jmp_buf env, int id )</li>
-      <li>int <a href="setjmp.html">setjmp</a>( jmp_buf env )</li>
     </ul>
 
     <ul style="display: none">
