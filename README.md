@@ -1,22 +1,26 @@
 # HelpPC Reference Library HTML Version
 
-This project contains Quick Reference Material used to program IBM PC and compatible computers back in the late 80's and early 90's. The information found here is distilled knowledge of many thousands of pages of Programmer reference material. 
+This project contains Quick Reference Material used to program IBM PC and compatible computers back in the late 80's and early 90's. The information found here is distilled knowledge of many thousands of pages of Programmer reference material.
 
-It also contains a utility program written in Python to convert the information found in the TXT files to an HTML site. 
+It also contains a utility program written in Python to convert the information found in the TXT files to an HTML site.
 
 The original program that used this data is available online on various retro software repositories. The TXT files availabe here can be updated and fed back into the program.
 
-# HelpPC Format
+## Build
+
+In order to build the website, invoke `python3 src/txt2html.py`. The build files will be placed in a `dist` folder.
+
+## HelpPC Format
 
 The format of the TXT file is documented below
 
 ```
 Creating your own Help Files
 ============================
-Each file musth have its own title which will show up in the 
-main menu.  Each topic following the file title (see below) will 
-show up in the subtopic	menu.  Note that HelpPC will adjust the 
-menu format based on the screen height and the number of items 
+Each file musth have its own title which will show up in the
+main menu.  Each topic following the file title (see below) will
+show up in the subtopic	menu.  Note that HelpPC will adjust the
+menu format based on the screen height and the number of items
 in the main menu.
 
 HelpPC text files are simple ASCII files that contain control codes
@@ -75,7 +79,7 @@ used to verify and supply the information found in HelpPC.
 
   2. Powell, David.  "IBM BIOS Programmer's Quick Reference
     Summary".  (Unpublished paper.)
-  
+
   3. Norton, Peter.  "Programmer's Guide to the IBM PC".
     Redmond, Washington: Microsoft Press, 1985.
 
@@ -171,7 +175,7 @@ used to verify and supply the information found in HelpPC.
 
 ```
 
-# License
+## License
 
 The files under `src`, `templates` and `assets` are all licensed under the GNU
 General Public License version 2 or later, with the exception of the web font,
