@@ -10,12 +10,15 @@
     <h2>Assembly Language Interface</h2>
     <ul>
       <li>void <a href="_chain_intr.html">_chain_intr</a>( void (interrupt far *target)() )</li>
+      <li>unsigned int <a href="_clear87.html">_clear87</a>( void )</li>
+      <li>unsigned <a href="_control87.html">_control87</a>( unsigned new, unsigned mask )</li>
       <li>void <a href="disable.html">_disable</a>( void )</li>
       <li>void <a href="disable.html">disable</a>( void )</li>
       <li>void <a href="enable.html">_enable</a>( void )</li>
       <li>void <a href="enable.html">enable</a>( void )</li>
       <li>unsigned <a href="fp_off.html">FP_OFF</a>( void far *fptr )</li>
       <li>unsigned <a href="fp_seg.html">FP_SEG</a>( void far *fptr )</li>
+      <li>void <a href="_fpreset.html">_fpreset</a>( void )</li>
       <li>void <a href="geninterrupt.html">geninterrupt</a>( int interrupt_num )</li>
       <li>void <a href="_harderr.html">_harderr</a>( void (far *handler)() )</li>
       <li>void <a href="_harderr.html">_hardresume</a>( int result )</li>
@@ -47,9 +50,10 @@
       <li>void <a href="pokeb.html">pokeb</a>( unsigned seg, unsigned off, char value )</li>
       <li>void <a href="segread.html">segread</a>( struct SREGS *segregs )</li>
       <li>int <a href="setjmp.html">setjmp</a>( jmp_buf env )</li>
+      <li>unsigned int <a href="_status87.html">_status87</a>( void )</li>
     </ul>
 
-    <h2>MS-DOS Dispatcher Handlers</h2>
+    <h2>MS-DOS Dispatcher Handlers and Utilities</h2>
     <ul>
       <li>int <a href="allocmem.html">allocmem</a>( unsigned size, unsigned *seg )</li>
       <li>int <a href="bdosptr.html">bdosptr</a>( int dosfun, void *argument, unsigned dosal )</li>
@@ -142,6 +146,7 @@
       <li>
         void <a href="getdfree.html">getdfree</a>( unsigned char drive, struct dfree *dfreep )
       </li>
+      <li>int <a href="getdisk.html">getdisk</a>( void )</li>
       <li>char far <a href="getdta.html">*getdta</a>( void )</li>
       <li>void <a href="getfat.html">getfat</a>( unsigned char drive, struct fatinfo *fatblkp )</li>
       <li>void <a href="getfatd.html">getfatd</a>( struct fatinfo *fatblkp )</li>
@@ -365,14 +370,15 @@
         void <a href="fnsplit.html">fnsplit</a>( const char *path, char *drive, char *dir, char
         *name, char *ext)
       </li>
+      <li>int <a href="fstat.html">fstat</a>( int handle, struct stat *buff )</li>
       <li>int <a href="getcurdir.html">getcurdir</a>( int drive, char *direc )</li>
       <li>char <a href="getcwd.html">*getcwd</a>( char *buf, int n )</li>
-      <li>int <a href="getdisk.html">getdisk</a>( void )</li>
       <li>int <a href="mkdir.html">mkdir</a>( const char *pathname )</li>
       <li>char <a href="mktemp.html">*mktemp</a>( char *template )</li>
       <li>int <a href="rmdir.html">rmdir</a>( const char *path )</li>
       <li>char *<a href="searchpath.html">searchpath</a>( const char *filename )</li>
       <li>int <a href="setdisk.html">setdisk</a>( int drive )</li>
+      <li>int <a href="stat.html">stat</a>( char *pathname, struct stat *buff )</li>
     </ul>
 
     <h2>Memory allocation</h2>
@@ -436,12 +442,26 @@
         short <a href="_ellipse.html">_ellipse</a>( short ctl, short x1, short y1, short x2, short
         y2 )
       </li>
+      <li>
+        short <a href="_ellipse.html">_ellipse_w</a>( short ctl, double wx1, double wy1, double wx2,
+        double wy2 )
+      </li>
+      <li>
+        short far <a href="_ellipse.html">_ellipse_wxy</a>( short ctl, struct _wxycoord far *pwxy1,
+        struct _wxycoord far *pwxy2 )
+      </li>
       <li>short far <a href="_floodfill.html">_floodfill</a>( short x, short y, short bcolor )</li>
+      <li>
+        short far <a href="_floodfill.html">_floodfill_w</a>( double wx, double wy, short bcolor )
+      </li>
       <li>short far <a href="_getcolor.html">_getcolor</a>( void )</li>
       <li>
         flagType <a href="getcolor.html">GetColor</a>( LINE line, la *colorlist, PFILE pFile )
       </li>
       <li>struct xycoord far <a href="_getcurrentposition.html">_getcurrentposition</a>( void )</li>
+      <li>
+        struct _wxycoord far <a href="_getcurrentposition.html">_getcurrentposition_w</a>( void )
+      </li>
       <li>
         unsigned char far <a href="_getfillmask.html">*_getfillmask</a>( unsigned char far *mask )
       </li>
@@ -452,6 +472,16 @@
       </li>
       <li>
         void far
+        <a href="_getimage.html">_getimage_w</a>( double wx1, double wy1, double wx2, double wy2,
+        char huge *image )
+      </li>
+      <li>
+        void far
+        <a href="_getimage.html">_getimage_wxy</a>( struct _wxycoord far *pwxy1, struct _wxycoord
+        far *pwxy2,char huge *image )
+      </li>
+      <li>
+        void far
         <a href="getimage.html">getimage</a>( int left, int top, int right, int bottom, void far
         *bitmap )
       </li>
@@ -459,6 +489,7 @@
       <li>struct xycoord far <a href="_getlogcoord.html">_getlogcoord</a>( short x, short y )</li>
       <li>struct xycoord far <a href="_getphyscoord.html">_getphyscoord</a>( short x, short y )</li>
       <li>short far <a href="_getpixel.html">_getpixel</a>( short x, short y )</li>
+      <li>short far <a href="_getpixel.html">_getpixel_w</a>( double wx, double wy )</li>
       <li>short far <a href="_gettextcolor.html">_gettextcolor</a>( void )</li>
       <li>struct rccoord far <a href="_gettextposition.html">_gettextposition</a>( void )</li>
       <li>
@@ -470,17 +501,29 @@
         <a href="imagesize.html">imagesize</a>( int left, int top, int right, int bottom )
       </li>
       <li>short far <a href="_lineto.html">_lineto</a>( short x, short y )</li>
+      <li>short far <a href="_lineto.html">_lineto_w</a>( double wx, double wy )</li>
       <li>struct xycoord far <a href="_moveto.html">_moveto</a>( short x, short y )</li>
+      <li>struct _wxycoord far <a href="_moveto.html">_moveto_w</a>( double wx, double wy )</li>
       <li>void far<a href="_outtext.html">_outtext</a>( unsigned char far *text )</li>
       <li>
         short
         <a href="_pie.html">_pie</a>( short control, short x1, short y1, short x2, short y2, short
         x3, short y3, short x4, short y4 )
       </li>
+      <li>
+        short far
+        <a href="_pie.html">_pie_wxy</a>( short ctl, struct _wxycoord far *pwxy1, struct _wxycoord
+        far *pwxy2, struct _wxycoord far *pwxy3, struct _wxycoord far *pwxy4 )
+      </li>
       <li>void <a href="getcolor.html">PutColor</a>( LINE line, la *colorlist, PFILE pFile )</li>
       <li>
         void
         <a href="_putimage.html">_putimage</a>( short x, short y, char huge *image, short action )
+      </li>
+      <li>
+        void far
+        <a href="_putimage.html">_putimage_w</a>( double wx, double wy, char huge *image, short
+        action )
       </li>
       <li>
         void far
@@ -491,7 +534,20 @@
         <a href="_rectangle.html">_rectangle</a>( short ctl, short x1, short y1, short x2, short y2
         )
       </li>
+      <li>
+        short far
+        <a href="_rectangle.html">_rectangle_w</a>( short control, double wx1, double wy1, double
+        wx2, double wy2 )
+      </li>
+      <li>
+        short far
+        <a href="_rectangle.html">_rectangle_wxy</a>( short control, struct _wxycoord far *pwxy1,
+        struct _wxycoord far *pwxy2 )
+      </li>
       <li>short far <a href="_remapallpalette.html">_remapallpalette</a>( long far *colors )</li>
+      <li>
+        long far <a href="_remapallpalette.html">_remappalette</a>( short pixnum, long color )
+      </li>
       <li>short far <a href="_selectpalette.html">_selectpalette</a>( short palette )</li>
       <li>short far <a href="_setactivepage.html">_setactivepage</a>( short page )</li>
       <li>long far <a href="_setbkcolor.html">_setbkcolor</a>( long color )</li>
@@ -524,22 +580,14 @@
       <li>short far <a href="_wrapon.html">_wrapon</a>( short wrap )</li>
     </ul>
 
-    <h2>Floating point functions (float.h)</h2>
-    <ul>
-      <li>unsigned int <a href="_clear87.html">_clear87</a>( void )</li>
-      <li>unsigned <a href="_control87.html">_control87</a>( unsigned new, unsigned mask )</li>
-      <li>void <a href="_fpreset.html">_fpreset</a>( void )</li>
-      <li>unsigned int <a href="_status87.html">_status87</a>( void )</li>
-    </ul>
-
     <h2>Standard library (stdlib.h)</h2>
     <ul>
+      <li>void <a href="abort.html">abort</a>( void )</li>
+      <li>int <a href="abs.html">abs</a>( int n )</li>
       <li>int <a href="atexit.html">atexit</a>( void func )</li>
       <li>double <a href="atof.html">atof</a>( const char *s )</li>
       <li>int <a href="atoi.html">atoi</a>( const char *s )</li>
       <li>long <a href="atol.html">atol</a>( const char *s )</li>
-      <li>void <a href="abort.html">abort</a>( void )</li>
-      <li>int <a href="abs.html">abs</a>( int n )</li>
       <li>
         void
         <a href="bsearch.html">*bsearch</a>( void *key, void *base, int nelem, int width, int (*fcmp
@@ -547,6 +595,7 @@
       </li>
       <li>void <a href="calloc.html">*calloc</a>( unsigned count, unsigned sizeeach )</li>
       <li>struct _div_t <a href="div_-c-.html">div</a>( int numer, int denom )</li>
+      <li>struct _ldiv_t <a href="div_-c-.html">ldiv</a>( long int numer, long int denom )</li>
       <li>char <a href="ecvt.html">*ecvt</a>( double value, int ndigit, int *decpt, int *sign )</li>
       <li>void <a href="exit.html">exit</a>( int completioncode )</li>
       <li>char <a href="fcvt.html">*fcvt</a>( double value, int ndigit, int *decpt, int *sign )</li>
@@ -565,6 +614,7 @@
         <a href="lfind.html">*lfind</a>(void *key,void *base,int *nelem,int width,int (*fcmp)())
       </li>
       <li>unsigned long <a href="_lrotl.html">_lrotl</a>( unsigned long value, int n )</li>
+      <li>unsigned long <a href="_lrotl.html">_lrotr</a>( unsigned long value, int n )</li>
       <li>
         void
         <a href="lsearch.html">*lsearch</a>(void *key,void *base,int *nelem,int width,int (*fcmp)())
@@ -580,6 +630,7 @@
       <li>int <a href="rand.html">rand</a>( void )</li>
       <li>void <a href="realloc.html">*realloc</a>( void *pseg, unsigned size )</li>
       <li>unsigned <a href="_rotl.html">_rotl</a>( unsigned value, int shift )</li>
+      <li>unsigned <a href="_rotl.html">_rotr</a>( unsigned value, int shift )</li>
       <li>void <a href="_searchenv.html">_searchenv</a>( char *fname, char *var, char *path )</li>
       <li>
         void
@@ -590,22 +641,62 @@
       <li>char <a href="ultoa.html">*ultoa</a>( unsigned long value, char *string, int radix )</li>
     </ul>
 
-    <h2>Process management (process.h / signal.h)</h2>
+    <h2>Process management and IPC</h2>
     <ul>
-      <li>int <a href="exec___.html">execl</a>(pathname,arg0,arg1,arg2,...,argN,NULL )</li>
-      <li>int <a href="exec___.html">execv</a>(pathname,arg,NULL )</li>
+      <li>
+        int <a href="exec___.html">execl</a>( char *pathname, char *arg0, char *arg1, ..., NULL )
+      </li>
+      <li>
+        int <a href="exec___.html">execle</a>( char *pathname, char *arg0, char *arg1, ..., NULL,
+        char *envp[] )
+      </li>
+      <li>
+        int <a href="exec___.html">execlp</a>( char *pathname, char *arg0, char *arg1, ..., NULL )
+      </li>
+      <li>
+        int <a href="exec___.html">execlpe</a>( char *pathname, char *arg0, char *arg1, ..., NULL,
+        char *envp[] )
+      </li>
+      <li>int <a href="exec___.html">execv</a>( char *pathname, *arg, NULL )</li>
+      <li>int <a href="exec___.html">execve</a>( char *pathname, *arg, NULL, char *envp[] )</li>
+      <li>int <a href="exec___.html">execvp</a>( char *pathname, *arg, NULL )</li>
+      <li>int <a href="exec___.html">execvpe</a>( char *pathname, *arg, NULL, char *envp[] )</li>
       <li>void <a href="_exit.html">_exit</a>( int completioncode )</li>
       <li>int <a href="gsignal.html">gsignal</a>( int sig )</li>
       <li>int <a href="getpid.html">getpid</a>( void )</li>
-      <li>Function <a href="spawn.html">spawn(), etc...</a></li>
+      <li>
+        int <a href="spawn.html">spawnl</a>( int mode, char *path, char *arg0, char *arg1, ..., NULL
+        )
+      </li>
+      <li>
+        int <a href="spawn.html">spawnle</a>( int mode, char *path, char *arg0, char *arg1, ...,
+        NULL, char *envp[] )
+      </li>
+      <li>
+        int <a href="spawn.html">spawnlp</a>( int mode, char *path, char *arg0, char *arg1, ...,
+        NULL )
+      </li>
+      <li>
+        int <a href="spawn.html">spawnlpe</a>( int mode, char *path, char *arg0, char *arg1, ...,
+        NULL, char *envp[] )
+      </li>
+      <li>int <a href="spawn.html">spawnv</a>( int mode, char *path, char *argv )</li>
+      <li>
+        int <a href="spawn.html">spawnve</a>( int mode, char *path, char *argv, char *envp[] )
+      </li>
+      <li>int <a href="spawn.html">spawnvp</a>( int mode, char *path, char *argv )</li>
+      <li>
+        int <a href="spawn.html">spawnvpe</a>( int mode, char *path, char *argv, char *envp[] )
+      </li>
       <li>int (<a href="ssignal.html">*ssignal</a>( int sig, int (*action))) (void)</li>
       <li>void <a href="swab.html">swab</a>( char *src, char *dest, int nbytes )</li>
       <li>int <a href="system.html">system</a>( const char *command )</li>
       <li>int <a href="raise.html">raise</a>( int sig )</li>
     </ul>
 
-    <h2>Time and date functions (time.h / sys/utime.h)</h2>
+    <h2>Time and date functions</h2>
     <ul>
+      <li>char <a href="asctime.html">*asctime</a>( const struct tm *tm )</li>
       <li>clock_t <a href="clock.html">clock</a>( void )</li>
       <li>char <a href="ctime.html">*ctime</a>( const long *clock )</li>
       <li>double <a href="difftime.html">difftime</a>( time_t time2, time_t time1 )</li>
@@ -613,14 +704,19 @@
       <li>struct tm <a href="localtime.html">*localtime</a>( const time_t *clock )</li>
       <li>int <a href="stime.html">stime</a>( time_t *tp )</li>
       <li>char <a href="_strdate.html">*_strdate</a>( char *date )</li>
+      <li>char <a href="_strdate.html">*_strtime</a>( char *time )</li>
       <li>time_t <a href="time.html">time</a>( time_t *tloc )</li>
       <li>void <a href="tzset.html">tzset</a>( void )</li>
       <li>int <a href="utime.html">utime</a>( char *path, struct utimbuf *times )</li>
     </ul>
 
-    <h2>String and memory functions (string.h / mem.h)</h2>
+    <h2>String and memory functions</h2>
+    <p>
+      You may also check the topic providing a summary of the
+      <a href="mem___.html">memory manipulation functions</a> and
+      <a href="str___.html">string manipulation functions</a>.
+    </p>
     <ul>
-      <li>Memory <a href="mem___.html">Manipulation Functions</a></li>
       <li>
         void <a href="memccpy.html">*memccpy(void *dest, const void *src, int ch, size_t n)</a>
       </li>
@@ -637,7 +733,6 @@
       </li>
       <li>void <a href="movmem.html">movmem</a>( void *src, void *dest, unsigned len )</li>
       <li>void <a href="setmem.html">setmem</a>( void *addr, int len, char value )</li>
-      <li>String <a href="str___.html">Manipulation Functions</a></li>
       <li>char <a href="stpcpy.html">*stpcpy</a>( char *dest, const char *src )</li>
       <li>char <a href="strcat.html">*strcat</a>( char *dest, const char *src )</li>
       <li>char <a href="strchr.html">*strchr</a>( const char *str, int c )</li>
@@ -673,13 +768,15 @@
       <li>double <a href="strtod.html">strtod</a>( const char *str, char **endptr )</li>
       <li>char <a href="strtok.html">*strtok</a>( char *str1, const char *str2 )</li>
       <li>long <a href="strtol.html">strtol</a>( const char *str, char **endptr, int base )</li>
+      <li>
+        unsigned long <a href="strtol.html">strtoul</a>( const char *s, char **endptr, int radix )
+      </li>
       <li>char <a href="strupr.html">*strupr</a>( char *str )</li>
     </ul>
 
     <h2>Math functions (math.h)</h2>
     <ul>
       <li>double <a href="acos.html">acos</a>( double x )</li>
-      <li>char <a href="asctime.html">*asctime</a>( const struct tm *tm )</li>
       <li>double <a href="asin.html">asin</a>( double x )</li>
       <li>double <a href="atan.html">atan</a>( double x )</li>
       <li>double <a href="atan2.html">tan</a>( double y, double x )</li>
@@ -688,9 +785,12 @@
       <li>double <a href="cos.html">cos</a>( double x )</li>
       <li>double <a href="cosh.html">cosh</a>( double x )</li>
       <li>int <a href="dieeetomsbin.html">dieeetomsbin</a>( double *srcdbl, double *dstdbl )</li>
+      <li>int <a href="dieeetomsbin.html">dmsbintoieee</a>( double *srcdbl, double *dstdbl )</li>
       <li>double <a href="exp.html">exp</a>( double x )</li>
       <li>double <a href="fabs.html">fabs</a>( double x )</li>
+      <li>int <a href="dieeetomsbin.html">fieeetomsbin</a>( float *srcflt, float *dstflt )</li>
       <li>double <a href="floor.html">floor</a>( double x )</li>
+      <li>int <a href="dieeetomsbin.html">fmsbintoieee</a>( float *srcflt, float *dstflt )</li>
       <li>double <a href="fmod.html">fmod</a>( double x, double y )</li>
       <li>double <a href="frexp.html">frexp</a>( double value, int eptr )</li>
       <li>double <a href="hypot.html">hypot</a>( double x, double y )</li>
@@ -719,13 +819,7 @@
       <li>void <a href="assert.html">assert</a>( int test )</li>
     </ul>
 
-    <h2>File status (stat.h)</h2>
-    <ul>
-      <li>int <a href="fstat.html">fstat</a>( int handle, struct stat *buff )</li>
-      <li>int <a href="stat.html">stat</a>( char *pathname, struct stat *buff )</li>
-    </ul>
-
-    <h2>Type utilities</h2>
+    <h2>Type utilities (ctype.h)</h2>
     <ul>
       <li>int <a href="is___.html">isalnum</a>( int c )</li>
       <li>int <a href="is___.html">isalpha</a>( int c )</li>
