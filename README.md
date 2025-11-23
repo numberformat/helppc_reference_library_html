@@ -4,11 +4,25 @@ This project contains Quick Reference Material used to program IBM PC and compat
 
 It also contains a utility program written in Python to convert the information found in the TXT files to an HTML site.
 
-The original program that used this data is available online on various retro software repositories. The TXT files availabe here can be updated and fed back into the program.
+The original program that used this data is available online on various retro software repositories. The TXT files available here can be updated and fed back into the program.
+
+![](assets/screenshot.png)
 
 ## Build
 
 In order to build the website, invoke `python3 src/txt2html.py`. The build files will be placed in a `dist` folder.
+
+## View
+
+To view the HTML, serve the dist/ folder, e.g.: `python -m http.server --directory dist 8080`
+
+## Color schemes
+
+Color schemes available (use -c): gray-black, green-black, amber-black, white-black, gray-blue, cyan-blue, yellow-blue.
+
+## Contributors
+
+See `CONTRIBUTORS.md` for contributor credits and how to add yourself.
 
 ## HelpPC Format
 

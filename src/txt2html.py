@@ -23,15 +23,76 @@ TOPIC_SLUG_MAP = {
     "TABLES.TXT": "tables"
 }
 
+COLOR_SCHEMES: dict[str, dict[str, str]] = {
+    # Default VGA-ish gray on black
+    "gray-black": {
+        "foreground": "#aaaaaa",
+        "background": "#000000",
+        "accent": "#ffffff"
+    },
+    # Bright phosphor looks
+    "green-black": {
+        "foreground": "#00ff5f",
+        "background": "#000000",
+        "accent": "#b7ffb7"
+    },
+    "amber-black": {
+        "foreground": "#ffbf70",
+        "background": "#000000",
+        "accent": "#ffdca8"
+    },
+    "white-black": {
+        "foreground": "#e5e5e5",
+        "background": "#000000",
+        "accent": "#ffffff"
+    },
+    # Classic blue-screen palettes
+    "gray-blue": {
+        "foreground": "#c0c0c0",
+        "background": "#0000aa",
+        "accent": "#ffff55"
+    },
+    "cyan-blue": {
+        "foreground": "#00ffff",
+        "background": "#0000aa",
+        "accent": "#ffffff"
+    },
+    "yellow-blue": {
+        "foreground": "#ffff55",
+        "background": "#0000aa",
+        "accent": "#ffffff"
+    }
+}
+
 
 class MainArguments:
     generate_indices: bool
+    color_scheme: str
+
+
+def apply_color_scheme(style_path: str, scheme_name: str) -> None:
+    scheme = COLOR_SCHEMES[scheme_name]
+    accent = scheme.get("accent", scheme["foreground"])
+    overrides = f"""
+
+/* Color scheme: {scheme_name} */
+body {{
+  background-color: {scheme["background"]};
+  color: {scheme["foreground"]};
+}}
+a, b, h1, h2, h3 {{
+  color: {accent};
+}}
+"""
+    with open(style_path, "a", encoding="utf-8") as stream:
+        stream.write(overrides)
 
 
 def main(args: MainArguments) -> None:
     # Copy assets over
     shutil.rmtree(BASE_PATH, ignore_errors=True)
-    shutil.copytree(ASSETS_PATH, BASE_PATH)
+    shutil.copytree(ASSETS_PATH, BASE_PATH, dirs_exist_ok=True)
+    apply_color_scheme(os.path.join(BASE_PATH, "style.css"), args.color_scheme)
 
     # First pass, create the references
     refs: dict[str, TopicRef] = {}
@@ -98,9 +159,22 @@ def main(args: MainArguments) -> None:
             print(f"Writing main index file")
             stream.write(factory.build())
 
+    available_schemes = ", ".join(COLOR_SCHEMES.keys())
+    print(
+        "\nHTML generation complete.\n"
+        "To view the HTML, serve the dist/ folder, e.g.: python -m http.server --directory dist 8080\n"
+        f"Color schemes available (use -c): {available_schemes}"
+    )
+
 
 if __name__ == "__main__":
     argparser = ArgumentParser(prog="txt2html")
     # Specify -i to generate indices in the assets folder, to be used locally
     argparser.add_argument("-i", "--generate-indices", action="store_true")
+    argparser.add_argument(
+        "-c", "--color-scheme",
+        choices=COLOR_SCHEMES.keys(),
+        default="gray-black",
+        help="Terminal-style color palette to apply to generated HTML."
+    )
     main(argparser.parse_args(namespace=MainArguments))
