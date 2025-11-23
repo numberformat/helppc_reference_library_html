@@ -1,6 +1,6 @@
 class TopicPageFactory:
     def __init__(self, template_path: str) -> None:
-        with open(template_path) as stream:
+        with open(template_path, encoding="utf-8") as stream:
             self.template = "".join(stream.readlines())
             self.body = None
             self.style_href = None
@@ -24,7 +24,7 @@ class TopicPageFactory:
 
 class IndexPageFactory:
     def __init__(self, template_path: str) -> None:
-        with open(template_path) as stream:
+        with open(template_path, encoding="utf-8") as stream:
             self.template = "".join(stream.readlines())
             self.entries = {}
             self.style_href = None

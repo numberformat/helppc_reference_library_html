@@ -62,7 +62,7 @@ def main(args: MainArguments) -> None:
             topic_filename = refs[topic_ref].filename
             topic_file = os.path.join(BASE_PATH, section_slug, topic_filename)
 
-            with open(topic_file, "w") as stream:
+            with open(topic_file, "w", encoding="utf-8") as stream:
                 print(f"Writing file '{topic_file}'")
                 stream.write(factory.build())
 
@@ -77,7 +77,7 @@ def main(args: MainArguments) -> None:
 
             index_file = os.path.join(ASSETS_PATH, section_slug, "index.html")
 
-            with open(index_file, "w") as stream:
+            with open(index_file, "w", encoding="utf-8") as stream:
                 print(f"Writing index file of section '{section_slug}'")
                 stream.write(factory.build())
 
@@ -94,7 +94,7 @@ def main(args: MainArguments) -> None:
 
         main_index_file = os.path.join(ASSETS_PATH, "index.html")
 
-        with open(main_index_file, "w") as stream:
+        with open(main_index_file, "w", encoding="utf-8") as stream:
             print(f"Writing main index file")
             stream.write(factory.build())
 
