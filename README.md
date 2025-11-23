@@ -20,6 +20,14 @@ To view the HTML, serve the dist/ folder, e.g.: `python -m http.server --directo
 
 Color schemes available (use -c): gray-black, green-black, amber-black, white-black, gray-blue, cyan-blue, yellow-blue.
 
+## Releasing
+
+The github actions will pick up the changes and generate the site zip file in Releases when you tag the release as follows.
+
+```sh
+git tag vYYYY.mm.dd && git push origin vYYYY.mm.dd
+```
+
 ## Contributors
 
 See `CONTRIBUTORS.md` for contributor credits and how to add yourself.

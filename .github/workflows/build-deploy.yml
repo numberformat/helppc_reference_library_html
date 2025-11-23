@@ -37,7 +37,7 @@ jobs:
         run: |
           rm -rf dist
           mkdir -p dist
-          python src/txt2html.py
+          python src/txt2html.py -c cyan-blue 
 
       - name: Create ZIP (tags only)
         if: startsWith(github.ref, 'refs/tags/')
