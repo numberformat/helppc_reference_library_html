@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Assembler Programming Topics</title>
+    <link rel="stylesheet" href="../style.css" />
+  </head>
+  <body class="asm">
+    <h1>Assembler Programming Topics</h1>
+    <p>
+      These topics contain information about assembler programming and the ISA for x86 processors up
+      to the Intel 486.
+    </p>
+    <p>
+      For an overview of the CPU registers, refer to the
+      <a href="8086_architecture.html">Intel 8086 Family Architecture</a> topic.
+    </p>
+    <p>
+      In the instruction topics, you will find clock counts for each CPU. The
+      <a href="instruction_timing.html">Instruction Clock Cycle Calculation</a> topic describes the
+      calculation in more detail.
+    </p>
+    <p>
+      If you are using MASM, you may find useful to check the
+      <a href="masm_options.html">MASM Command Line Options</a> and the
+      <a href="directives.html">MASM Directives</a> topics.
+    </p>
+    <p>
+      The <a href="models.html">Memory Model Programming & Segment Information</a> topic describes
+      the memory models supported by most MS-DOS assemblers.
+    </p>
+    <p>
+      Finally, for information on the flags register and the machine status word (286+ only), check
+      the
+      <a href="flags_register.html">FLAGS</a> and <a href="msw.html">MSW</a> topics respectively.
+    </p>
+    <h2 class="isa">x86 Instruction Set</h2>
+    <div class="letters">
+      <a href="#a">A</a>
+      <a href="#b">B</a>
+      <a href="#c">C</a>
+      <a href="#d">D</a>
+      <a href="#e">E</a>
+      <span>F</span>
+      <span>G</span>
+      <a href="#h">H</a>
+      <a href="#i">I</a>
+      <a href="#j">J</a>
+      <span>K</span>
+      <a href="#l">L</a>
+      <a href="#m">M</a>
+      <a href="#n">N</a>
+      <a href="#o">O</a>
+      <a href="#p">P</a>
+      <span>Q</span>
+      <a href="#r">R</a>
+      <a href="#s">S</a>
+      <a href="#t">T</a>
+      <span>U</span>
+      <a href="#v">V</a>
+      <a href="#w">W</a>
+      <a href="#x">X</a>
+      <span>Y</span>
+      <span>Z</span>
+    </div>
+    <h3 id="a">A</h3>
+    <table>
+      <tbody>
+        <tr>
+          <td><a href="aaa.html">AAA</a></td>
+          <td>Ascii Adjust for Addition</td>
+        </tr>
+        <tr>
+          <td><a href="aad.html">AAD</a></td>
+          <td>Ascii Adjust for Division</td>
+        </tr>
+        <tr>
+          <td><a href="aam.html">AAM</a></td>
+          <td>Ascii Adjust for Multiplication</td>
+        </tr>
+        <tr>
+          <td><a href="aas.html">AAS</a></td>
+          <td>Ascii Adjust for Subtraction</td>
+        </tr>
+        <tr>
+          <td><a href="adc.html">ADC</a></td>
+          <td>Add With Carry</td>
+        </tr>
+        <tr>
+          <td><a href="add.html">ADD</a></td>
+          <td>Arithmetic Addition</td>
+        </tr>
+        <tr>
+          <td><a href="and.html">AND</a></td>
+          <td>Logical And</td>
+        </tr>
+        <tr>
+          <td><a href="arpl.html">ARPL</a></td>
+          <td>Adjusted Requested Privilege Level of Selector</td>
+        </tr>
+      </tbody>
+    </table>
+    <h3 id="b">B</h3>
+    <table>
+      <tbody>
+        <tr>
+          <td><a href="bound.html">BOUND</a></td>
+          <td>Array Index Bound Check (80188+)</td>
+        </tr>
+        <tr>
+          <td><a href="bsf.html">BSF</a></td>
+          <td>Bit Scan Forward (386+ only)</td>
+        </tr>
+        <tr>
+          <td><a href="bsr.html">BSR</a></td>
+          <td>Bit Scan Reverse (386+ only)</td>
+        </tr>
+        <tr>
+          <td><a href="bswap.html">BSWAP</a></td>
+          <td>Byte Swap (486+ only)</td>
+        </tr>
+        <tr>
+          <td><a href="bt.html">BT</a></td>
+          <td>Bit Test (386+ only)</td>
+        </tr>
+        <tr>
+          <td><a href="btc.html">BTC</a></td>
+          <td>Bit Test with Compliment (386+ only)</td>
+        </tr>
+        <tr>
+          <td><a href="btr.html">BTR</a></td>
+          <td>Bit Test with Reset (386+ only)</td>
+        </tr>
+        <tr>
+          <td><a href="bts.html">BTS</a></td>
+          <td>Bit Test and Set (386+ only)</td>
+        </tr>
+      </tbody>
+    </table>
+    <h3 id="c">C</h3>
+    <table>
+      <tbody>
+        <tr>
+          <td><a href="call.html">CALL</a></td>
+          <td>Procedure Call</td>
+        </tr>
+        <tr>
+          <td><a href="cbw.html">CBW</a></td>
+          <td>Convert Byte to Word</td>
+        </tr>
+        <tr>
+          <td><a href="cdq.html">CDQ</a></td>
+          <td>Convert Double to Quad (386+ only)</td>
+        </tr>
+        <tr>
+          <td><a href="clc.html">CLC</a></td>
+          <td>Clear Carry</td>
+        </tr>
+        <tr>
+          <td><a href="cld.html">CLD</a></td>
+          <td>Clear Direction Flag</td>
+        </tr>
+        <tr>
+          <td><a href="cli.html">CLI</a></td>
+          <td>Clear Interrupt Flag (disable)</td>
+        </tr>
+        <tr>
+          <td><a href="clts.html">CLTS</a></td>
+          <td>Clear Task Switched Flag (286+ privileged)</td>
+        </tr>
+        <tr>
+          <td><a href="cmc.html">CMC</a></td>
+          <td>Complement Carry Flag</td>
+        </tr>
+        <tr>
+          <td><a href="cmp.html">CMP</a></td>
+          <td>Compare</td>
+        </tr>
+        <tr>
+          <td><a href="cmps.html">CMPS</a></td>
+          <td>Compare String (Byte, Word or Doubleword)</td>
+        </tr>
+        <tr>
+          <td><a href="cmpxchg.html">CMPXCHG</a></td>
+          <td>Compare and Exchange</td>
+        </tr>
+        <tr>
+          <td><a href="cwd.html">CWD</a></td>
+          <td>Convert Word to Doubleword</td>
+        </tr>
+        <tr>
+          <td><a href="cwde.html">CWDE</a></td>
+          <td>Convert Word to Extended Doubleword (386+ only)</td>
+        </tr>
+      </tbody>
+    </table>
+    <h3 id="d">D</h3>
+    <table>
+      <tbody>
+        <tr>
+          <td><a href="daa.html">DAA</a></td>
+          <td>Decimal Adjust for Addition</td>
+        </tr>
+        <tr>
+          <td><a href="das.html">DAS</a></td>
+          <td>Decimal Adjust for Subtraction</td>
+        </tr>
+        <tr>
+          <td><a href="dec.html">DEC</a></td>
+          <td>Decrement</td>
+        </tr>
+        <tr>
+          <td><a href="div.html">DIV</a></td>
+          <td>Divide</td>
+        </tr>
+      </tbody>
+    </table>
+    <h3 id="e">E</h3>
+    <table>
+      <tbody>
+        <tr>
+          <td><a href="enter.html">ENTER</a></td>
+          <td>Make Stack Frame (80188+)</td>
+        </tr>
+        <tr>
+          <td><a href="esc.html">ESC</a></td>
+          <td>Escape</td>
+        </tr>
+      </tbody>
+    </table>
+    <h3 id="h">H</h3>
+    <table>
+      <tbody>
+        <tr>
+          <td><a href="hlt.html">HLT</a></td>
+          <td>Halt CPU</td>
+        </tr>
+      </tbody>
+    </table>
+    <h3 id="i">I</h3>
+    <table>
+      <tbody>
+        <tr>
+          <td><a href="idiv.html">IDIV</a></td>
+          <td>Signed Integer Division</td>
+        </tr>
+        <tr>
+          <td><a href="imul.html">IMUL</a></td>
+          <td>Signed Multiply</td>
+        </tr>
+        <tr>
+          <td><a href="in.html">IN</a></td>
+          <td>Input Byte or Word From Port</td>
+        </tr>
+        <tr>
+          <td><a href="inc.html">INC</a></td>
+          <td>Increment</td>
+        </tr>
+        <tr>
+          <td><a href="ins.html">INS</a></td>
+          <td>Input String from Port (80188+)</td>
+        </tr>
+        <tr>
+          <td><a href="int.html">INT</a></td>
+          <td>Interrupt</td>
+        </tr>
+        <tr>
+          <td><a href="into.html">INTO</a></td>
+          <td>Interrupt on Overflow</td>
+        </tr>
+        <tr>
+          <td><a href="invd.html">INVD</a></td>
+          <td>Invalidate Cache (486+ only)</td>
+        </tr>
+        <tr>
+          <td><a href="invlpg.html">INVLPG</a></td>
+          <td>Invalidate Translation Look-Aside Buffer Entry (486+ only)</td>
+        </tr>
+        <tr>
+          <td><a href="iret.html">IRET/IRETD</a></td>
+          <td>Interrupt Return</td>
+        </tr>
+      </tbody>
+    </table>
+    <h3 id="j">J</h3>
+    <p>
+      Check the
+      <a href="j___.html">Jump Instructions Table</a> topic for a summary of the various jump
+      instructions.
+    </p>
+    <table>
+      <tbody>
+        <tr>
+          <td><a href="ja.html">JA/JNBE</a></td>
+          <td>Jump Above / Jump Not Below or Equal</td>
+        </tr>
+        <tr>
+          <td><a href="jae.html">JAE/JNB</a></td>
+          <td>Jump Above or Equal / Jump on Not Below</td>
+        </tr>
+        <tr>
+          <td><a href="jb.html">JB/JNAE</a></td>
+          <td>Jump Below / Jump Not Above or Equal</td>
+        </tr>
+        <tr>
+          <td><a href="jbe.html">JBE/JNA</a></td>
+          <td>Jump Below or Equal / Jump Not Above</td>
+        </tr>
+        <tr>
+          <td><a href="jc.html">JC</a></td>
+          <td>Jump on Carry</td>
+        </tr>
+        <tr>
+          <td><a href="jcxz.html">JCXZ/JECXZ</a></td>
+          <td>Jump if Register (E)CX is Zero</td>
+        </tr>
+        <tr>
+          <td><a href="je.html">JE/JZ</a></td>
+          <td>Jump Equal / Jump Zero</td>
+        </tr>
+        <tr>
+          <td><a href="jg.html">JG/JNLE</a></td>
+          <td>Jump Greater / Jump Not Less or Equal</td>
+        </tr>
+        <tr>
+          <td><a href="jge.html">JGE/JNL</a></td>
+          <td>Jump Greater or Equal / Jump Not Less</td>
+        </tr>
+        <tr>
+          <td><a href="jl.html">JL/JNGE</a></td>
+          <td>Jump Less / Jump Not Greater or Equal</td>
+        </tr>
+        <tr>
+          <td><a href="jle.html">JLE/JNG</a></td>
+          <td>Jump Less or Equal / Jump Not Greater</td>
+        </tr>
+        <tr>
+          <td><a href="jmp.html">JMP</a></td>
+          <td>Unconditional Jump</td>
+        </tr>
+        <tr>
+          <td><a href="jnc.html">JNC</a></td>
+          <td>Jump Not Carry</td>
+        </tr>
+        <tr>
+          <td><a href="jne.html">JNE/JNZ</a></td>
+          <td>Jump Not Equal / Jump Not Zero</td>
+        </tr>
+        <tr>
+          <td><a href="jno.html">JNO</a></td>
+          <td>Jump Not Overflow</td>
+        </tr>
+        <tr>
+          <td><a href="jns.html">JNS</a></td>
+          <td>Jump Not Signed</td>
+        </tr>
+        <tr>
+          <td><a href="jnp.html">JNP/JPO</a></td>
+          <td>Jump Not Parity / Jump Parity Odd</td>
+        </tr>
+        <tr>
+          <td><a href="jo.html">JO</a></td>
+          <td>Jump on Overflow</td>
+        </tr>
+        <tr>
+          <td><a href="jp.html">JP/JPE</a></td>
+          <td>Jump on Parity / Jump on Parity Even</td>
+        </tr>
+        <tr>
+          <td><a href="js.html">JS</a></td>
+          <td>Jump Signed</td>
+        </tr>
+      </tbody>
+    </table>
+    <h3 id="l">L</h3>
+    <table>
+      <tbody>
+        <tr>
+          <td><a href="lahf.html">LAHF</a></td>
+          <td>Load Register AH From Flags</td>
+        </tr>
+        <tr>
+          <td><a href="lar.html">LAR</a></td>
+          <td>Load Access Rights (286+ protected)</td>
+        </tr>
+        <tr>
+          <td><a href="lds.html">LDS</a></td>
+          <td>Load Pointer Using DS</td>
+        </tr>
+        <tr>
+          <td><a href="lea.html">LEA</a></td>
+          <td>Load Effective Address</td>
+        </tr>
+        <tr>
+          <td><a href="leave.html">LEAVE</a></td>
+          <td>Restore Stack for Procedure Exit (80188+)</td>
+        </tr>
+        <tr>
+          <td><a href="les.html">LES</a></td>
+          <td>Load Pointer Using ES</td>
+        </tr>
+        <tr>
+          <td><a href="lfs.html">LFS</a></td>
+          <td>Load Pointer Using FS (386+ only)</td>
+        </tr>
+        <tr>
+          <td><a href="lgdt.html">LGDT</a></td>
+          <td>Load Global Descriptor Table (286+ privileged)</td>
+        </tr>
+        <tr>
+          <td><a href="lidt.html">LIDT</a></td>
+          <td>Load Interrupt Descriptor Table (286+ privileged)</td>
+        </tr>
+        <tr>
+          <td><a href="lgs.html">LGS</a></td>
+          <td>Load Pointer Using GS (386+ only)</td>
+        </tr>
+        <tr>
+          <td><a href="lldt.html">LLDT</a></td>
+          <td>Load Local Descriptor Table (286+ privileged)</td>
+        </tr>
+        <tr>
+          <td><a href="lmsw.html">LMSW</a></td>
+          <td>Load Machine Status Word (286+ privileged)</td>
+        </tr>
+        <tr>
+          <td><a href="lock.html">LOCK</a></td>
+          <td>Lock Bus</td>
+        </tr>
+        <tr>
+          <td><a href="lods.html">LODS</a></td>
+          <td>Load String (Byte, Word or Double)</td>
+        </tr>
+        <tr>
+          <td><a href="loop.html">LOOP</a></td>
+          <td>Decrement CX and Loop if CX Not Zero</td>
+        </tr>
+        <tr>
+          <td><a href="loope.html">LOOPE/LOOPZ</a></td>
+          <td>Loop While Equal / Loop While Zero</td>
+        </tr>
+        <tr>
+          <td><a href="loopnz.html">LOOPNZ/LOOPNE</a></td>
+          <td>Loop While Not Zero / Loop While Not Equal</td>
+        </tr>
+        <tr>
+          <td><a href="lsl.html">LSL</a></td>
+          <td>Load Segment limit (286+ protected)</td>
+        </tr>
+        <tr>
+          <td><a href="lss.html">LSS</a></td>
+          <td>Load Pointer Using SS (386+ only)</td>
+        </tr>
+        <tr>
+          <td><a href="ltr.html">LTR</a></td>
+          <td>Load Task Register (286+ privileged)</td>
+        </tr>
+      </tbody>
+    </table>
+    <h3 id="m">M</h3>
+    <table>
+      <tbody>
+        <tr>
+          <td><a href="mov.html">MOV</a></td>
+          <td>Move Byte or Word</td>
+        </tr>
+        <tr>
+          <td><a href="movs.html">MOVS</a></td>
+          <td>Move String (Byte or Word)</td>
+        </tr>
+        <tr>
+          <td><a href="movsx.html">MOVSX</a></td>
+          <td>Move with Sign Extend (386+ only)</td>
+        </tr>
+        <tr>
+          <td><a href="movzx.html">MOVZX</a></td>
+          <td>Move with Zero Extend (386+ only)</td>
+        </tr>
+        <tr>
+          <td><a href="mul.html">MUL</a></td>
+          <td>Unsigned Multiply</td>
+        </tr>
+      </tbody>
+    </table>
+    <h3 id="n">N</h3>
+    <table>
+      <tbody>
+        <tr>
+          <td><a href="neg.html">NEG</a></td>
+          <td>Two's Complement Negation</td>
+        </tr>
+        <tr>
+          <td><a href="nop.html">NOP</a></td>
+          <td>No Operation (90h)</td>
+        </tr>
+        <tr>
+          <td><a href="not.html">NOT</a></td>
+          <td>One's Compliment Negation (Logical NOT)</td>
+        </tr>
+      </tbody>
+    </table>
+    <h3 id="o">O</h3>
+    <table>
+      <tbody>
+        <tr>
+          <td><a href="or.html">OR</a></td>
+          <td>Inclusive Logical OR</td>
+        </tr>
+        <tr>
+          <td><a href="out.html">OUT</a></td>
+          <td>Output Data to Port</td>
+        </tr>
+        <tr>
+          <td><a href="outs.html">OUTS</a></td>
+          <td>Output String to Port (80188+ only)</td>
+        </tr>
+      </tbody>
+    </table>
+    <h3 id="p">P</h3>
+    <table>
+      <tbody>
+        <tr>
+          <td><a href="pop.html">POP</a></td>
+          <td>Pop Word off Stack</td>
+        </tr>
+        <tr>
+          <td><a href="popa.html">POPA/POPAD</a></td>
+          <td>Pop All Registers onto Stack (80188+ only)</td>
+        </tr>
+        <tr>
+          <td><a href="popf.html">POPF/POPFD</a></td>
+          <td>Pop Flags off Stack</td>
+        </tr>
+        <tr>
+          <td><a href="push.html">PUSH</a></td>
+          <td>Push Word onto Stack</td>
+        </tr>
+        <tr>
+          <td><a href="pusha.html">PUSHA/PUSHAD</a></td>
+          <td>Push All Registers onto Stack (80188+ only)</td>
+        </tr>
+        <tr>
+          <td><a href="pushf.html">PUSHF/PUSHFD</a></td>
+          <td>Push Flags onto Stack</td>
+        </tr>
+      </tbody>
+    </table>
+    <h3 id="r">R</h3>
+    <table>
+      <tbody>
+        <tr>
+          <td><a href="rcl.html">RCL</a></td>
+          <td>Rotate Through Carry Left</td>
+        </tr>
+        <tr>
+          <td><a href="rcr.html">RCR</a></td>
+          <td>Rotate Through Carry Right</td>
+        </tr>
+        <tr>
+          <td><a href="rep.html">REP</a></td>
+          <td>Repeat String Operation</td>
+        </tr>
+        <tr>
+          <td><a href="repe.html">REPE/REPZ</a></td>
+          <td>Repeat Equal / Repeat Zero</td>
+        </tr>
+        <tr>
+          <td><a href="repne.html">REPNE/REPNZ</a></td>
+          <td>Repeat Not Equal / Repeat Not Zero</td>
+        </tr>
+        <tr>
+          <td><a href="ret.html">RET/RETF</a></td>
+          <td>Return From Procedure</td>
+        </tr>
+        <tr>
+          <td><a href="rol.html">ROL</a></td>
+          <td>Rotate Left</td>
+        </tr>
+        <tr>
+          <td><a href="ror.html">ROR</a></td>
+          <td>Rotate Right</td>
+        </tr>
+      </tbody>
+    </table>
+    <h3 id="s">S</h3>
+    <table>
+      <tbody>
+        <tr>
+          <td><a href="sahf.html">SAHF</a></td>
+          <td>Store AH Register into FLAGS</td>
+        </tr>
+        <tr>
+          <td><a href="sal.html">SAL/SHL</a></td>
+          <td>Shift Arithmetic Left / Shift Logical Left</td>
+        </tr>
+        <tr>
+          <td><a href="sar.html">SAR</a></td>
+          <td>Shift Arithmetic Right</td>
+        </tr>
+        <tr>
+          <td><a href="sbb.html">SBB</a></td>
+          <td>Subtract with Borrow</td>
+        </tr>
+        <tr>
+          <td><a href="scas.html">SCAS</a></td>
+          <td>Scan String (Byte, Word or Doubleword)</td>
+        </tr>
+        <tr>
+          <td><a href="setae.html">SETAE/SETNB</a></td>
+          <td>Set if Above or Equal / Set if Not Below</td>
+        </tr>
+        <tr>
+          <td><a href="setb.html">SETB/SETNAE</a></td>
+          <td>Set if Below / Set if Not Above or Equal</td>
+        </tr>
+        <tr>
+          <td><a href="setbe.html">SETBE/SETNA</a></td>
+          <td>Set if Below or Equal / Set if Not Above</td>
+        </tr>
+        <tr>
+          <td><a href="sete.html">SETE/SETZ</a></td>
+          <td>Set if Equal / Set if Zero (386+ only)</td>
+        </tr>
+        <tr>
+          <td><a href="setne.html">SETNE/SETNZ</a></td>
+          <td>Set if Not Equal / Set if Not Zero (386+ only)</td>
+        </tr>
+        <tr>
+          <td><a href="setl.html">SETL/SETNGE</a></td>
+          <td>Set if Less / Set if Not Greater or Equal</td>
+        </tr>
+        <tr>
+          <td><a href="setge.html">SETGE/SETNL</a></td>
+          <td>Set if Greater or Equal / Set if Not Less</td>
+        </tr>
+        <tr>
+          <td><a href="setle.html">SETLE/SETNG</a></td>
+          <td>Set if Less or Equal / Set if Not greater or Equal</td>
+        </tr>
+        <tr>
+          <td><a href="setg.html">SETG/SETNLE</a></td>
+          <td>Set if Greater / Set if Not Less or Equal</td>
+        </tr>
+        <tr>
+          <td><a href="sets.html">SETS</a></td>
+          <td>Set if Signed (386+ only)</td>
+        </tr>
+        <tr>
+          <td><a href="setns.html">SETNS</a></td>
+          <td>Set if Not Signed (386+ only)</td>
+        </tr>
+        <tr>
+          <td><a href="setc.html">SETC</a></td>
+          <td>Set if Carry (386+ only)</td>
+        </tr>
+        <tr>
+          <td><a href="setnc.html">SETNC</a></td>
+          <td>Set if Not Carry (386+ only)</td>
+        </tr>
+        <tr>
+          <td><a href="seto.html">SETO</a></td>
+          <td>Set if Overflow (386+ only)</td>
+        </tr>
+        <tr>
+          <td><a href="setno.html">SETNO</a></td>
+          <td>Set if Not Overflow (386+ only)</td>
+        </tr>
+        <tr>
+          <td><a href="setp.html">SETP/SETPE</a></td>
+          <td>Set if Parity / Set if Parity Even (386+ only)</td>
+        </tr>
+        <tr>
+          <td><a href="setnp.html">SETNP/SETPO</a></td>
+          <td>Set if No Parity / Set if Parity Odd (386+ only)</td>
+        </tr>
+        <tr>
+          <td><a href="sgdt.html">SGDT</a></td>
+          <td>Store Global Descriptor Table (286+ privileged)</td>
+        </tr>
+        <tr>
+          <td><a href="sidt.html">SIDT</a></td>
+          <td>Store Interrupt Descriptor Table (286+ privileged)</td>
+        </tr>
+        <tr>
+          <td><a href="shr.html">SHR</a></td>
+          <td>Shift Logical Right</td>
+        </tr>
+        <tr>
+          <td><a href="shld.html">SHLD/SHRD</a></td>
+          <td>Double Precision Shift (386+ only)</td>
+        </tr>
+        <tr>
+          <td><a href="sldt.html">SLDT</a></td>
+          <td>Store Local Descriptor Table (286+ privileged)</td>
+        </tr>
+        <tr>
+          <td><a href="smsw.html">SMSW</a></td>
+          <td>Store Machine Status Word (286+ privileged)</td>
+        </tr>
+        <tr>
+          <td><a href="stc.html">STC</a></td>
+          <td>Set Carry</td>
+        </tr>
+        <tr>
+          <td><a href="std.html">STD</a></td>
+          <td>Set Direction Flag</td>
+        </tr>
+        <tr>
+          <td><a href="sti.html">STI</a></td>
+          <td>Set Interrupt Flag (Enable Interrupts)</td>
+        </tr>
+        <tr>
+          <td><a href="stos.html">STOS</a></td>
+          <td>Store String (Byte, Word or Doubleword)</td>
+        </tr>
+        <tr>
+          <td><a href="str.html">STR</a></td>
+          <td>Store Task Register (286+ privileged)</td>
+        </tr>
+        <tr>
+          <td><a href="sub.html">SUB</a></td>
+          <td>Subtract</td>
+        </tr>
+      </tbody>
+    </table>
+    <h3 id="t">T</h3>
+    <table>
+      <tbody>
+        <tr>
+          <td><a href="test.html">TEST</a></td>
+          <td>Test For Bit Pattern</td>
+        </tr>
+      </tbody>
+    </table>
+    <h3 id="v">V</h3>
+    <table>
+      <tbody>
+        <tr>
+          <td><a href="verr.html">VERR</a></td>
+          <td>Verify Read (286+ protected)</td>
+        </tr>
+        <tr>
+          <td><a href="verw.html">VERW</a></td>
+          <td>Verify Write (286+ protected)</td>
+        </tr>
+      </tbody>
+    </table>
+    <h3 id="w">W</h3>
+    <table>
+      <tbody>
+        <tr>
+          <td><a href="wait.html">WAIT/FWAIT</a></td>
+          <td>Event Wait</td>
+        </tr>
+        <tr>
+          <td><a href="wbinvd.html">WBINVD</a></td>
+          <td>Write-Back and Invalidate Cache</td>
+        </tr>
+      </tbody>
+    </table>
+    <h3 id="x">X</h3>
+    <table>
+      <tbody>
+        <tr>
+          <td><a href="xchg.html">XCHG</a></td>
+          <td>Exchange</td>
+        </tr>
+        <tr>
+          <td><a href="xlat.html">XLAT/XLATB</a></td>
+          <td>Translate</td>
+        </tr>
+        <tr>
+          <td><a href="xor.html">XOR</a></td>
+          <td>Exclusive OR</td>
+        </tr>
+      </tbody>
+    </table>
+  </body>
+</html>
