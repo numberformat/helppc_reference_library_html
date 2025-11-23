@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>C Programming Topics</title>
+    <link rel="stylesheet" href="../style.css" />
+  </head>
+  <body>
+    <h1>C Programming Topics</h1>
+    <p>
+      These topics contain information about general C programming and a comprehensive library
+      reference for C functions.
+    </p>
+    <p>
+      General C programming topics include <a href="c_declarations.html">complex declarations</a>,
+      <a href="c_escape_sequences.html">escape sequences</a>,
+      <a href="c_operators.html">operators</a>, <a href="regs.html">register structures</a> for
+      assembly code interface and <a href="stdarg.html">variable arguments</a>.
+    </p>
+    <p>
+      If using Microsoft C compiler, it can be useful to check the
+      <a href="c_errors_-msc-.html">MSC compiler fatal errors</a> and
+      <a href="cl.html">MSC CLI options (v6.0)</a> topic.
+    </p>
+
+    <h2>C Functions Reference</h2>
+    <p>
+      <a href="#asm">Assembly</a> ∙ <a href="#msdos">MS-DOS</a> ∙ <a href="#bios">BIOS</a> ∙
+      <a href="#stdio">Standard I/O</a> ∙ <a href="#conio">Console I/O</a> ∙
+      <a href="#io">Other I/O</a> ∙ <a href="#fs">Filesystem</a> ∙ <a href="#alloc">Allocation</a> ∙
+      <a href="#graph">Graphics</a> ∙ <a href="#stdlib">Standard library</a> ∙
+      <a href="#process">Process/IPC</a> ∙ <a href="#time">Time and date</a> ∙
+      <a href="#string">String and memory</a> ∙ <a href="#math">Math</a> ∙
+      <a href="#assert">Assertions </a> ∙
+      <a href="#ctype">Type</a>
+    </p>
+
+    <h3 id="asm">Assembly Language Interface</h3>
+    <ul>
+      <li>void <a href="_chain_intr.html">_chain_intr</a>( void (interrupt far *target)() )</li>
+      <li>unsigned int <a href="_clear87.html">_clear87</a>( void )</li>
+      <li>unsigned <a href="_control87.html">_control87</a>( unsigned new, unsigned mask )</li>
+      <li>void <a href="disable.html">_disable</a>( void )</li>
+      <li>void <a href="disable.html">disable</a>( void )</li>
+      <li>void <a href="enable.html">_enable</a>( void )</li>
+      <li>void <a href="enable.html">enable</a>( void )</li>
+      <li>unsigned <a href="fp_off.html">FP_OFF</a>( void far *fptr )</li>
+      <li>unsigned <a href="fp_seg.html">FP_SEG</a>( void far *fptr )</li>
+      <li>void <a href="_fpreset.html">_fpreset</a>( void )</li>
+      <li>void <a href="geninterrupt.html">geninterrupt</a>( int interrupt_num )</li>
+      <li>void <a href="_harderr.html">_harderr</a>( void (far *handler)() )</li>
+      <li>void <a href="_harderr.html">_hardresume</a>( int result )</li>
+      <li>void <a href="_harderr.html">_hardretn</a>( int error )</li>
+      <li>void <a href="harderr.html">harderr</a>( int (*fptr)())</li>
+      <li>void <a href="hardresume.html">hardresume</a>( int rescode )</li>
+      <li>void <a href="hardretn.html">hardretn</a>( int errcode )</li>
+      <li>int <a href="inp.html">inp</a>( unsigned port )</li>
+      <li>int <a href="inport.html">inport</a>( int port )</li>
+      <li>unsigned char <a href="inportb.html">inportb</a>( int port )</li>
+      <li>unsigned <a href="inp.html">inpw</a>( unsigned port )</li>
+      <li>
+        int <a href="int86.html">int86</a>( int intr_num, union REGS *inregs, union REGS *outregs )
+      </li>
+      <li>
+        int <a href="int86x.html">int86x</a>( int intr_num, union REGS *inregs, union REGS *outregs,
+        struct SREGS *segregs )
+      </li>
+      <li>void <a href="intr.html">intr</a>( int intr_num, struct REGPACK *preg )</li>
+      <li>void <a href="longjmp.html">longjmp</a>( jmp_buf env, int id )</li>
+      <li>void far <a href="mk_fp.html">*MK_FP</a>( unsigned segment, unsigned offset )</li>
+      <li>int <a href="outp.html">outp</a>( unsigned port, int datab )</li>
+      <li>void <a href="outport.html">outport</a>( int port, int word )</li>
+      <li>void <a href="outportb.html">outportb</a>( int port, unsigned char byte )</li>
+      <li>void <a href="outp.html">outpw</a>( unsigned port, unsigned dataw )</li>
+      <li>int <a href="peek.html">peek</a>( unsigned seg, unsigned off )</li>
+      <li>char <a href="peekb.html">peekb</a>( unsigned seg, unsigned off )</li>
+      <li>void <a href="poke.html">poke</a>( unsigned seg, unsigned off, int value )</li>
+      <li>void <a href="pokeb.html">pokeb</a>( unsigned seg, unsigned off, char value )</li>
+      <li>void <a href="segread.html">segread</a>( struct SREGS *segregs )</li>
+      <li>int <a href="setjmp.html">setjmp</a>( jmp_buf env )</li>
+      <li>unsigned int <a href="_status87.html">_status87</a>( void )</li>
+    </ul>
+
+    <h3 id="msdos">MS-DOS Dispatcher Handlers and Utilities</h3>
+    <ul>
+      <li>int <a href="allocmem.html">allocmem</a>( unsigned size, unsigned *seg )</li>
+      <li>int <a href="bdosptr.html">bdosptr</a>( int dosfun, void *argument, unsigned dosal )</li>
+      <li>
+        struct country <a href="country.html">*country</a>(int cntrycode,struct country *cntryp)
+      </li>
+      <li>void <a href="ctrlbrk.html">ctrlbrk</a>( int (*fptr )(void) )</li>
+      <li>
+        unsigned <a href="_dos_allocmem.html">_dos_allocmem</a>( unsigned size, unsigned *seg )
+      </li>
+      <li>unsigned <a href="_dos_close.html">_dos_close</a>( int handle )</li>
+      <li>
+        unsigned <a href="_dos_creat.html">_dos_creat</a>(char *fname,unsigned attr,int *handle)
+      </li>
+      <li>
+        unsigned <a href="_dos_creat.html">_dos_creatnew</a>(char *fname,unsigned attr,int *handle)
+      </li>
+      <li>
+        unsigned
+        <a href="findfirst.html">_dos_findfirst</a>( char *path, unsigned attr, struct find_t
+        *fileinfo )
+      </li>
+      <li>unsigned <a href="findnext.html">_dos_findnext</a>( struct find_t *fileinfo )</li>
+      <li>unsigned <a href="_dos_freemem.html">_dos_freemem</a>( unsigned seg )</li>
+      <li>void <a href="_dos_getdate.html">_dos_getdate</a>( struct dosdate_t *date )</li>
+      <li>
+        unsigned
+        <a href="_dos_getdiskfree.html">_dos_getdiskfree</a>(unsigned drv,struct diskfree_t *spc)
+      </li>
+      <li>void <a href="_dos_getdrive.html">_dos_getdrive</a>( unsigned *drive )</li>
+      <li>
+        unsigned <a href="_dos_getfileattr.html">_dos_getfileattr</a>( char *path, unsigned *attr )
+      </li>
+      <li>
+        unsigned <a href="_dos_getftime.html">_dos_getftime</a>(int h,unsigned *date,unsigned *time)
+      </li>
+      <li>void <a href="_dos_gettime.html">_dos_gettime</a>( struct dostime_t *time )</li>
+      <li>
+        void (interrupt far *<a href="_dos_getvect.html">_dos_getvect</a>( unsigned intnum ))()
+      </li>
+      <li>void <a href="_dos_keep.html">_dos_keep</a>( unsigned rc, unsigned size )</li>
+      <li>
+        unsigned <a href="_dos_open.html">_dos_open</a>( char *fname, unsigned mode, int *handle )
+      </li>
+      <li>
+        unsigned <a href="_dos_read.html">_dos_read</a>( int handle, void far *buffer, unsigned
+        count, unsigned *nread )
+      </li>
+      <li>
+        unsigned
+        <a href="_dos_setblock.html">_dos_setblock</a>( unsigned size, unsigned seg, unsigned
+        *maxsize )
+      </li>
+      <li>unsigned <a href="_dos_setdate.html">_dos_setdate</a>( struct dosdate_t *date )</li>
+      <li>
+        void <a href="_dos_setdrive.html">_dos_setdrive</a>( unsigned drive, unsigned *count )
+      </li>
+      <li>
+        unsigned <a href="_dos_setfileattr.html">_dos_setfileattr</a>( char *path, unsigned attr )
+      </li>
+      <li>
+        unsigned
+        <a href="_dos_setftime.html">_dos_setftime</a>(int handle,unsigned date,unsigned time)
+      </li>
+      <li>unsigned <a href="_dos_settime.html">_dos_settime</a>( struct dostime_t *time )</li>
+      <li>
+        void
+        <a href="_dos_setvect.html">_dos_setvect</a>( unsigned intnum, void (interrupt far
+        *handler)() )
+      </li>
+      <li>
+        unsigned
+        <a href="_dos_write.html">_dos_write</a>( int handle, void far *buffer, unsigned count,
+        unsigned *nbytes )
+      </li>
+      <li>int <a href="dosexterr.html">dosexterr</a>( struct DOSERR *errinfo )</li>
+      <li>int <a href="dosexterr.html">dosexterr</a>( struct DOSERROR *errinfo )</li>
+      <li>
+        long <a href="dostounix.html">dostounix</a>( struct date *dateptr, struct time *timeptr )
+      </li>
+      <li>FILE <a href="fdopen.html">*fdopen</a>( int handle, char *type )</li>
+      <li>
+        int
+        <a href="findfirst.html">findfirst</a>( const char *path, struct ffblk *ffblk, int attr)
+      </li>
+      <li>int <a href="findnext.html">findnext</a>( struct ffblk *ffblk )</li>
+      <li>int <a href="freemem.html">freemem</a>( unsigned seg )</li>
+      <li>int <a href="getcbrk.html">getcbrk</a>( void )</li>
+      <li>void <a href="getdate.html">getdate</a>( struct date *dateblk )</li>
+      <li>
+        void <a href="getdfree.html">getdfree</a>( unsigned char drive, struct dfree *dfreep )
+      </li>
+      <li>int <a href="getdisk.html">getdisk</a>( void )</li>
+      <li>char far <a href="getdta.html">*getdta</a>( void )</li>
+      <li>void <a href="getfat.html">getfat</a>( unsigned char drive, struct fatinfo *fatblkp )</li>
+      <li>void <a href="getfatd.html">getfatd</a>( struct fatinfo *fatblkp )</li>
+      <li>int <a href="getftime.html">getftime</a>( int handle, struct ftime *ftimep )</li>
+      <li>unsigned <a href="getpsp.html">getpsp</a>( void )</li>
+      <li>void <a href="gettime.html">gettime</a>( struct time *timep )</li>
+      <li>void interrupt (<a href="getvect.html">*getvect</a>( int intr_num ))()</li>
+      <li>int <a href="getverify.html">getverify</a>( void )</li>
+      <li>int <a href="intdos.html">intdos</a>(union REGS *inregs, union REGS *outregs )</li>
+      <li>
+        int
+        <a href="intdosx.html">intdosx</a>( union REGS *inregs, union REGS *outregs, struct SREGS
+        *segregs )
+      </li>
+      <li>void <a href="keep.html">keep</a>( unsigned char status, int size )</li>
+      <li>
+        char
+        <a href="parsfnm.html">*parsfnm</a>( const char *cmdline, struct fcb *fcbptr, int option)
+      </li>
+      <li>int <a href="randbrd.html">randbrd</a>( struct fcb *fcbptr, int reccnt )</li>
+      <li>int <a href="randbrw.html">randbrw</a>( struct fcb *fcbptr, int reccnt )</li>
+      <li>int <a href="setblock.html">setblock</a>( unsigned seg, unsigned newsize )</li>
+      <li>int <a href="setcbrk.html">setcbrk</a>( int value )</li>
+      <li>void <a href="setdate.html">setdate</a>( struct date *dateblk )</li>
+      <li>void <a href="setdta.html">setdta</a>( char far *dta )</li>
+      <li>int <a href="setftime.html">setftime</a>( int handle, struct ftime *ftimep )</li>
+      <li>void <a href="settime.html">settime</a>( struct time *timep )</li>
+      <li>void <a href="setvect.html">setvect</a>( int intr_num, void interrupt(*isr)() )</li>
+      <li>int <a href="setverify.html">setverify</a>( int value )</li>
+      <li>void <a href="sleep.html">sleep</a>( unsigned seconds )</li>
+      <li>
+        void
+        <a href="unixtodos.html">unixtodos</a>( long utime, struct date *dateptr, struct time
+        *timeptr)
+      </li>
+      <li>int <a href="unlink.html">unlink</a>( const char *filename )</li>
+    </ul>
+
+    <h3 id="bios">BIOS Handlers</h3>
+    <ul>
+      <li>int <a href="bdos.html">bdos</a>( int dosfun, unsigned dosdx, unsigned dosal )</li>
+      <li>int <a href="bioscom.html">bioscom</a>( int cmd, char byte, int port )</li>
+      <li>
+        int
+        <a href="biosdisk.html">biosdisk</a>( int cmd, int drive, int head, int track, int sector,
+        int nsects, void *buffer )
+      </li>
+      <li>
+        unsigned <a href="_bios_disk.html">_bios_disk</a>(unsigned cmd,struct diskinfo_t *dskinfo)
+      </li>
+      <li>int <a href="biosequip.html">biosequip</a>( void )</li>
+      <li>unsigned <a href="_bios_equiplist.html">_bios_equiplist</a>( void )</li>
+      <li>int <a href="bioskey.html">bioskey</a>( int cmd )</li>
+      <li>int <a href="biosmemory.html">biosmemory</a>( void )</li>
+      <li>int <a href="biosprint.html">biosprint</a>( int cmd, int byte, int port )</li>
+      <li>int <a href="biostime.html">biostime</a>( int cmd, long newtime )</li>
+      <li>int <a href="_bios_keybrd.html">_bios_keybrd</a>( int cmd )</li>
+      <li>unsigned <a href="_bios_memsize.html">_bios_memsize</a>( void )</li>
+      <li>
+        unsigned
+        <a href="_bios_printer.html">_bios_printer</a>(unsigned cmd,unsigned port,unsigned data)
+      </li>
+      <li>
+        unsigned
+        <a href="_bios_serialcom.html">_bios_serialcom</a>(unsigned cmd,unsigned port,unsigned fmt)
+      </li>
+      <li>
+        unsigned <a href="_bios_timeofday.html">_bios_timeofday</a>( unsigned cmd, long *timeval )
+      </li>
+    </ul>
+
+    <h3 id="stdio">Standard Input/Output (stdio.h)</h3>
+    <ul>
+      <li>void <a href="clearerr.html">clearerr</a>( FILE *stream )</li>
+      <li>int <a href="fclose.html">fclose</a>( FILE *fp )</li>
+      <li>int <a href="fcloseall.html">fcloseall</a>( void )</li>
+      <li>int <a href="feof.html">feof</a>( FILE *stream )</li>
+      <li>int <a href="ferror.html">ferror</a>( FILE *stream )</li>
+      <li>int <a href="fflush.html">fflush</a>( FILE *fp )</li>
+      <li>int <a href="fgetc.html">fgetc</a>( FILE *fp )</li>
+      <li>int <a href="fgetchar.html">fgetchar</a>( void )</li>
+      <li>char <a href="fgets.html">*fgets</a>( char *s, int size, FILE *fp )</li>
+      <li>int <a href="fileno.html">fileno</a>( FILE *stream )</li>
+      <li>int <a href="flushall.html">flushall</a>( void )</li>
+      <li>FILE <a href="fopen.html">*fopen</a>( const char *filename, const char *type )</li>
+      <li>
+        int <a href="fprintf.html">fprintf</a>( FILE *fp, const char *format [, arg1, arg2, ...] )
+      </li>
+      <li>int <a href="fputc.html">fputc</a>( int c, FILE *fp )</li>
+      <li>int <a href="fputs.html">fputs</a>( const char *s, FILE *fp )</li>
+      <li>
+        size_t <a href="fread.html">fread</a>( void *buf, size_t size, size_t count, FILE *fp )
+      </li>
+      <li>
+        FILE <a href="freopen.html">*freopen</a>( const char *fname, const char *type, FILE *fp )
+      </li>
+      <li>int <a href="fscanf.html">fscanf</a>( FILE *fp, const char *format, arg1, arg2, ... )</li>
+      <li>int <a href="fseek.html">fseek</a>( FILE *fp, long offset, int mode )</li>
+      <li>long <a href="ftell.html">ftell</a>( FILE *fp )</li>
+      <li>
+        size_t
+        <a href="fwrite.html">fwrite</a>(const void *buf, size_t size, size_t count, FILE *fp)
+      </li>
+      <li>int <a href="getc.html">getc</a>( FILE *fp )</li>
+      <li>int <a href="getchar.html">getchar</a>( void )</li>
+      <li>char <a href="gets.html">*gets</a>( char *s )</li>
+      <li>int <a href="getw.html">getw</a>( FILE *fp )</li>
+      <li>void <a href="perror.html">perror</a>( const char *string )</li>
+      <li>
+        int <a href="printf.html">printf</a>( const char
+        <a href="printf_specifiers.html">*format</a> [, arg1, arg2, ...] )
+      </li>
+      <li>int <a href="putc.html">putc</a>( int c, FILE *fp )</li>
+      <li>int <a href="putchar.html">putchar</a>( char c )</li>
+      <li>int <a href="puts.html">puts</a>( const char *string )</li>
+      <li>int <a href="putw.html">putw</a>( int n, FILE *fp )</li>
+      <li>int <a href="remove.html">remove</a>( char *filename )</li>
+      <li>int <a href="rename.html">rename</a>( const char *oldf, const char *newf )</li>
+      <li>void <a href="rewind.html">rewind</a>( FILE *fp )</li>
+      <li>int <a href="rmtmp.html">rmtmp</a>( void )</li>
+      <li>
+        int <a href="scanf.html">scanf</a>( const char <a href="scanf_specifiers.html">*format</a>,
+        arg1, arg2, ... )
+      </li>
+      <li>void <a href="setbuf.html">setbuf</a>( FILE *stream, char *buf )</li>
+      <li>
+        int <a href="setvbuf.html">setvbuf</a>( FILE *stream, char *buf, int type, size_t size )
+      </li>
+      <li>
+        int <a href="sprintf.html">sprintf</a>( char *s, const char *format [, arg1, arg2, ...] )
+      </li>
+      <li>
+        int <a href="sscanf.html">sscanf</a>( const char *s, const char *format, arg1, arg2, ... )
+      </li>
+      <li>char <a href="tempnam.html">*tempnam</a>( char *dir, char *prefix )</li>
+      <li>int <a href="ungetc.html">ungetc</a>( int c, FILE *fp )</li>
+      <li>
+        int <a href="vfprintf.html">vfprintf</a>( FILE *stream, const char *format, va_list param )
+      </li>
+      <li>
+        int <a href="vfscanf.html">vfscanf</a>( FILE *stream, const char *format, va_list argp )
+      </li>
+      <li>int <a href="vprintf.html">vprintf</a>( const char *format, va_list param )</li>
+      <li>int <a href="vscanf.html">vscanf</a>( const char *format, va_list argp )</li>
+      <li>
+        int <a href="vsprintf.html">vsprintf</a>( char *string, const char *format, va_list param )
+      </li>
+      <li>
+        int
+        <a href="vsscanf.html">vsscanf</a>( const char *string, const char *format, va_list argp )
+      </li>
+    </ul>
+
+    <h3 id="conio">Console Input/Output (conio.h)</h3>
+    <ul>
+      <li>char <a href="cgets.html">*cgets</a>( char *s )</li>
+      <li>int <a href="cprintf.html">cprintf</a>( char *format [, argument,...] )</li>
+      <li>void <a href="cputs.html">cputs</a>( char *s )</li>
+      <li>int <a href="cscanf.html">cscanf</a>( const char *format [,argument,...] )</li>
+      <li>int <a href="getch.html">getch</a>( void )</li>
+      <li>int <a href="getche.html">getche</a>( void )</li>
+      <li>char <a href="getpass.html">*getpass</a>( const char *prompt )</li>
+      <li>int <a href="kbhit.html">kbhit</a>( void )</li>
+      <li>int <a href="putch.html">putch</a>( int ch )</li>
+      <li>void <a href="ungetch.html">ungetch</a>( int c )</li>
+    </ul>
+
+    <h3 id="io">Other Input/Output</h3>
+    <ul>
+      <li>
+        int <a href="absread.html">absread</a>( int drive, int count, int start, void *buffer )
+      </li>
+      <li>
+        int <a href="abswrite.html">abswrite</a>( int drive, int sectors, int start, void *buffer )
+      </li>
+      <li>int <a href="access.html">access</a>( const char *filename, int amode )</li>
+      <li>int <a href="_creat.html">_creat</a>( const char *fname, int attr )</li>
+      <li>int <a href="creattemp.html">creattemp</a>( char *filename, int attr )</li>
+      <li>int <a href="_chmod.html">_chmod</a>( const char *filename, int func [,int attrib] )</li>
+      <li>int <a href="chmod.html">chmod</a>( const char *filename, int permiss)</li>
+      <li>int <a href="_close.html">_close</a>( int fh )</li>
+      <li>int <a href="close.html">close</a>( int fh )</li>
+      <li>int <a href="creat.html">creat</a>( const char *filename, int permis )</li>
+      <li>int <a href="creatnew.html">creatnew</a>( const char *fname, int attr )</li>
+      <li>
+        unsigned <a href="creatnew.html">creatnew</a>( const char *fname, unsigned attr, int fh )
+      </li>
+      <li>int <a href="dup.html">dup</a>( int handle )</li>
+      <li>int <a href="dup2.html">dup2</a>( int oldhandle, int newhandle )</li>
+      <li>int <a href="eof.html">eof</a>( int handle )</li>
+      <li>long <a href="filelength.html">filelength</a>( int handle )</li>
+      <li>int <a href="ioctl.html">ioctl</a>( int handle, int cmd [, void *argdx, int argcx] )</li>
+      <li>int <a href="isatty.html">isatty</a>( int handle )</li>
+      <li>int <a href="lock_-c-.html">lock</a>( int handle, long offset, long length )</li>
+      <li>int <a href="locking.html">locking</a>( int handle, int mode, long nbytes )</li>
+      <li>long <a href="lseek.html">lseek</a>( int handle, long offset, int mode )</li>
+      <li>int <a href="_open.html">_open</a>( const char *path, int access )</li>
+      <li>int <a href="open.html">open</a>( const char *path, int access [, unsigned permis] )</li>
+      <li>int <a href="_read.html">_read</a>( int handle, void *buf, int size )</li>
+      <li>int <a href="read.html">read</a>( int handle, char *buf, int size )</li>
+      <li>int <a href="setmode.html">setmode</a>( int handle, int mode )</li>
+      <li>
+        int <a href="sopen.html">sopen</a>( const char *path, int access, int shflag, int mode )
+      </li>
+      <li>long <a href="tell.html">tell</a>( int handle )</li>
+      <li>int <a href="umask.html">umask</a>( int permission )</li>
+      <li>int <a href="unlock.html">unlock</a>( int handle, long offset, long length )</li>
+      <li>int <a href="_write.html">_write</a>( int handle, char *buf, int count )</li>
+      <li>int <a href="write.html">write</a>( int handle, char *buf, int count )</li>
+    </ul>
+
+    <h3 id="fs">Filesystem operation</h3>
+    <ul>
+      <li>int <a href="chdir.html">chdir</a>( const char *path )</li>
+      <li>
+        void
+        <a href="fnmerge.html">fnmerge</a>( char *path, const char *drive, const char *dir, const
+        char *name, const char *ext)
+      </li>
+      <li>
+        void <a href="fnsplit.html">fnsplit</a>( const char *path, char *drive, char *dir, char
+        *name, char *ext)
+      </li>
+      <li>int <a href="fstat.html">fstat</a>( int handle, struct stat *buff )</li>
+      <li>int <a href="getcurdir.html">getcurdir</a>( int drive, char *direc )</li>
+      <li>char <a href="getcwd.html">*getcwd</a>( char *buf, int n )</li>
+      <li>int <a href="mkdir.html">mkdir</a>( const char *pathname )</li>
+      <li>char <a href="mktemp.html">*mktemp</a>( char *template )</li>
+      <li>int <a href="rmdir.html">rmdir</a>( const char *path )</li>
+      <li>char *<a href="searchpath.html">searchpath</a>( const char *filename )</li>
+      <li>int <a href="setdisk.html">setdisk</a>( int drive )</li>
+      <li>int <a href="stat.html">stat</a>( char *pathname, struct stat *buff )</li>
+    </ul>
+
+    <h3 id="alloc">Memory allocation</h3>
+    <ul>
+      <li>void <a href="alloca.html">*alloca</a>( size_t size )</li>
+      <li>
+        void _based(void) <a href="_expand.html">*_bexpand</a>( _segment seg, void _based(void)
+        *block, size_t size )
+      </li>
+      <li>void <a href="_bfree.html">_bfree</a>( _segment seg, void _based(void) *block )</li>
+      <li>int <a href="_heapchk.html">_bheapchk</a>( _segment seg )</li>
+      <li>int <a href="_heapset.html">_bheapset</a>( _segment seg, unsigned fill )</li>
+      <li>int <a href="_heapwalk.html">_bheapwalk</a>( _segment seg, struct _heapinfo *entry )</li>
+      <li>void _based(void) <a href="_bmalloc.html">*_bmalloc</a>( _segment seg, size_t size )</li>
+      <li>size_t <a href="_msize.html">_bmsize</a>( _segment seg, void _based( void ) *block )</li>
+      <li>int <a href="brk.html">brk</a>( void *endds )</li>
+      <li>unsigned <a href="coreleft.html">coreleft</a>( void )</li>
+      <li>unsigned long <a href="coreleft.html">coreleft</a>( void )</li>
+      <li>void <a href="_expand.html">*_expand</a>( void *block, size_t size )</li>
+      <li>
+        void far
+        <a href="farcalloc.html">*farcalloc</a>( unsigned long nunits, unsigned long units )
+      </li>
+      <li>unsigned long <a href="farcoreleft.html">farcoreleft</a>( void )</li>
+      <li>void <a href="farfree.html">farfree</a>( void far *block )</li>
+      <li>
+        void far <a href="farrealloc.html">*farrealloc</a>( void far *block, unsigned long newsize )
+      </li>
+      <li>void far <a href="_expand.html">*_fexpand</a>( void far *block, size_t size )</li>
+      <li>int <a href="_heapchk.html">_fheapchk</a>( void )</li>
+      <li>int <a href="_heapset.html">_fheapset</a>( unsigned fill )</li>
+      <li>int <a href="_heapwalk.html">_fheapwalk</a>( struct _heapinfo *entry )</li>
+      <li>void far <a href="_bmalloc.html">*_fmalloc</a>( size_t size )</li>
+      <li>size_t <a href="_msize.html">_fmsize</a>( void far *block )</li>
+      <li>void <a href="_bfree.html">_ffree</a>( void far *block )</li>
+      <li>void <a href="free.html">free</a>( void *pseg )</li>
+      <li>unsigned <a href="_freect.html">_freect</a>( size_t size )</li>
+      <li>void huge <a href="halloc.html">*halloc</a>( long num, size_t size )</li>
+      <li>int <a href="_heapchk.html">_heapchk</a>( void )</li>
+      <li>int <a href="_heapset.html">_heapset</a>( unsigned fill )</li>
+      <li>int <a href="_heapwalk.html">_heapwalk</a>( struct _heapinfo *entry )</li>
+      <li>void <a href="hfree.html">hfree</a>( void huge *block )</li>
+      <li>size_t <a href="_memavl.html">_memavl</a>( void )</li>
+      <li>size_t <a href="_msize.html">_msize</a>( void *block )</li>
+      <li>void near <a href="_expand.html">*_nexpand</a>( void near *block, size_t size )</li>
+      <li>void <a href="_bfree.html">_nfree</a>( void near *block )</li>
+      <li>int <a href="_heapchk.html">_nheapchk</a>( void )</li>
+      <li>int <a href="_heapset.html">_nheapset</a>( unsigned fill )</li>
+      <li>int <a href="_heapwalk.html">_nheapwalk</a>( struct _heapinfo *entry )</li>
+      <li>void near <a href="_bmalloc.html">*_nmalloc</a>( size_t size )</li>
+      <li>size_t <a href="_msize.html">_nmsize</a>( void far *block )</li>
+      <li>void <a href="sbrk.html">*sbrk</a>( int incr )</li>
+      <li>size_t <a href="stackavail.html">stackavail</a>( void )</li>
+    </ul>
+
+    <h3 id="graph">Graphics mode functions</h3>
+    <ul>
+      <li>void far <a href="_clearscreen.html">_clearscreen</a>( short target )</li>
+      <li>short far <a href="_displaycursor.html">_displaycursor</a>( short flag )</li>
+      <li>
+        short <a href="_ellipse.html">_ellipse</a>( short ctl, short x1, short y1, short x2, short
+        y2 )
+      </li>
+      <li>
+        short <a href="_ellipse.html">_ellipse_w</a>( short ctl, double wx1, double wy1, double wx2,
+        double wy2 )
+      </li>
+      <li>
+        short far <a href="_ellipse.html">_ellipse_wxy</a>( short ctl, struct _wxycoord far *pwxy1,
+        struct _wxycoord far *pwxy2 )
+      </li>
+      <li>short far <a href="_floodfill.html">_floodfill</a>( short x, short y, short bcolor )</li>
+      <li>
+        short far <a href="_floodfill.html">_floodfill_w</a>( double wx, double wy, short bcolor )
+      </li>
+      <li>short far <a href="_getcolor.html">_getcolor</a>( void )</li>
+      <li>
+        flagType <a href="getcolor.html">GetColor</a>( LINE line, la *colorlist, PFILE pFile )
+      </li>
+      <li>struct xycoord far <a href="_getcurrentposition.html">_getcurrentposition</a>( void )</li>
+      <li>
+        struct _wxycoord far <a href="_getcurrentposition.html">_getcurrentposition_w</a>( void )
+      </li>
+      <li>
+        unsigned char far <a href="_getfillmask.html">*_getfillmask</a>( unsigned char far *mask )
+      </li>
+      <li>
+        void far
+        <a href="_getimage.html">_getimage</a>( short x1, short y1, short x2, short y2, char huge
+        *image )
+      </li>
+      <li>
+        void far
+        <a href="_getimage.html">_getimage_w</a>( double wx1, double wy1, double wx2, double wy2,
+        char huge *image )
+      </li>
+      <li>
+        void far
+        <a href="_getimage.html">_getimage_wxy</a>( struct _wxycoord far *pwxy1, struct _wxycoord
+        far *pwxy2,char huge *image )
+      </li>
+      <li>
+        void far
+        <a href="getimage.html">getimage</a>( int left, int top, int right, int bottom, void far
+        *bitmap )
+      </li>
+      <li>unsigned short far<a href="_getlinestyle.html">_getlinestyle</a>( void )</li>
+      <li>struct xycoord far <a href="_getlogcoord.html">_getlogcoord</a>( short x, short y )</li>
+      <li>struct xycoord far <a href="_getphyscoord.html">_getphyscoord</a>( short x, short y )</li>
+      <li>short far <a href="_getpixel.html">_getpixel</a>( short x, short y )</li>
+      <li>short far <a href="_getpixel.html">_getpixel_w</a>( double wx, double wy )</li>
+      <li>short far <a href="_gettextcolor.html">_gettextcolor</a>( void )</li>
+      <li>struct rccoord far <a href="_gettextposition.html">_gettextposition</a>( void )</li>
+      <li>
+        struct videoconfig far
+        <a href="_getvideoconfig.html">*_getvideoconfig</a>( struct videoconfig far *config )
+      </li>
+      <li>
+        unsigned far
+        <a href="imagesize.html">imagesize</a>( int left, int top, int right, int bottom )
+      </li>
+      <li>short far <a href="_lineto.html">_lineto</a>( short x, short y )</li>
+      <li>short far <a href="_lineto.html">_lineto_w</a>( double wx, double wy )</li>
+      <li>struct xycoord far <a href="_moveto.html">_moveto</a>( short x, short y )</li>
+      <li>struct _wxycoord far <a href="_moveto.html">_moveto_w</a>( double wx, double wy )</li>
+      <li>void far<a href="_outtext.html">_outtext</a>( unsigned char far *text )</li>
+      <li>
+        short
+        <a href="_pie.html">_pie</a>( short control, short x1, short y1, short x2, short y2, short
+        x3, short y3, short x4, short y4 )
+      </li>
+      <li>
+        short far
+        <a href="_pie.html">_pie_wxy</a>( short ctl, struct _wxycoord far *pwxy1, struct _wxycoord
+        far *pwxy2, struct _wxycoord far *pwxy3, struct _wxycoord far *pwxy4 )
+      </li>
+      <li>void <a href="getcolor.html">PutColor</a>( LINE line, la *colorlist, PFILE pFile )</li>
+      <li>
+        void
+        <a href="_putimage.html">_putimage</a>( short x, short y, char huge *image, short action )
+      </li>
+      <li>
+        void far
+        <a href="_putimage.html">_putimage_w</a>( double wx, double wy, char huge *image, short
+        action )
+      </li>
+      <li>
+        void far
+        <a href="putimage.html">putimage</a>( int left, int top, void far *bitmap, int option )
+      </li>
+      <li>
+        short
+        <a href="_rectangle.html">_rectangle</a>( short ctl, short x1, short y1, short x2, short y2
+        )
+      </li>
+      <li>
+        short far
+        <a href="_rectangle.html">_rectangle_w</a>( short control, double wx1, double wy1, double
+        wx2, double wy2 )
+      </li>
+      <li>
+        short far
+        <a href="_rectangle.html">_rectangle_wxy</a>( short control, struct _wxycoord far *pwxy1,
+        struct _wxycoord far *pwxy2 )
+      </li>
+      <li>short far <a href="_remapallpalette.html">_remapallpalette</a>( long far *colors )</li>
+      <li>
+        long far <a href="_remapallpalette.html">_remappalette</a>( short pixnum, long color )
+      </li>
+      <li>short far <a href="_selectpalette.html">_selectpalette</a>( short palette )</li>
+      <li>short far <a href="_setactivepage.html">_setactivepage</a>( short page )</li>
+      <li>long far <a href="_setbkcolor.html">_setbkcolor</a>( long color )</li>
+      <li>
+        void far
+        <a href="_setcliprgn.html">_setcliprgn</a>( short x1, short y1, short x2, short y2 )
+      </li>
+      <li>short far <a href="_setcolor.html">_setcolor</a>( short color )</li>
+      <li>void far <a href="_setfillmask.html">_setfillmask</a>( unsigned char far *mask )</li>
+      <li>short far <a href="_setfont.html">_setfont</a>( unsigned char far *options )</li>
+      <li>void far <a href="_setlinestyle.html">_setlinestyle</a>( unsigned short mask )</li>
+      <li>struct xycoord far <a href="_setlogorg.html">_setlogorg</a>( short x, short y )</li>
+      <li>short far <a href="_setpixel.html">_setpixel</a>( short x, short y )</li>
+      <li>short far <a href="_setpixel.html">_setpixel_w</a>( double wx, double wy )</li>
+      <li>short far <a href="_settextcolor.html">_settextcolor</a>( short color )</li>
+      <li>
+        struct rccoord far
+        <a href="_settextposition.html">_settextposition</a>( short row, short column )
+      </li>
+      <li>
+        void far
+        <a href="_settextwindow.html">_settextwindow</a>( short r1, short c1, short r2, short c2 )
+      </li>
+      <li>short far <a href="_setvideomode.html">_setvideomode</a>( short mode )</li>
+      <li>
+        void far
+        <a href="_setviewport.html">_setviewport</a>( short x1, short y1, short x2, short y2 )
+      </li>
+      <li>short far <a href="_setvisualpage.html">_setvisualpage</a>( short page )</li>
+      <li>short far <a href="_wrapon.html">_wrapon</a>( short wrap )</li>
+    </ul>
+
+    <h3 id="stdlib">Standard library (stdlib.h)</h3>
+    <ul>
+      <li>void <a href="abort.html">abort</a>( void )</li>
+      <li>int <a href="abs.html">abs</a>( int n )</li>
+      <li>int <a href="atexit.html">atexit</a>( void func )</li>
+      <li>double <a href="atof.html">atof</a>( const char *s )</li>
+      <li>int <a href="atoi.html">atoi</a>( const char *s )</li>
+      <li>long <a href="atol.html">atol</a>( const char *s )</li>
+      <li>
+        void
+        <a href="bsearch.html">*bsearch</a>( void *key, void *base, int nelem, int width, int (*fcmp
+        )())
+      </li>
+      <li>void <a href="calloc.html">*calloc</a>( unsigned count, unsigned sizeeach )</li>
+      <li>struct _div_t <a href="div_-c-.html">div</a>( int numer, int denom )</li>
+      <li>struct _ldiv_t <a href="div_-c-.html">ldiv</a>( long int numer, long int denom )</li>
+      <li>char <a href="ecvt.html">*ecvt</a>( double value, int ndigit, int *decpt, int *sign )</li>
+      <li>void <a href="exit.html">exit</a>( int completioncode )</li>
+      <li>char <a href="fcvt.html">*fcvt</a>( double value, int ndigit, int *decpt, int *sign )</li>
+      <li>char <a href="gcvt.html">*gcvt</a>( double value, int ndigit, char *buf )</li>
+      <li>char <a href="getenv.html">*getenv</a>( const char *envvar )</li>
+      <li>char <a href="itoa.html">*itoa</a>( int value, char *string, int radix )</li>
+      <li>long <a href="labs.html">labs</a>( long n )</li>
+      <li>void <a href="malloc.html">*malloc</a>( unsigned size )</li>
+      <li>
+        void
+        <a href="_makepath.html">_makepath</a>( char *path, char *drive, char *dir, char *fname,
+        char *ext )
+      </li>
+      <li>
+        void
+        <a href="lfind.html">*lfind</a>(void *key,void *base,int *nelem,int width,int (*fcmp)())
+      </li>
+      <li>unsigned long <a href="_lrotl.html">_lrotl</a>( unsigned long value, int n )</li>
+      <li>unsigned long <a href="_lrotl.html">_lrotr</a>( unsigned long value, int n )</li>
+      <li>
+        void
+        <a href="lsearch.html">*lsearch</a>(void *key,void *base,int *nelem,int width,int (*fcmp)())
+      </li>
+      <li>char <a href="ltoa.html">*ltoa</a>( long value, char *string, int radix )</li>
+      <li>onexit_t <a href="onexit.html">onexit</a>( onexit_t func )</li>
+      <li>int <a href="putenv.html">putenv</a>( const char *envvar )</li>
+      <li>
+        void
+        <a href="qsort.html">qsort</a>( void *array, size_t n_elem, size_t elem_size, int
+        (*fcmp)(const void *, const void *) )
+      </li>
+      <li>int <a href="rand.html">rand</a>( void )</li>
+      <li>void <a href="realloc.html">*realloc</a>( void *pseg, unsigned size )</li>
+      <li>unsigned <a href="_rotl.html">_rotl</a>( unsigned value, int shift )</li>
+      <li>unsigned <a href="_rotl.html">_rotr</a>( unsigned value, int shift )</li>
+      <li>void <a href="_searchenv.html">_searchenv</a>( char *fname, char *var, char *path )</li>
+      <li>
+        void
+        <a href="_splitpath.html">_splitpath</a>( char *path, char *drive, char *dir, char *fname,
+        char *ext )
+      </li>
+      <li>void <a href="srand.html">srand</a>( unsigned seed )</li>
+      <li>char <a href="ultoa.html">*ultoa</a>( unsigned long value, char *string, int radix )</li>
+    </ul>
+
+    <h3 id="process">Process management and IPC</h3>
+    <ul>
+      <li>
+        int <a href="exec___.html">execl</a>( char *pathname, char *arg0, char *arg1, ..., NULL )
+      </li>
+      <li>
+        int <a href="exec___.html">execle</a>( char *pathname, char *arg0, char *arg1, ..., NULL,
+        char *envp[] )
+      </li>
+      <li>
+        int <a href="exec___.html">execlp</a>( char *pathname, char *arg0, char *arg1, ..., NULL )
+      </li>
+      <li>
+        int <a href="exec___.html">execlpe</a>( char *pathname, char *arg0, char *arg1, ..., NULL,
+        char *envp[] )
+      </li>
+      <li>int <a href="exec___.html">execv</a>( char *pathname, *arg, NULL )</li>
+      <li>int <a href="exec___.html">execve</a>( char *pathname, *arg, NULL, char *envp[] )</li>
+      <li>int <a href="exec___.html">execvp</a>( char *pathname, *arg, NULL )</li>
+      <li>int <a href="exec___.html">execvpe</a>( char *pathname, *arg, NULL, char *envp[] )</li>
+      <li>void <a href="_exit.html">_exit</a>( int completioncode )</li>
+      <li>int <a href="gsignal.html">gsignal</a>( int sig )</li>
+      <li>int <a href="getpid.html">getpid</a>( void )</li>
+      <li>
+        int <a href="spawn.html">spawnl</a>( int mode, char *path, char *arg0, char *arg1, ..., NULL
+        )
+      </li>
+      <li>
+        int <a href="spawn.html">spawnle</a>( int mode, char *path, char *arg0, char *arg1, ...,
+        NULL, char *envp[] )
+      </li>
+      <li>
+        int <a href="spawn.html">spawnlp</a>( int mode, char *path, char *arg0, char *arg1, ...,
+        NULL )
+      </li>
+      <li>
+        int <a href="spawn.html">spawnlpe</a>( int mode, char *path, char *arg0, char *arg1, ...,
+        NULL, char *envp[] )
+      </li>
+      <li>int <a href="spawn.html">spawnv</a>( int mode, char *path, char *argv )</li>
+      <li>
+        int <a href="spawn.html">spawnve</a>( int mode, char *path, char *argv, char *envp[] )
+      </li>
+      <li>int <a href="spawn.html">spawnvp</a>( int mode, char *path, char *argv )</li>
+      <li>
+        int <a href="spawn.html">spawnvpe</a>( int mode, char *path, char *argv, char *envp[] )
+      </li>
+      <li>int (<a href="ssignal.html">*ssignal</a>( int sig, int (*action))) (void)</li>
+      <li>void <a href="swab.html">swab</a>( char *src, char *dest, int nbytes )</li>
+      <li>int <a href="system.html">system</a>( const char *command )</li>
+      <li>int <a href="raise.html">raise</a>( int sig )</li>
+    </ul>
+
+    <h3 id="time">Time and date functions</h3>
+    <ul>
+      <li>char <a href="asctime.html">*asctime</a>( const struct tm *tm )</li>
+      <li>clock_t <a href="clock.html">clock</a>( void )</li>
+      <li>char <a href="ctime.html">*ctime</a>( const long *clock )</li>
+      <li>double <a href="difftime.html">difftime</a>( time_t time2, time_t time1 )</li>
+      <li>struct tm <a href="gmtime.html">*gmtime</a>( const time_t *clock )</li>
+      <li>struct tm <a href="localtime.html">*localtime</a>( const time_t *clock )</li>
+      <li>int <a href="stime.html">stime</a>( time_t *tp )</li>
+      <li>char <a href="_strdate.html">*_strdate</a>( char *date )</li>
+      <li>char <a href="_strdate.html">*_strtime</a>( char *time )</li>
+      <li>time_t <a href="time.html">time</a>( time_t *tloc )</li>
+      <li>void <a href="tzset.html">tzset</a>( void )</li>
+      <li>int <a href="utime.html">utime</a>( char *path, struct utimbuf *times )</li>
+    </ul>
+
+    <h3 id="string">String and memory functions</h3>
+    <p>
+      You may also check the topic providing a summary of the
+      <a href="mem___.html">memory manipulation functions</a> and
+      <a href="str___.html">string manipulation functions</a>.
+    </p>
+    <ul>
+      <li>
+        void <a href="memccpy.html">*memccpy</a>(void *dest, const void *src, int ch, size_t n)
+      </li>
+      <li>void <a href="memchr.html">*memchr</a>( const void *s, int ch, size_t n )</li>
+      <li>int <a href="memcmp.html">memcmp</a>( const void *s1, const void *s2, size_t n )</li>
+      <li>void <a href="memcpy.html">*memcpy</a>( void *dest, const void *src, size_t n )</li>
+      <li>int <a href="memicmp.html">memicmp</a>( const void *s1, const void *s2, size_t n )</li>
+      <li>void <a href="memmove.html">*memmove</a>( void *dest, const void *src, size_t n )</li>
+      <li>void <a href="memset.html">*memset</a>( void *s, int ch, size_t n )</li>
+      <li>
+        void
+        <a href="movedata.html">movedata</a>( unsigned segsrc, unsigned offsrc, unsigned segdest,
+        unsigned offdest, size_t n )
+      </li>
+      <li>void <a href="movmem.html">movmem</a>( void *src, void *dest, unsigned len )</li>
+      <li>void <a href="setmem.html">setmem</a>( void *addr, int len, char value )</li>
+      <li>char <a href="stpcpy.html">*stpcpy</a>( char *dest, const char *src )</li>
+      <li>char <a href="strcat.html">*strcat</a>( char *dest, const char *src )</li>
+      <li>char <a href="strchr.html">*strchr</a>( const char *str, int c )</li>
+      <li>int <a href="strcmp.html">strcmp</a>( const char *str1, const char *str2 )</li>
+      <li>char <a href="strcpy.html">*strcpy</a>( char *dest, const char *src )</li>
+      <li>size_t <a href="strcspn.html">strcspn</a>( const char *str1, const char *str2 )</li>
+      <li>char <a href="strdup.html">*strdup</a>( const char *str )</li>
+      <li>char <a href="_strerror.html">*_strerror</a>( char *string )</li>
+      <li>char <a href="strerror.html">*strerror</a>( char *str )</li>
+      <li>int <a href="stricmp.html">stricmp</a>( const char *str1, const char *str2 )</li>
+      <li>size_t <a href="strlen.html">strlen</a>( const char *str )</li>
+      <li>char <a href="strlwr.html">*strlwr</a>( char *str )</li>
+      <li>
+        char <a href="strncat.html">*strncat</a>( char *dest, const char *src, size_t maxlen )
+      </li>
+      <li>
+        int <a href="strncmp.html">strncmp</a>( const char *str1, const char *str2, size_t maxlen )
+      </li>
+      <li>
+        char <a href="strncpy.html">*strncpy</a>( char *dest, const char *src, size_t maxlen )
+      </li>
+      <li>
+        int
+        <a href="strnicmp.html">strnicmp</a>( const char *str1, const char *str2, size_t maxlen )
+      </li>
+      <li>char <a href="strnset.html">*strnset</a>( char *str, int ch, size_t n )</li>
+      <li>char <a href="strpbrk.html">*strpbrk</a>( const char *str1, const char *str2 )</li>
+      <li>char <a href="strrchr.html">*strrchr</a>( const char *str, int c )</li>
+      <li>char <a href="strrev.html">*strrev</a>( char *str )</li>
+      <li>char <a href="strset.html">*strset</a>( char *str, int ch )</li>
+      <li>size_t <a href="strspn.html">strspn</a>( const char *str1, const char *str2 )</li>
+      <li>char <a href="strstr.html">*strstr</a>( const char *anchor, const char *testpattern )</li>
+      <li>double <a href="strtod.html">strtod</a>( const char *str, char **endptr )</li>
+      <li>char <a href="strtok.html">*strtok</a>( char *str1, const char *str2 )</li>
+      <li>long <a href="strtol.html">strtol</a>( const char *str, char **endptr, int base )</li>
+      <li>
+        unsigned long <a href="strtol.html">strtoul</a>( const char *s, char **endptr, int radix )
+      </li>
+      <li>char <a href="strupr.html">*strupr</a>( char *str )</li>
+    </ul>
+
+    <h3 id="math">Math functions (math.h)</h3>
+    <ul>
+      <li>double <a href="acos.html">acos</a>( double x )</li>
+      <li>double <a href="asin.html">asin</a>( double x )</li>
+      <li>double <a href="atan.html">atan</a>( double x )</li>
+      <li>double <a href="atan2.html">tan</a>( double y, double x )</li>
+      <li>double <a href="cabs.html">cabs</a>( struct complex z )</li>
+      <li>double <a href="ceil.html">ceil</a>( double x )</li>
+      <li>double <a href="cos.html">cos</a>( double x )</li>
+      <li>double <a href="cosh.html">cosh</a>( double x )</li>
+      <li>int <a href="dieeetomsbin.html">dieeetomsbin</a>( double *srcdbl, double *dstdbl )</li>
+      <li>int <a href="dieeetomsbin.html">dmsbintoieee</a>( double *srcdbl, double *dstdbl )</li>
+      <li>double <a href="exp.html">exp</a>( double x )</li>
+      <li>double <a href="fabs.html">fabs</a>( double x )</li>
+      <li>int <a href="dieeetomsbin.html">fieeetomsbin</a>( float *srcflt, float *dstflt )</li>
+      <li>double <a href="floor.html">floor</a>( double x )</li>
+      <li>int <a href="dieeetomsbin.html">fmsbintoieee</a>( float *srcflt, float *dstflt )</li>
+      <li>double <a href="fmod.html">fmod</a>( double x, double y )</li>
+      <li>double <a href="frexp.html">frexp</a>( double value, int eptr )</li>
+      <li>double <a href="hypot.html">hypot</a>( double x, double y )</li>
+      <li>double <a href="ldexp.html">ldexp</a>( double value, int exp )</li>
+      <li>double <a href="log.html">log</a>( double x )</li>
+      <li>double <a href="log10.html">log10</a>( double x )</li>
+      <li>
+        double
+        <a href="_matherr.html">_matherr</a>( _mexcep why, char *fun, double *arg1p, double *arg2p,
+        double retv )
+      </li>
+      <li>int <a href="matherr.html">matherr</a>( struct exception *e )</li>
+      <li>double <a href="modf.html">modf</a>( double value, double *iptr )</li>
+      <li>double <a href="poly.html">poly</a>( double x, int n, double coeff[] )</li>
+      <li>double <a href="pow.html">pow</a>( double x, double y )</li>
+      <li>double <a href="pow10.html">pow10</a>( double x )</li>
+      <li>double <a href="sin.html">sin</a>( double x )</li>
+      <li>double <a href="sinh.html">sinh</a>( double x )</li>
+      <li>double <a href="sqrt.html">sqrt</a>( double x )</li>
+      <li>double <a href="tan.html">tan</a>( double x )</li>
+      <li>double <a href="tanh.html">tanh</a>( double x )</li>
+    </ul>
+
+    <h3 id="assert">Assertion library (assert.h)</h3>
+    <ul>
+      <li>void <a href="assert.html">assert</a>( int test )</li>
+    </ul>
+
+    <h3 id="ctype">Type utilities (ctype.h)</h3>
+    <ul>
+      <li>int <a href="is___.html">isalnum</a>( int c )</li>
+      <li>int <a href="is___.html">isalpha</a>( int c )</li>
+      <li>int <a href="is___.html">isascii</a>( int c )</li>
+      <li>int <a href="is___.html">iscntrl</a>( int c )</li>
+      <li>int <a href="is___.html">isdigit</a>( int c )</li>
+      <li>int <a href="is___.html">isgraph</a>( int c )</li>
+      <li>int <a href="is___.html">islower</a>( int c )</li>
+      <li>int <a href="is___.html">isprint</a>( int c )</li>
+      <li>int <a href="is___.html">ispunct</a>( int c )</li>
+      <li>int <a href="is___.html">isspace</a>( int c )</li>
+      <li>int <a href="is___.html">isupper</a>( int c )</li>
+      <li>int <a href="is___.html">isxdigit</a>( int c )</li>
+      <li>int <a href="toascii.html">toascii</a>( int c )</li>
+      <li>int <a href="_tolower.html">_tolower</a>( int c )</li>
+      <li>int <a href="tolower.html">tolower</a>( int c )</li>
+      <li>int <a href="_toupper.html">_toupper</a>( int c )</li>
+      <li>int <a href="toupper.html">toupper</a>( int c )</li>
+    </ul>
+  </body>
+</html>

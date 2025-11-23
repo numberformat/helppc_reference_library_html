@@ -1,0 +1,113 @@
+@font-face {
+  font-family: ibm-vga;
+  src: url('./webplus-ibm-vga-8x14.woff');
+}
+
+body {
+  background-color: rgb(0, 0, 0);
+  color: rgb(170, 170, 170);
+  font-family: ibm-vga, monospace;
+  font-size: 28px;
+  line-height: 1em;
+  margin: 2em auto 4em;
+  max-width: 80ch;
+  padding: 0;
+  transform: scaleX(0.83333333333);
+}
+
+body > :not(pre):not(h1) {
+  margin-left: 8ch !important;
+  margin-right: 8ch !important;
+}
+
+a {
+  color: rgb(255, 255, 255);
+  text-decoration: underline 2px;
+}
+
+b {
+  color: rgb(255, 255, 255);
+  font-weight: inherit;
+}
+
+h1,
+h2,
+h3 {
+  color: rgb(255, 255, 255);
+  font-weight: inherit;
+  line-height: 125%;
+  padding: 0;
+  text-align: center;
+  text-wrap: wrap;
+}
+
+h1 {
+  font-size: 100%;
+  margin: 2em 0;
+}
+
+h2,
+h3 {
+  font-size: 100%;
+  margin: 0;
+}
+
+footer {
+  margin-top: 2em;
+}
+
+p {
+  margin: 1em 0;
+  line-height: 1em;
+  padding: 0;
+}
+
+pre {
+  font-family: inherit;
+  font-size: inherit;
+}
+
+table {
+  border-collapse: collapse;
+  border: none;
+  margin: 1em 0;
+  padding: 0;
+}
+
+td {
+  padding: 0;
+  margin: 0;
+}
+
+td:first-child {
+  text-align: right;
+}
+
+td:not(:last-child) {
+  padding-right: 2ch;
+}
+
+ul {
+  list-style-type: none;
+  margin: 1em 0;
+  padding: 0;
+}
+
+ul.v-spaced > li {
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+.asm .isa {
+  margin-top: 2em;
+}
+
+.letters {
+  text-align: center;
+  margin-bottom: 1em;
+}
+
+.asm td:first-child {
+  width: 13ch;
+  vertical-align: top;
+}
