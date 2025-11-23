@@ -1,5 +1,7 @@
+# Human-friendly workflow name shown in the GitHub UI.
 name: Build and Deploy
 
+# Triggers: run on pushes to master/develop branches and version tags like v1.2.3.
 on:
  push:
     branches:
@@ -8,59 +10,74 @@ on:
     tags:
       - 'v*.*.*'
 
+# Permissions granted to the workflow token:
+# - contents: write releases and artifacts
+# - pages: publish GitHub Pages
+# - id-token: OIDC token for deploy-pages action
 permissions:
   contents: write
   pages: write
   id-token: write
 
+# Ensure only one Pages deployment runs at a time; do not cancel in-flight jobs.
 concurrency:
   group: 'pages'
   cancel-in-progress: false
 
 jobs:
+  # Single job that builds the site and either publishes a release asset or deploys Pages.
   build-and-deploy:
     runs-on: ubuntu-latest
 
+    # Link deployment to the GitHub Pages environment so the URL surfaces in the UI.
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
 
     steps:
+      # Check out repository code so subsequent steps have access to it.
       - uses: actions/checkout@v4
 
+      # Install a specific Python version for the build script.
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
 
+      # Build the static site into dist/ using the txt2html script.
       - name: Build site
         run: |
           rm -rf dist
           mkdir -p dist
           python src/txt2html.py -c cyan-blue 
 
+      # When building a tagged release, bundle the generated site as a zip.
       - name: Create ZIP (tags only)
         if: startsWith(github.ref, 'refs/tags/')
         run: |
           cd dist
           zip -r ../html-site.zip .
 
+      # Attach the zip to the GitHub Release for tagged builds.
       - name: Upload ZIP to Release (tags only)
         if: startsWith(github.ref, 'refs/tags/')
         uses: softprops/action-gh-release@v2
         with:
           files: html-site.zip
 
+      # For branch pushes, set up GitHub Pages deployment configuration.
       - name: Setup Pages
         if: startsWith(github.ref, 'refs/heads/')
         uses: actions/configure-pages@v5
 
+      # Upload the built site as an artifact for Pages to serve.
       - name: Upload Pages Artifact
         if: startsWith(github.ref, 'refs/heads/')
         uses: actions/upload-pages-artifact@v3
         with:
           path: ./dist
 
+      # Deploy the artifact to GitHub Pages and expose the resulting URL.
       - name: Deploy to GitHub Pages
         if: startsWith(github.ref, 'refs/heads/')
         id: deployment
