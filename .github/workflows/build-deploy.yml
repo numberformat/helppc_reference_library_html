@@ -1,42 +1,68 @@
-name: Build and deploy static content to Pages
+name: Build and Deploy
 
 on:
-  push:
-    branches: ['master']
+ push:
+    branches:
+      - master
+      - develop
+    tags:
+      - 'v*.*.*'
 
-# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
-# We want concurrency, but we don't want to cancel in-progress runs as we want to allow
-# production deployments to complete.
 concurrency:
   group: 'pages'
   cancel-in-progress: false
 
 jobs:
-  build-deploy:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
-          python-version-file: .python-version
-      - name: Build website
-        run: python src/txt2html.py
+          python-version: '3.11'
+
+      - name: Build site
+        run: |
+          rm -rf dist
+          mkdir -p dist
+          python src/txt2html.py
+
+      - name: Create ZIP (tags only)
+        if: startsWith(github.ref, 'refs/tags/')
+        run: |
+          cd dist
+          zip -r ../html-site.zip .
+
+      - name: Upload ZIP to Release (tags only)
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: html-site.zip
+
       - name: Setup Pages
+        if: startsWith(github.ref, 'refs/heads/')
         uses: actions/configure-pages@v5
-      - name: Upload artifact
+
+      - name: Upload Pages Artifact
+        if: startsWith(github.ref, 'refs/heads/')
         uses: actions/upload-pages-artifact@v3
         with:
-          path: './dist'
+          path: ./dist
+
       - name: Deploy to GitHub Pages
+        if: startsWith(github.ref, 'refs/heads/')
         id: deployment
         uses: actions/deploy-pages@v4
+
