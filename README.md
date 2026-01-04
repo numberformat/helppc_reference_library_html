@@ -8,7 +8,7 @@ It also contains a utility program written in Python to convert the information 
 
 The original program that used this data is available online on various retro software repositories. The TXT files available here can be updated and fed back into the program.
 
-![https://numberformat.github.io/helppc_reference_library_html/](assets/screenshot.png)
+[![](assets/screenshot.png)](https://numberformat.github.io/helppc_reference_library_html/)
 
 ## Build
 
